@@ -1,32 +1,9 @@
 #include "lib.h"
+#include "total.h"
 using namespace std;
 
 
-class Client{
-private:
 
-	//0은 admin, 1 guest, 2 user
-	int c_session;
-	string c_name;
-	string c_private_number;
-	string c_address;
-	string c_email;
-	string c_id;
-	string c_password;
-
-	//비더 , 셀러
-
-public:
-	
-	//get, set 구현할것
-	//생성자 구현할것
-
-	Client(int session, string name){
-		c_session = session;lib
-		c_name = name;
-	}
-
-};
 
 
 int main(void)
@@ -34,6 +11,7 @@ int main(void)
 	//어디로 넘어갈지 정해주는 변수
 	int state;
 
+	//지금 현재 유저가 누구인지 나타내주는 클래스이다
 	Client *CurrentUser = new Client(1,"guest");
 	
 	cout << "1. Login/Logout" << endl;
@@ -49,16 +27,16 @@ int main(void)
 	cin >> state;
 
 	switch (state){
-	case 1:
-	case 2:
-	case 3:
-	case 4:
-	case 5:
-	case 6:
-	case 7:
-	case 0:
+		case 1:break;
+		case 2:break;
+		case 3:break;
+		case 4:break;
+		case 5:break;
+		case 6:break;
+		case 7:break;
+		case 0:break;
 		default:
-			cout << "알맞지 않는 번호입니다"
+			cout << "알맞지 않는 번호입니다";
 			break;
 			
 

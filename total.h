@@ -1,6 +1,6 @@
 #include "lib.h"
 #include <string.h>
-
+using namespace std;
 
 //구매 아이템에 대한 컬렉션
 class BidItemCollection{
@@ -48,4 +48,5 @@ public:
 	string getPassword();
 	void setPassword(string password);
 
+	Client(int session, string name){ c_session = session; c_name = name; }
 };

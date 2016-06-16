@@ -4,22 +4,25 @@ using namespace std;
 
 class Client {
 private:
-	string name;
-	string praivateNum;
-	string address;
-	string email;
-	string ID;
-	string PW;
+	string c_name;
+	int c_privateNum;
+	string c_address;
+	string c_email;
+	string c_ID;
+	string c_PW;
 
 public:
-	Client() : name(""), praivateNum(""), address(""), email(""), ID(""), PW("") { }
-	void MakeName(string str);
-	//void MakePN(string str) { praivateNum = str; }
-	void MakeADD(string str);
-	void MakeEMAIL(string str);
-	void MakeID(string str);
-	void MakePW(string str);
-
+	Client() : c_name(""), c_privateNum(-1), c_address(""), c_email(""), c_ID(""), c_PW("") { }
+	void SetName(string);
+	void SetADD(string);
+	void SetEMAIL(string);
+	void SetID(string);
+	void SetPW(string);
+	void Print();
+	string GetID();
+	string GetPW();
+	int GetPrivateNum();
+	void SetPRIVATENUM (int);
 
 };
 
@@ -34,6 +37,12 @@ public:
 			n[i] = false;
 	};
 	~ClientCollection() { delete[] totalClient; }
-	void signUp();
+	void SignUp();
+	void PrintAll();
 
+	int Login();
+	//void Login(); //로그인
+//	void Logout();  //로그아웃
+	//int SetState(int);
 };
+

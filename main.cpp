@@ -9,7 +9,7 @@ using namespace std;
 int main(void)
 {
 	//어디로 넘어갈지 정해주는 변수
-	int state;
+	int command;
 
 	//지금 현재 유저가 누구인지 나타내주는 클래스이다
 	Client *CurrentUser = new Client(1,"guest");
@@ -24,16 +24,20 @@ int main(void)
 	cout << "0. 종료" << endl;
 
 	cout << "* 입력 선택 : ";
-	cin >> state;
+	cin >> command;
 
-	switch (state){
+	switch (command){
 		case 1:break;
 		case 2:break;
-		case 3:break;
+		case 3:
+			managementRegisterItem(*CurrentUser);
+			break;
 		case 4:break;
 		case 5:break;
 		case 6:break;
-		case 7:break;
+		case 7:
+			
+			break;
 		case 0:break;
 		default:
 			cout << "알맞지 않는 번호입니다";

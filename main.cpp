@@ -6,16 +6,29 @@ using namespace std;
 //전체 판매를 관리하는 
 
 
+int Item::markItemID = 0;
+Client CurrentUser(1, "guest");
+SellItemCollection SellItemCollect;
+FinishItemCollection FinishItemCollect;
+BidItemCollection BidItemCollect;
+
+//현재시간을 나타내는 전역변수
+Day CurrentTime;
+
 
 int main(void)
 {
-	//어디로 넘어갈지 정해주는 변수
+	//시간초기화 나중에 클래스로 예쁘게 구현해야 한다
+	//오퍼레이션 하셨다는게 어떤걸 의미하는지 내일 여쭤보자
+	CurrentTime.year = 2016;
+	CurrentTime.month = 5;
+	CurrentTime.day = 15;
+	CurrentTime.hour = 12;
+
+
 	int command;
 
 	//지금 현재 유저가 누구인지 나타내주는 클래스이다
-	Client *CurrentUser = new Client(1,"guest");
-	SellItemCollection *SellItemCollect = new SellItemCollection();
-	
 	
 	cout << "1. Login/Logout" << endl;
 	cout << "2. Session 선택/변경" << endl;
@@ -35,11 +48,13 @@ int main(void)
 
 		//판매물품등록관리로 넘어간다
 		case 3:
-			managementRegisterItem(*CurrentUser, *SellItemCollect);
+			managementRegisterItem();
 			break;
 		case 4:break;
 		case 5:break;
-		case 6:break;
+		case 6:
+			setCurrentTime();
+			break;
 		case 7:
 			
 			break;

@@ -3,6 +3,7 @@
 using namespace std;
 
 
+//전체 판매를 관리하는 
 
 
 
@@ -13,6 +14,8 @@ int main(void)
 
 	//지금 현재 유저가 누구인지 나타내주는 클래스이다
 	Client *CurrentUser = new Client(1,"guest");
+	SellItemCollection *SellItemCollect = new SellItemCollection();
+	
 	
 	cout << "1. Login/Logout" << endl;
 	cout << "2. Session 선택/변경" << endl;
@@ -29,8 +32,10 @@ int main(void)
 	switch (command){
 		case 1:break;
 		case 2:break;
+
+		//판매물품등록관리로 넘어간다
 		case 3:
-			managementRegisterItem(*CurrentUser);
+			managementRegisterItem(*CurrentUser, *SellItemCollect);
 			break;
 		case 4:break;
 		case 5:break;
@@ -46,8 +51,5 @@ int main(void)
 
 	}
 	
-
-
-
 	return 0;
 }

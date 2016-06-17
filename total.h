@@ -1,273 +1,230 @@
-#include "total.h"
-
-extern SellItemCollection SellItemCollect;
-
-
-
-void registerSellItem(Client currentUser, SellItemCollection totalSellItemCollection){
-
-	cout << "\n\n\n" << "************** 물품 등록을 하러 오셨군요 반갑습니다 **************" << endl;
-
-
-	string name, ownerId, itemId;
-	name = currentUser.getName();
-	ownerId = currentUser.getId();
-	itemId = "12";
-	int totalNum, startPrice;
-	Time startTime, endTime, remainTime;
-
-
-	//freopen("input.txt", "r", stdin);
-
-	cout << "물품명을 입력하세요 : ";
-	cin >> name;
-	cout << "총판매수량을 입력하세요 : ";
-	cin >> totalNum;
-	cout << "시작 가격을 입력하세요 : ";
-	cin >> startPrice;
-	cout << "경매 시작시간을 입력하세요 년 : ";
-	cin >> startTime.year;
-	cout << "경매 시작시간을 입력하세요 월 : ";
-	cin >> startTime.month;
-	cout << "경매 시작시간을 입력하세요 일 : ";
-	cin >> startTime.day;
-	cout << "경매 시작시간을 입력하세요 시간 : ";
-	cin >> startTime.hour;
-	cout << "경매 종료시간을 입력하세요 년 :";
-	cin >> endTime.year;
-	cout << "경매 종료시간을 입력하세요 월 : ";
-	cin >> endTime.month;
-	cout << "경매 종료시간을 입력하세요 일 : ";
-	cin >> endTime.day;
-	cout << "경매 종료시간을 입력하세요 시간 : ";
-	cin >> endTime.hour;
-
-	remainTime.year = endTime.year - startTime.year;
-	remainTime.month = endTime.month - startTime.month;
-	remainTime.day = endTime.day - startTime.day;
-	remainTime.hour = endTime.hour - startTime.hour;
-
-	cout << name << endl;
-
-	SellItem *newItem = new SellItem(name, startTime, endTime, remainTime, totalNum, startPrice, ownerId, itemId);
-	totalSellItemCollection.addSellItem(newItem);
-
-	//SellItemCollection collect = currentUser.getSellerItem();
-	//collect.addSellItem(newItem);
-
-	
-	cout << "\n" << "메뉴 등록이 완료되었습니다" << endl;
-
-	return;
-}
+#include "lib.h"
+#include <string>
+#include <vector>
+using namespace std;
 
 
 
 
-void querySellItem(Client currentUser, SellItemCollection totalSellItemCollection){
+/**********************		T			Y			P			E	********************************/
 
-	cout << "\n\n\n" << "************** 판매중인 물품 정보 조회 하러 오셨군요 반갑습니다 **************" << endl;
-
-	totalSellItemCollection.getSellItemList();
-
-	return;
-}
-
-
-void managementRegisterItem(Client currentUser, SellItemCollection totalSellItemCollection){
-
-	int command;
-
-
-	
-	while (1){
-
-
-		cout << "1. 판매 물품 정보 등록" << endl;
-		cout << "2. 판매 중인 물품 정보 조회" << endl;
-		cout << "3. 판매 종료/유 물품 조회" << endl;
-		cout << "0. 메인 메뉴로 돌아가기" << endl;
-		cout << "입력 선택 : ";
-
-
-		cin >> command;
-
-		switch (command){
-		case 1:
-			cout << "1. 판매 물품 정보 등록으로 들어갑니다" << endl;
-			registerSellItem(currentUser, totalSellItemCollection);
-			break;
-		case 2:
-			cout << "2. 판매 중인 물품 정보 조회로 들어갑니다." << endl;
-			querySellItem(currentUser, totalSellItemCollection);
-			break;
-		case 3:
-			cout << "3. 아직 구현 안햇쪙" << endl;
-			break;
-		case 0:
-			cout << "메인 메뉴로 돌아가겠습니다" << endl;
-			return;
-			break;
-		default:
-			cout << "명령어 입력이 올바르지 않습니다. 다시 입력해주세요" << endl;
-			continue;
-
-		}
-	}
-	return;
-
-
-}
+//시간 명령어
+typedef struct Time{
+	int year;
+	int month;
+	int day;
+	int hour;
+}Day;
 
 
 
 
 
-/********************************		클		래		스		구		현		********************************/
+/**********************		I		T		E		M	********************************/
 
 
+class Item{
+protected:
+
+	string i_name;
+	Day	i_startTime;
+	Day i_endTime;
+	int i_totalNum;
+	int i_startPrice;
+	string i_ownerId;
+	string i_itemId;
 
 
-//client 클래스 구현
-string Client::getName(){
-	return c_name;
-}
-void Client::setName(string name){
-	c_name = name;
-}
-string Client::getPrivateNumber(){
-	return c_privateNumber;
-}
-void Client::setPrivateNumber(string privateName){
-	c_privateNumber = privateName;
-}
-string Client::getAddress(){
-	return c_address;
-}
-void Client::setAddress(string Address){
-	c_address = Address;
-}
-string Client::getEmail(){
-	return c_email;
-}
-void Client::setEmail(string email){
-	c_email = email;
-}
-string Client::getId(){
-	return c_id;
-}
-void Client::setId(string id){
-	c_id = id;
-}
-string Client::getPassword(){
-	return c_password;
-}
-void Client::setPassword(string password){
-	c_password = password;
-}
+public:
 
 
-BidItemCollection Client::getBidderItem(){
-	return bidderItem;
-}
-SellItemCollection Client::getSellerItem(){
-	return sellerItem;
-}
-FinishItemCollection Client::getFinishItem(){
-	return finishItem;
-}
+	//나머지 getset도 다 만들것
+	string getItemId();
+	void setItemId();
 
 
-
-
-SellItem SellItemCollection::getSellItem(int i){
-	return sellItem[i];
-}
-
-
-void SellItemCollection::setSellItem(int i, SellItem newItem){
-	sellItem[i] = newItem;
-}
-
-void SellItemCollection::addSellItem(SellItem *additionSell){
-
-
-	printf("여기까지 오는데 성공했구나\n");
-	for (int i = 0; i < 100; i++){
-		SellItem item = getSellItem(i);
-		if (item.getItemId() == ""){
-			setSellItem(i, *additionSell);
-			cout << "완료하였습니다``11";
-			break;
-		}
-			
-	}
-	
-
-
-}
-
-void SellItemCollection::getSellItemList(){
-	
-	printf("여기까지 또 왔구나 성공했구나\n");
-	for (int i = 0; i < 100; i++){
-		SellItem item = getSellItem(i);
-		cout << item.getItemId() << endl;
-
+	Item(){};
+	~Item(){
+		cout << "소멸자" << endl;
 	}
 
-}
-
-//bool deleteSellItem(SellItem removeSell){}
+};
 
 
+class SellItem : public Item {
+private:
+	Day i_remainTime;
 
-//SellItem getSellList(string ownerId){}
+public:
 
-
-
-
-//SellItem findSellList(string firstValue){}
-
-
-
-
-
-/////////// class Item 구현 /////////////////
-string Item::getItemId(){
-	return i_itemId;
-}
-
-
-
-
-/////////// class SellItem 구현 ///////////////
-string SellItem::getItemId(){
-	return i_itemId;
-}
-
-
-Day SellItem::getStartTime(){ return i_startTime; }
-Day SellItem::getEndTime(){ return i_endTime; }
-Day SellItem::getRemainTime(){ return i_remainTime; }
-int SellItem::getTotalNum(){ return i_totalNum; }
-int SellItem::getStartPrice(){ return i_startPrice; }
-string SellItem::getOwnerId(){ return i_ownerId; }
-void SellItem::setItemId(string itemId){ i_itemId = itemId; }
-void SellItem::setStartTime(Day startTime){ i_startTime = startTime; }
-void SellItem::setEndTime(Day endTime){ i_endTime = endTime; }
-void SellItem::setTotalNum(int totalNum){ i_totalNum = totalNum; }
-void SellItem::setStartPrice(int startPrice){ i_startPrice = startPrice; }
-void SellItem::setOwnerId(string ownerId){ i_ownerId = ownerId; }
+	string getItemId();
+	Day getStartTime();
+	Day getEndTime();
+	Day getRemainTime();
+	int getTotalNum();
+	int getStartPrice();
+	string getOwnerId();
+	void setRemainTime(Day remaintime);
+	void setItemId(string ItemId);
+	void setStartTime(Day startTime);
+	void setEndTime(Day endTime);
+	void setTotalNum(int totalNum);
+	void setStartPrice(int startPrice);
+	void setOwnerId(string OwnerId);
 
 
 
+	//기본생성자
+	SellItem(){
+		//cout << "생성자가 생성되었습니다 11";
+	}
+
+	//초기화 생성자 현황, 이름, 시작시간, 끝나는 시간, 남은 시간, 총 판매 수량, 시작 가격, 오너Id, 아이템 ID
+	SellItem(string name, Day startTime, Day endTime, Day remainTime, int totalNum, int startPrice, string ownerId, string itemId){
+		i_name = name;
+		i_startTime = startTime;
+		i_endTime = endTime;
+		i_totalNum = totalNum;
+		i_startPrice = startPrice;
+		i_ownerId = ownerId;
+		i_itemId = itemId;
+	}
+	~SellItem(){
+		//cout <<// "소멸자 11" << endl;
+	}
+
+};
+
+class FinishItem : public Item  {
+protected:
+	int totalSoldNumber;
+	int bidderNumber;
+
+public:
+	FinishItem();
+	~FinishItem(){
+		cout << "소멸자" << endl;
+	}
+
+};
+
+
+class BidItem : public Item{
+protected:
+	Day remainTime;
+	int bidPrice;
+
+public:
+	BidItem();
+	~BidItem(){
+		cout << "소멸자" << endl;
+	}
+};
+
+
+
+
+/**********************	c	o	l	l	e	c	t	i	o	n	********************************/
+
+//구매 아이템에 대한 컬렉션
+class BidItemCollection{
+private:
+
+public:
+
+};
+
+//판매 아이템에 대한 컬렉션
+class SellItemCollection{
+private:
+
+	SellItem sellItem[100];
+
+public:
+
+	//getset 함수
+	SellItem getSellItem(int i);
+	void setSellItem(int i, SellItem newItem);
+	void addSellItem(SellItem *additionSell);
+	void deleteSellItem(SellItem *removeSell);
+
+
+
+	void getSellItemList();
+	
+	
+	//주소를 받아야한다 반드시 수정해야됌
+//	SellItem getSellList(string ownerId);
+	//SellItem findSellList(string firstValue);
+
+	SellItemCollection(){}
+	~SellItemCollection(){
+		cout << "소멸자가 생성되었습니다." << endl;
+	}
+
+};
+
+
+class FinishItemCollection{
+private:
+public:
+};
 
 
 
 
 
+/**********************		C		L		I		E		T		********************************/
 
+
+//client 구현
+class Client{
+private:
+
+	//0은 admin, 1 guest, 2 user
+	int c_session;
+	string c_name;
+	string c_privateNumber;
+	string c_address;
+	string c_email;
+	string c_id;
+	string c_password;
+	BidItemCollection bidderItem;
+	SellItemCollection sellerItem;
+	FinishItemCollection finishItem;
+	//비더 , 셀러
+
+public:
+
+	string getName();
+	void setName(string name);
+	string getPrivateNumber();
+	void setPrivateNumber(string privateName);
+	string getAddress();
+	void setAddress(string address);
+	string getEmail();
+	void setEmail(string email);
+	string getId();
+	void setId(string id);
+	string getPassword();
+	void setPassword(string password);
+	BidItemCollection getBidderItem();
+	SellItemCollection getSellerItem();
+	FinishItemCollection getFinishItem();
+
+
+
+	Client(int session, string name){ c_session = session; c_name = name; }
+
+};
+
+
+
+
+/**********************		전		방		선		언	********************************/
+
+void managementRegisterItem(Client currentUserm, SellItemCollection totalSellItemCollection);
+void registerSellItem(Client currentUser, SellItemCollection totalSellItemCollection);
 
 
 

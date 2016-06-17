@@ -18,93 +18,89 @@ typedef struct Time{
 
 
 
-
-
 /**********************		I		T		E		M	********************************/
 
-
 class Item{
+
 protected:
+	int itemID;
+	int totalNum;
+	int startPrice;
+	string name;
+	Day	startTime;
+	Day endTime;
 
-	string i_name;
-	Day	i_startTime;
-	Day i_endTime;
-	int i_totalNum;
-	int i_startPrice;
-	string i_ownerId;
-	string i_itemId;
-
+	string ownerID;
 
 public:
+	static int markItemID;
+	string getOwnerID();
+	string getName();
+	Day getStartTime();
+	Day getEndTime();
+	int getTotalNum();
+	int getStartPrice();
+	int getItemID();
+
+	void setItemID(int i_itemID);
+	void setName(int i_name);
+	void setStartTime(Day i_startTime);
+	void setEndTime(Day i_endTime);
+	void setTotalNum(int i_totalNum);
+	void setStartPrice(int i_startPrice);
+	void setOwnerID(string i_OwnerID);
 
 
-	//나머지 getset도 다 만들것
-	string getItemId();
-	void setItemId();
-
-
-	Item(){};
-	~Item(){
-		cout << "소멸자" << endl;
-	}
-
+	Item(){}
+	//~Item(){cout << "소멸자" << endl;}
+	~Item(){}
 };
 
 
 class SellItem : public Item {
 private:
-	Day i_remainTime;
+	Day remainTime;
 
 public:
 
-	string getItemId();
-	Day getStartTime();
-	Day getEndTime();
 	Day getRemainTime();
-	int getTotalNum();
-	int getStartPrice();
-	string getOwnerId();
 	void setRemainTime(Day remaintime);
-	void setItemId(string ItemId);
-	void setStartTime(Day startTime);
-	void setEndTime(Day endTime);
-	void setTotalNum(int totalNum);
-	void setStartPrice(int startPrice);
-	void setOwnerId(string OwnerId);
-
-
 
 	//기본생성자
-	SellItem(){
-		//cout << "생성자가 생성되었습니다 11";
-	}
+	//SellItem(){ cout << "SellItem 생성자" << endl; }
+	SellItem(){}
 
 	//초기화 생성자 현황, 이름, 시작시간, 끝나는 시간, 남은 시간, 총 판매 수량, 시작 가격, 오너Id, 아이템 ID
-	SellItem(string name, Day startTime, Day endTime, Day remainTime, int totalNum, int startPrice, string ownerId, string itemId){
-		i_name = name;
-		i_startTime = startTime;
-		i_endTime = endTime;
-		i_totalNum = totalNum;
-		i_startPrice = startPrice;
-		i_ownerId = ownerId;
-		i_itemId = itemId;
+	SellItem(string i_name, Day i_startTime, Day i_endTime, Day i_remainTime, int i_totalNum, int i_startPrice, string i_ownerID, int i_itemID){
+		name = i_name;
+		startTime = i_startTime;
+		endTime = i_endTime;
+		totalNum = i_totalNum;
+		startPrice = i_startPrice;
+		ownerID = i_ownerID;
+		itemID = i_itemID;
+		
 	}
-	~SellItem(){
-		//cout <<// "소멸자 11" << endl;
-	}
-
+	//~SellItem(){ cout << "SellItem 소멸자" << endl; }
+	~SellItem(){}
 };
 
+
 class FinishItem : public Item  {
-protected:
+private:
 	int totalSoldNumber;
 	int bidderNumber;
 
 public:
-	FinishItem();
-	~FinishItem(){
-		cout << "소멸자" << endl;
-	}
+
+	int getTotalSoldNumber();
+	int getBidderNumber();
+
+	
+	//얘는 set이 있어야 하나 절대로 수정되어선 안되는건데?
+
+	FinishItem(){};
+	~FinishItem(){}
 
 };
 
@@ -124,7 +120,7 @@ public:
 
 
 
-/**********************	c	o	l	l	e	c	t	i	o	n	********************************/
+/**********************	s	e	l	l	I	t	e	m	c	o	l	l	e	c	t	i	o	n	********************************/
 
 //구매 아이템에 대한 컬렉션
 class BidItemCollection{
@@ -137,37 +133,38 @@ public:
 //판매 아이템에 대한 컬렉션
 class SellItemCollection{
 private:
-
 	SellItem sellItem[100];
-
 public:
 
-	//getset 함수
+	void addSellItem();
+
 	SellItem getSellItem(int i);
+
 	void setSellItem(int i, SellItem newItem);
-	void addSellItem(SellItem *additionSell);
-	void deleteSellItem(SellItem *removeSell);
-
-
-
+	//void deleteSellItem(SellItem *removeSell);
 	void getSellItemList();
 	
-	
-	//주소를 받아야한다 반드시 수정해야됌
-//	SellItem getSellList(string ownerId);
-	//SellItem findSellList(string firstValue);
 
+	//생성자 소멸자
 	SellItemCollection(){}
-	~SellItemCollection(){
-		cout << "소멸자가 생성되었습니다." << endl;
-	}
+	~SellItemCollection(){cout << "소멸자가 생성되었습니다." << endl;}
 
 };
 
 
 class FinishItemCollection{
 private:
+	FinishItem finishItem[100];
+
 public:
+
+	FinishItem getFinishItem(int i);
+	void getFinishItemList();
+	void addFinishItem();
+	void setFinishItem(int i, FinishItem newItem);
+
+	FinishItemCollection(){}
+	~FinishItemCollection(){}
 };
 
 
@@ -176,45 +173,44 @@ public:
 
 /**********************		C		L		I		E		T		********************************/
 
-
 //client 구현
 class Client{
 private:
 
 	//0은 admin, 1 guest, 2 user
-	int c_session;
-	string c_name;
-	string c_privateNumber;
-	string c_address;
-	string c_email;
-	string c_id;
-	string c_password;
+	int session;
+	string name;
+	string privateNumber;
+	string address;
+	string email;
+	string id;
+	string password;
 	BidItemCollection bidderItem;
 	SellItemCollection sellerItem;
 	FinishItemCollection finishItem;
 	//비더 , 셀러
 
 public:
-
 	string getName();
-	void setName(string name);
+	void setName(string c_name);
 	string getPrivateNumber();
-	void setPrivateNumber(string privateName);
+	void setPrivateNumber(string c_privateName);
 	string getAddress();
-	void setAddress(string address);
+	void setAddress(string c_address);
 	string getEmail();
-	void setEmail(string email);
+	void setEmail(string c_email);
 	string getId();
-	void setId(string id);
+	void setId(string c_id);
 	string getPassword();
-	void setPassword(string password);
+	void setPassword(string c_password);
 	BidItemCollection getBidderItem();
 	SellItemCollection getSellerItem();
 	FinishItemCollection getFinishItem();
 
 
 
-	Client(int session, string name){ c_session = session; c_name = name; }
+	Client(int c_session, string c_name){ session = c_session; name = c_name; }
+	~Client(){}
 
 };
 
@@ -223,9 +219,8 @@ public:
 
 /**********************		전		방		선		언	********************************/
 
-void managementRegisterItem(Client currentUserm, SellItemCollection totalSellItemCollection);
-void registerSellItem(Client currentUser, SellItemCollection totalSellItemCollection);
-
+void managementRegisterItem();
+void setCurrentTime();
 
 
 

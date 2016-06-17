@@ -210,9 +210,39 @@ public:
 
 
 	Client(int c_session, string c_name){ session = c_session; name = c_name; }
+	Client() {}
 	~Client(){}
 
 };
+
+
+
+ /**************************CLient Collection Class****************/
+class ClientCollection {
+private:
+	Client* totalClient = new Client[10];
+	bool n[10];
+
+public:
+	ClientCollection() {
+		for (int i = 0; i < 10; i++)
+			n[i] = false;
+	};
+	~ClientCollection() { delete[] totalClient; }
+
+	void signUp_deleteClient(Client currentUser, ClientCollection ClientCollect);
+	void signUp(Client currentUser);
+	bool deleteClient(Client currentUser);
+
+	void Login_Logout(Client currentUser, ClientCollection ClientCollect);
+	bool Login(Client currentUser);
+	int Logout(int);
+
+	//void printClient();
+//	void PrintAll(Client currentUser);  //// 정보 입력 확인 용
+
+};
+
 
 
 

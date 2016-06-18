@@ -1,8 +1,6 @@
 #include "total.h"
 
 
-
-
 extern SellItemCollection SellItemCollect;
 extern FinishItemCollection FinishItemCollect;
 extern BidItemCollection BidItemCollect;
@@ -22,8 +20,8 @@ void querySellItem(){
 
 void queryFinishItem(){
 	
-
 	cout << "************** 판매/종료 유찰 조회 하러 오셨군요 반갑습니다 **************" << endl;
+
 	FinishItemCollect.addFinishItem();
 	FinishItemCollect.getFinishItemList();
 	return;
@@ -72,12 +70,12 @@ void managementRegisterItem(){
 
 		cout << "1. 판매 물품 정보 등록" << endl;
 		cout << "2. 판매 중인 물품 정보 조회" << endl;
-		cout << "3. 판매 종료/유 물품 조회" << endl;
+		cout << "3. 판매 종료/유찰 물품 조회" << endl;
 		cout << "0. 메인 메뉴로 돌아가기" << endl;
 		cout << "입력 선택 : ";
 
-
 		cin >> command;
+		if (command == 0) return;
 
 		switch (command){
 		case 1:
@@ -103,7 +101,6 @@ void managementRegisterItem(){
 		}
 	}
 	return;
-
 	
 }
 
@@ -111,22 +108,40 @@ void managementRegisterItem(){
 void setCurrentTime(){
 	
 	cout << "************** 경과시간을 입력하는 곳입니다. **************" << endl;
+	cout << "현재시간은" << CurrentTime.year << "년 " << CurrentTime.month << "월 " << CurrentTime.day << "일 " << CurrentTime.hour << "시간 "<< endl;
+
 
 	int tmp;
-
-	cout << "몇 년으로 설정하시겠습니까 : ";
-	cin >> tmp;
-	CurrentTime.year = tmp;
-	cout << "몇 월으로 설정하시겠습니까 : ";
-	cin >> tmp;
-	CurrentTime.month = tmp;
-	cout << "몇 일으로 설정하시겠습니까 : ";
-	cin >> tmp;
-	CurrentTime.day = tmp;
-	cout << "몇 시간으로 설정하시겠습니까 : ";
-	cin >> tmp;
-	CurrentTime.hour = tmp;
+	while (1){
+		try{
+			cout << "몇 년으로 설정하시겠습니까 : ";
+			cin >> tmp;
+			CurrentTime.year = tmp;
+			if (CurrentTime.year < 0) throw 1;
+			cout << "몇 월으로 설정하시겠습니까 : ";
+			cin >> tmp;
+			CurrentTime.month = tmp;
+			if (CurrentTime.month < 0 || CurrentTime.month > 12) throw 1;
+			cout << "몇 일으로 설정하시겠습니까 : ";
+			cin >> tmp;
+			CurrentTime.day = tmp;
+			if (CurrentTime.day < 0 || CurrentTime.day > 31) throw 1;
+			cout << "몇 시간으로 설정하시겠습니까 : ";
+			cin >> tmp;
+			CurrentTime.hour = tmp;
+			if (CurrentTime.hour < 0 || CurrentTime.hour > 24) throw 1;
+			break;
+		}
+		catch (int type){
+			if (type == 1){
+				cout << "올바른 경과시간을 입력해주시기 바랍니다. ";
+			}
+		}
+	}
 	
+	
+	cout << "바뀐 현재시간은 " << CurrentTime.year << "년 " << CurrentTime.month << "월 " << CurrentTime.day << "일 " << CurrentTime.hour << "시간 " << endl;
+
 
 }
 
@@ -248,39 +263,61 @@ void FinishItemCollection::getFinishItemList(){
 	FinishItem trash;
 	tmp.push_back(make_pair(0, trash));
 
-	cout << "번호" << "        " << "경매 마감 시간" << "            " << "물품명" << endl;
-	FinishItem Item;
-	for (int i = 0; i < 100; i++){
-		Item = getFinishItem(i);
-		if (Item.getName() != ""){
-			tmp.push_back(make_pair(number, Item));
-			cout << number++ << "        " << Item.getEndTime().year << "년 " << Item.getEndTime().month << "월 "
-				<< Item.getEndTime().day << "일 " << Item.getEndTime().hour << "시간        " << Item.getName() << endl;
-				 
+
+	try{
+		cout << "번호" << "        " << "경매 마감 시간" << "            " << "물품명" << endl;
+		FinishItem Item;
+		for (int i = 0; i < 100; i++){
+			Item = getFinishItem(i);
+			if (Item.getName() != ""){
+				tmp.push_back(make_pair(number, Item));
+				cout << number++ << "        " << Item.getEndTime().year << "년 " << Item.getEndTime().month << "월 "
+					<< Item.getEndTime().day << "일 " << Item.getEndTime().hour << "시간        " << Item.getName() << endl;
+
+			}
 		}
+		cout << "0. 메인 메뉴로 돌아가기" << endl;
+
+
+
+		//상세보기를 할건지 안할건지 결정하는 곳입니다
+		cout << "입력선택 : ";
+		cin >> command;
+		if (command == 0) return;
+		if (command > number) throw 1;
+
+
+		if (command != 0){
+			//어떤 번호를 말하는건지 잘 모르겠다 일단 아이템 아이디로 넘겨보겠다
+
+			cout << "번호" << "       " << "경매마감시간" << "            " << "물품명" << "     " << "총판매수량" << "   " << "시작가격" << "    " << "입찰자수" << endl;
+			cout << tmp[command].first << "        "
+				<< tmp[command].second.getEndTime().year << "년 " << tmp[command].second.getEndTime().month << "월 "
+				<< tmp[command].second.getEndTime().day << "일 " << tmp[command].second.getEndTime().hour << "시간       "
+				<< tmp[command].second.getName() << "        " << tmp[command].second.getTotalSoldNumber() << "        "
+				<< tmp[command].second.getStartPrice() << "        " << tmp[command].second.getBidderNumber() << endl;
+
+		}
+		cout << "0. 메인메뉴로 돌아가기" << endl;
+		cin >> command;
+		if (command != 0) throw 2;
+
+		
 	}
-	cout << "0. 메인 메뉴로 돌아가기" << endl;
-
-
-
-	//상세보기를 할건지 안할건지 결정하는 곳입니다
-	cout << "입력선택 : ";
-	cin >> command;
-
-	if (command != 0){
-		//어떤 번호를 말하는건지 잘 모르겠다 일단 아이템 아이디로 넘겨보겠다
-
-		cout << "번호" << "               " << "경매마감시간" << "    " << "물품명" << "      " << "총판매수량" << "      " << "시작가격" << "    " << "입찰자수" << endl;
-		cout << tmp[command].first << "        "
-			<< tmp[command].second.getEndTime().year << "년 " << tmp[command].second.getEndTime().month << "월 "
-			<< tmp[command].second.getEndTime().day << "일 " << tmp[command].second.getEndTime().hour << "시간 "
-			<< tmp[command].second.getName() << "        " << tmp[command].second.getTotalSoldNumber() << "        "
-			<< tmp[command].second.getStartPrice() << "        " << tmp[command].second.getBidderNumber() << endl;
-
+	catch (int type){
+		if (type == 1){
+			cout << "없는 상세보기를 입력하셨습니다 나가겠습니다\n" << endl;
+			return;
+		}
+			
+		else if (type == 2){
+			cout << "입력이 0 말고는 더이상 할게 없습니다 나가겠습니다\n" << endl;
+		}
+		
 	}
-	else
-		return;
 }
+
+	
 
 
 void FinishItemCollection::addFinishItem(){
@@ -294,15 +331,15 @@ void FinishItemCollection::addFinishItem(){
 		Item = SellItemCollect.getSellItem(i);
 		if (Item.getEndTime().year == 0)
 			continue;
-		printf("%d %d %d %d %d %d %d %d\n", Item.getEndTime().year, Item.getEndTime().month, Item.getEndTime().day, Item.getEndTime().hour,
-			CurrentTime.year, CurrentTime.month, CurrentTime.day, CurrentTime.hour);
+		//printf("%d %d %d %d %d %d %d %d\n", Item.getEndTime().year, Item.getEndTime().month, Item.getEndTime().day, Item.getEndTime().hour,
+			//CurrentTime.year, CurrentTime.month, CurrentTime.day, CurrentTime.hour);
 		if (Item.getRemainTime().year >0)
 			continue;
 		if (Item.getRemainTime().year == 0 && Item.getRemainTime().month > 0)
 			continue;
 		if (Item.getRemainTime().year == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().day >0)
 			continue;
-		if (Item.getRemainTime().year == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().hour>0)
+		if (Item.getRemainTime().year == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().day == 0 && Item.getRemainTime().hour>0)
 			continue;
 		//이제 추가시킨다
 		FinishItem FItem;
@@ -332,7 +369,6 @@ SellItem SellItemCollection::getSellItem(int i){
 
 
 void SellItemCollection::setSellItem(int i, SellItem newItem){
-	cout << "지금 입력하려고 하는 아이템은 " << newItem.getName() << i <<  endl;
 	totalSellItem[i] = newItem;
 }
 
@@ -344,53 +380,92 @@ void SellItemCollection::addSellItem(){
 
 
 	string name, ownerID;
-	//itemID는 나중에 처리하겠따
-	int itemID = 12;
 	name = CurrentUser.getName();
 	ownerID = CurrentUser.getId();
 	int totalNum, startPrice;
 	Time startTime, endTime, remainTime;
+	while (1){
+		try{
+			cout << "물품명을 입력하세요 : ";
+			cin >> name;
+			if (name.length() < 1) throw 1;
+			cout << "총판매수량을 입력하세요 : ";
+			cin >> totalNum;
+			if (totalNum< 0) throw 2;
+			cout << "시작 가격을 입력하세요 : ";
+			cin >> startPrice;
+			if (startPrice< 0) throw 3;
+			cout << "경매 시작시간을 입력하세요 년 : ";
+			cin >> startTime.year;
+			if (startTime.year < CurrentTime.year) throw 4;
+			cout << "경매 시작시간을 입력하세요 월 : ";
+			cin >> startTime.month;
+			if ((startTime.year == CurrentTime.year) && startTime.month < CurrentTime.month) throw 4;
+			if (startTime.month > 12) throw 6;
+			cout << "경매 시작시간을 입력하세요 일 : ";
+			cin >> startTime.day;
+			if ((startTime.year == CurrentTime.year) && (startTime.month == CurrentTime.month) && startTime.day < CurrentTime.day) throw 4;
+			if (startTime.day > 31) throw 6;
+			cout << "경매 시작시간을 입력하세요 시간 : ";
+			cin >> startTime.hour;
+			if ((startTime.year == CurrentTime.year) && (startTime.month == CurrentTime.month) && (startTime.day == CurrentTime.day) && startTime.hour < CurrentTime.hour) throw 4;
+			if (startTime.day > 24) throw 6;
 
+			cout << "경매 종료시간을 입력하세요 년 :";
+			cin >> endTime.year;
+			if (endTime.year < CurrentTime.year) throw 4;
+			if (endTime.year < startTime.year) throw 5;
+			cout << "경매 종료시간을 입력하세요 월 : ";
+			cin >> endTime.month;
+			if ((endTime.year == CurrentTime.year) && endTime.month < CurrentTime.month) throw 4;
+			if ((endTime.year == startTime.year) && endTime.month < startTime.month) throw 5;
+			if (endTime.month > 12) throw 6;
+			cout << "경매 종료시간을 입력하세요 일 : ";
+			cin >> endTime.day;
+			if ((endTime.year == CurrentTime.year) && (endTime.month == CurrentTime.month) && endTime.day < CurrentTime.day) throw 4;
+			if ((endTime.year == CurrentTime.year) && (endTime.month == CurrentTime.month) && endTime.day < startTime.day) throw 5;
+			if (endTime.day > 31) throw 6;
+			cout << "경매 종료시간을 입력하세요 시간 : ";
+			cin >> endTime.hour;
+			if ((endTime.year == CurrentTime.year) && (endTime.month == CurrentTime.month) && (endTime.day == CurrentTime.day) && endTime.hour < CurrentTime.hour) throw 4;
+			if ((endTime.year == CurrentTime.year) && (endTime.month == CurrentTime.month) && (endTime.day == CurrentTime.day) && endTime.hour < startTime.hour) throw 5;
+			if (endTime.hour > 24) throw 6;
 
-	//freopen("input.txt", "r", stdin);
-
-	cout << "물품명을 입력하세요 : ";
-	cin >> name;
-	cout << "총판매수량을 입력하세요 : ";
-	cin >> totalNum;
-	cout << "시작 가격을 입력하세요 : ";
-	cin >> startPrice;
-	cout << "경매 시작시간을 입력하세요 년 : ";
-	cin >> startTime.year;
-	cout << "경매 시작시간을 입력하세요 월 : ";
-	cin >> startTime.month;
-	cout << "경매 시작시간을 입력하세요 일 : ";
-	cin >> startTime.day;
-	cout << "경매 시작시간을 입력하세요 시간 : ";
-	cin >> startTime.hour;
-	cout << "경매 종료시간을 입력하세요 년 :";
-	cin >> endTime.year;
-	cout << "경매 종료시간을 입력하세요 월 : ";
-	cin >> endTime.month;
-	cout << "경매 종료시간을 입력하세요 일 : ";
-	cin >> endTime.day;
-	cout << "경매 종료시간을 입력하세요 시간 : ";
-	cin >> endTime.hour;
-
-	remainTime.year = endTime.year - CurrentTime.year;
-	remainTime.month = endTime.month - CurrentTime.month;
-	remainTime.day = endTime.day - CurrentTime.day;
-	remainTime.hour = endTime.hour - CurrentTime.hour;
-
-	cout << name << endl;
-
-	//SellItem *newItem = new SellItem(name, startTime, endTime, remainTime, totalNum, startPrice, ownerID, Item::markItemID);
+			remainTime.year = endTime.year - CurrentTime.year;
+			remainTime.month = endTime.month - CurrentTime.month;
+			remainTime.day = endTime.day - CurrentTime.day;
+			remainTime.hour = endTime.hour - CurrentTime.hour;
+			break;
+		}
+		catch (int type){
+			switch (type){
+			case 1:
+				cout << "물품명을 적어도 2글자 이상 적어주세요" << endl;
+				break;
+			case 2:
+				cout << "총 판매수량을 0원 이상으로 적어주세요" << endl;
+				break;
+			case 3:
+				cout << "시작가격을 0원 이상으로 적어주세요" << endl;
+				break;
+			case 4:
+				cout << "현재시간보다 더 적게 설정할 수는 없습니다." << endl;
+				break;
+			case 5:
+				cout << "마감시간이 시작시간보다 전일 수는 없습니다" << endl;
+				break;
+			case 6:
+				cout << "범위에 맞지 않는 수 입니다." << endl;
+			}
+			cout << "다시 입력하세요 " << endl;
+			continue;
+		}
+	}
 
 	SellItem newItem(name, startTime, endTime, remainTime, totalNum, startPrice, ownerID, Item::markItemID++);
 
 	SellItem item;
 	for (int i = 0; i < 100; i++){
-		//getSellItem이 없어져야해
 		item = getSellItem(i);
 		if (item.getName() == ""){
 			setSellItem(i, newItem);
@@ -398,7 +473,6 @@ void SellItemCollection::addSellItem(){
 		}
 			
 	}
-	
 	cout << "\n" << "메뉴 등록이 완료되었습니다" << endl;
 
 	return;
@@ -416,36 +490,55 @@ void SellItemCollection::getSellItemList(){
 	SellItem trash;
 	tmp.push_back(make_pair(0, trash));
 
-	printf("여기는 getSellItemList 입니다\n");
-
-	cout << "번호" << "   " << "물 품 명" << "   " << "총 판매수량" << "   " << "시작 가격" << endl;
-	SellItem Item;
-	for (int i = 0; i < 100; i++){
-		Item = getSellItem(i);
-		if (Item.getName() != ""){
-			tmp.push_back(make_pair(number, Item));
-			cout << number++ << "        " << Item.getName() << "        " << Item.getTotalNum() << "        " << Item.getStartPrice() << endl;
+	try{
+		cout << "번호" << "   " << "물 품 명" << "   " << "총 판매수량" << "     " << "시작 가격" << endl;
+		SellItem Item;
+		for (int i = 0; i < 100; i++){
+			Item = getSellItem(i);
+			if (Item.getName() != ""){
+				tmp.push_back(make_pair(number, Item));
+				cout << number++ << "        " << Item.getName() << "        " << Item.getTotalNum() << "             " << Item.getStartPrice() << endl;
+			}
 		}
+		cout << "0. 메인 메뉴로 돌아가기" << endl;
+
+
+
+		//상세보기를 할건지 안할건지 결정하는 곳입니다
+		cout << "입력선택 : ";
+		cin >> command;
+		if (command == 0) return;
+		if (command > number) throw 1;
+
+
+		if (command != 0){
+			//어떤 번호를 말하는건지 잘 모르겠다 일단 아이템 아이디로 넘겨보겠다
+			cout << "번호" << "  " << "물 품 명" << "   " << "총 판매수량" << "   " << "시작 가격" << "   " << "입찰자 수" << "        " << "경매마감시간" << endl;
+			cout << tmp[command].first << "      " << tmp[command].second.getName() << "         " << tmp[command].second.getTotalNum()
+				<< "           " << tmp[command].second.getStartPrice() << "        " << tmp[command].second.getBidPersonNum() << "        "
+				<< tmp[command].second.getEndTime().year << "년 " << tmp[command].second.getEndTime().month << "월 "
+				<< tmp[command].second.getEndTime().day << "일 " << tmp[command].second.getEndTime().hour << "시간 "
+				<< endl;
+		}
+		cout << "0. 메인 메뉴로 돌아가기" << endl;
+		cout << "입력선택 : ";
+		cin >> command;
+		if (command != 0) throw 2;
+
+
 	}
-	cout << "0. 메인 메뉴로 돌아가기" << endl;
-	
+	catch (int type){
+		if (type == 1){
+			cout << "없는 상세보기를 입력하셨습니다 나가겠습니다\n" << endl;
+			return;
+		}
 
+		else if (type == 2){
+			cout << "입력이 0 말고는 더이상 할게 없습니다 나가겠습니다\n" << endl;
+		}
 
-	//상세보기를 할건지 안할건지 결정하는 곳입니다
-	cout << "입력선택 : ";
-	cin >> command;
-
-	if (command != 0){
-		//어떤 번호를 말하는건지 잘 모르겠다 일단 아이템 아이디로 넘겨보겠다
-		cout << "번호" << "  " << "물 품 명" << "   " << "총 판매수량" << "   " << "시작 가격" << " " << "입찰자 수" << "     " << "경매마감시간" << endl;
-		cout << tmp[command].first << "      " << tmp[command].second.getName() << "       " << tmp[command].second.getTotalNum()
-			<< "                " << tmp[command].second.getStartPrice() << "              " << "입찰자 수" << "        " 
-			<< tmp[command].second.getEndTime().year << "년 " << tmp[command].second.getEndTime().month << "월 "
-			<< tmp[command].second.getEndTime().day << "일 " << tmp[command].second.getEndTime().hour << "시간 "
-			<< endl;
 	}
-	else
-		return;
+	return;
 }
 
 
@@ -469,8 +562,9 @@ int Item::getTotalNum(){ return totalNum; }
 int Item::getStartPrice(){ return startPrice; }
 string Item::getOwnerID(){ return ownerID; }
 string Item::getName(){ return name; }
+int Item::getBidPersonNum(){ return bidPersonNum; }
 
-
+void Item::setBidPersonNum(int i_bidPersonNum){ bidPersonNum = i_bidPersonNum; }
 void Item::setName(string i_name){ name = i_name; }
 void Item::setItemID(int i_itemID){ itemID = i_itemID; }
 void Item::setStartTime(Day i_startTime){ startTime = i_startTime; }

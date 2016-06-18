@@ -12,7 +12,7 @@ extern Day CurrentTime;
 
 void querySellItem(){
 
-	cout << "\n\n\n" << "************** 판매중인 물품 정보 조회 하러 오셨군요 반갑습니다 **************" << endl;
+	cout << "************** 판매중인 물품 정보 조회 하러 오셨군요 반갑습니다 **************" << endl;
 
 	SellItemCollect.getSellItemList();
 
@@ -21,14 +21,46 @@ void querySellItem(){
 
 
 void queryFinishItem(){
+	
 
-
-	cout << "\n\n\n" << "************** 판매/종료 유찰 조회 하러 오셨군요 반갑습니다 **************" << endl;
-
+	cout << "************** 판매/종료 유찰 조회 하러 오셨군요 반갑습니다 **************" << endl;
+	FinishItemCollect.addFinishItem();
 	FinishItemCollect.getFinishItemList();
 	return;
 }
 
+
+void changeSession(){
+
+	int command;
+	cout << "************** 세션을 바꾸러 오셨군요 반갑습니다 **************" << endl;
+
+	cout << "1.Admin" << endl;
+	cout << "2.Guest" << endl;
+	//이게 유저를 의미하는건지 아닌지 모르겠다
+	cout << "3.User" << endl;
+	cout << "0.메인 메뉴로 돌아가기" << endl;
+	cin >> command;
+
+	switch (command){
+	case 1:
+		CurrentUser.setSession(0);
+		break;
+	case 2:
+		CurrentUser.setSession(1);
+		break;
+	case 3:
+		CurrentUser.setSession(2);
+		break;
+	default :
+		//다시 실행시킬지 말지 정하자
+		cout << "잘못된 값을 입력하셨습니다 프로그램을 종료합니다";
+		break;
+	}
+
+
+	return;
+}
 
 
 //물품 등록 관리를 하는 창입니다
@@ -96,7 +128,6 @@ void setCurrentTime(){
 	CurrentTime.hour = tmp;
 	
 
-
 }
 
 
@@ -145,6 +176,13 @@ void Client::setPassword(string c_password){
 	password = c_password;
 }
 
+void Client::setSession(int wantChangeNum){
+	session = wantChangeNum;
+}
+
+int Client::getSession(){
+	return session;
+}
 
 
 ////////// 얘네는 뭐 하는 얘들이이지
@@ -162,10 +200,12 @@ FinishItemCollection Client::getFinishItem(){
 
 /***********************	FinishItem class 구현	*************************/
 
-
-
 int FinishItem::getTotalSoldNumber(){ return totalSoldNumber; }
 int FinishItem::getBidderNumber(){ return bidderNumber; }
+
+
+void FinishItem::setTotalSoldNumber(int i_totalSoldNumber){ totalSoldNumber = i_totalSoldNumber; }
+void FinishItem::setBidderNumber(int i_bidderNumer){ bidderNumber = i_bidderNumer; }
 
 
 /***********************	FinishItemCollection class 구현	*************************/
@@ -177,9 +217,22 @@ FinishItem FinishItemCollection::getFinishItem(int i){
 	return finishItem[i];
 }
 
-void FinishItemCollection::setFinishItem(int i, FinishItem newItem){
-	cout << "지금 입력하려고 하는 아이템은 " << newItem.getName() << i << endl;
-	finishItem[i] = newItem;
+void FinishItemCollection::setFinishItem(int sellectSellItem, int sellectFinishItem, SellItem newItem){
+
+	//totalNum과 totalSoldNumber를 어떻게 넘길것인가 꼭 해결하시오//////////////////////
+	finishItem[sellectFinishItem].setTotalSoldNumber(1111);
+
+	finishItem[sellectFinishItem].setItemID(newItem.getItemID());
+	finishItem[sellectFinishItem].setStartPrice(newItem.getStartPrice());
+	finishItem[sellectFinishItem].setName(newItem.getName());
+	finishItem[sellectFinishItem].setStartTime(newItem.getStartTime());
+	finishItem[sellectFinishItem].setEndTime(newItem.getEndTime());
+	finishItem[sellectFinishItem].setOwnerID(newItem.getOwnerID());
+
+	SellItem FreshItem;
+	SellItemCollect.setSellItem(sellectSellItem, FreshItem);
+	
+	
 }
 
 
@@ -195,16 +248,14 @@ void FinishItemCollection::getFinishItemList(){
 	FinishItem trash;
 	tmp.push_back(make_pair(0, trash));
 
-	printf("여기는 getSellItemList 입니다\n");
-
-	cout << "번호" << "   " << "경매 마감 시간" << "   " << "물품명" << endl;
+	cout << "번호" << "        " << "경매 마감 시간" << "            " << "물품명" << endl;
 	FinishItem Item;
 	for (int i = 0; i < 100; i++){
 		Item = getFinishItem(i);
 		if (Item.getName() != ""){
 			tmp.push_back(make_pair(number, Item));
 			cout << number++ << "        " << Item.getEndTime().year << "년 " << Item.getEndTime().month << "월 "
-				<< Item.getEndTime().day << "일 " << Item.getEndTime().hour << "시간" << Item.getName() << endl;
+				<< Item.getEndTime().day << "일 " << Item.getEndTime().hour << "시간        " << Item.getName() << endl;
 				 
 		}
 	}
@@ -219,7 +270,7 @@ void FinishItemCollection::getFinishItemList(){
 	if (command != 0){
 		//어떤 번호를 말하는건지 잘 모르겠다 일단 아이템 아이디로 넘겨보겠다
 
-		cout << "번호" << "      " << "경매마감시간" << "      " << "물품명" << "      " << "총판매수량" << "      " << "시작가격" << "             " << "입찰자수" << endl;
+		cout << "번호" << "               " << "경매마감시간" << "    " << "물품명" << "      " << "총판매수량" << "      " << "시작가격" << "    " << "입찰자수" << endl;
 		cout << tmp[command].first << "        "
 			<< tmp[command].second.getEndTime().year << "년 " << tmp[command].second.getEndTime().month << "월 "
 			<< tmp[command].second.getEndTime().day << "일 " << tmp[command].second.getEndTime().hour << "시간 "
@@ -236,23 +287,31 @@ void FinishItemCollection::addFinishItem(){
 	//FinishItem은 remainTime을 계산하여 remainTime <0 
 	//것이 있따면 FinishItem()에 추가를 시킨다 
 
+
+
 	SellItem Item;
 	for (int i = 0; i < 100; i++){
 		Item = SellItemCollect.getSellItem(i);
-		if (Item.getRemainTime().day >0)
+		if (Item.getEndTime().year == 0)
 			continue;
-		if (Item.getRemainTime().day == 0 && Item.getRemainTime().month > 0)
+		printf("%d %d %d %d %d %d %d %d\n", Item.getEndTime().year, Item.getEndTime().month, Item.getEndTime().day, Item.getEndTime().hour,
+			CurrentTime.year, CurrentTime.month, CurrentTime.day, CurrentTime.hour);
+		if (Item.getRemainTime().year >0)
 			continue;
-		if (Item.getRemainTime().day == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().day >0)
+		if (Item.getRemainTime().year == 0 && Item.getRemainTime().month > 0)
 			continue;
-		if (Item.getRemainTime().day == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().hour>0)
+		if (Item.getRemainTime().year == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().day >0)
+			continue;
+		if (Item.getRemainTime().year == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().hour>0)
 			continue;
 		//이제 추가시킨다
 		FinishItem FItem;
 		for (int j = 0; j < 100; j++){
 			FItem = getFinishItem(j);
 			if (FItem.getName() == ""){
-				setFinishItem(j, FItem);
+				cout << Item.getName() << endl;
+				setFinishItem(i, j, Item);
+				break;
 			}
 		}
 
@@ -268,20 +327,20 @@ void FinishItemCollection::addFinishItem(){
 
 
 SellItem SellItemCollection::getSellItem(int i){
-	return sellItem[i];
+	return totalSellItem[i];
 }
 
 
 void SellItemCollection::setSellItem(int i, SellItem newItem){
 	cout << "지금 입력하려고 하는 아이템은 " << newItem.getName() << i <<  endl;
-	sellItem[i] = newItem;
+	totalSellItem[i] = newItem;
 }
 
 
 
 void SellItemCollection::addSellItem(){
 
-	cout << "\n\n\n" << "************** 물품 등록을 하러 오셨군요 반갑습니다 **************" << endl;
+	cout  << "************** 물품 등록을 하러 오셨군요 반갑습니다 **************" << endl;
 
 
 	string name, ownerID;
@@ -329,14 +388,12 @@ void SellItemCollection::addSellItem(){
 
 	SellItem newItem(name, startTime, endTime, remainTime, totalNum, startPrice, ownerID, Item::markItemID++);
 
-	printf("여기까지 오는데 성공했구나\n");
 	SellItem item;
 	for (int i = 0; i < 100; i++){
 		//getSellItem이 없어져야해
 		item = getSellItem(i);
 		if (item.getName() == ""){
 			setSellItem(i, newItem);
-			cout << newItem.getName() << newItem.getStartPrice() << "아이템을 성공적으로 입력하였습니다" << endl;
 			break;
 		}
 			
@@ -380,9 +437,9 @@ void SellItemCollection::getSellItemList(){
 
 	if (command != 0){
 		//어떤 번호를 말하는건지 잘 모르겠다 일단 아이템 아이디로 넘겨보겠다
-		cout << "번호" << "      " << "물 품 명" << "      " << "총 판매수량" << "      " << "시작 가격" << "      " << "입찰자 수" << "             " << "경매마감시간" << endl;
+		cout << "번호" << "  " << "물 품 명" << "   " << "총 판매수량" << "   " << "시작 가격" << " " << "입찰자 수" << "     " << "경매마감시간" << endl;
 		cout << tmp[command].first << "      " << tmp[command].second.getName() << "       " << tmp[command].second.getTotalNum()
-			<< "   " << tmp[command].second.getStartPrice() << "   " << "입찰자 수" << "   " 
+			<< "                " << tmp[command].second.getStartPrice() << "              " << "입찰자 수" << "        " 
 			<< tmp[command].second.getEndTime().year << "년 " << tmp[command].second.getEndTime().month << "월 "
 			<< tmp[command].second.getEndTime().day << "일 " << tmp[command].second.getEndTime().hour << "시간 "
 			<< endl;
@@ -398,14 +455,23 @@ int Item::getItemID(){
 }
 Day Item::getStartTime(){ return startTime; }
 Day Item::getEndTime(){ return endTime; }
-Day SellItem::getRemainTime(){ return remainTime; }
+Day SellItem::getRemainTime(){ 
+	//SellItem에 remainTime이 의미가 없는것 같은데?
+	//의문점을 꼭 해결하시오
+	//대문자 소문자 이거도 꼭맞추시오
+	remainTime.year = endTime.year - CurrentTime.year;
+	remainTime.month = endTime.month - CurrentTime.month;
+	remainTime.day = endTime.day - CurrentTime.day;
+	remainTime.hour = endTime.hour - CurrentTime.hour;
+	return remainTime;
+}
 int Item::getTotalNum(){ return totalNum; }
 int Item::getStartPrice(){ return startPrice; }
 string Item::getOwnerID(){ return ownerID; }
 string Item::getName(){ return name; }
 
 
-void Item::setName(int i_name){ name = i_name; }
+void Item::setName(string i_name){ name = i_name; }
 void Item::setItemID(int i_itemID){ itemID = i_itemID; }
 void Item::setStartTime(Day i_startTime){ startTime = i_startTime; }
 void Item::setEndTime(Day i_endTime){ endTime = i_endTime; }
@@ -415,90 +481,6 @@ void Item::setOwnerID(string i_ownerID){ ownerID = i_ownerID; }
 
 
 
-/*==================================ClientCollection===========================================================*/
-
-
-/*======================== 회 원  가 입   회 원 탈 퇴======================*/
-void ClientCollection::signUp_deleteClient(Client currentUser, ClientCollection ClientCollect) {
-	int command = 0;
-
-	//Client *CurrentUser = new Client(1, "guest");
-
-
-	cout << "1. 회원 가입" << endl;
-	cout << "2. 회원 탈퇴" << endl;
-	cout << "0. 메인 메뉴로 돌아가기" << endl;
-	
-		cout << "* 입력 선택 : ";
-		cin >> command;
-
-		switch (command) {
-		case 1:
-			cout << "1. 회원 가입." << endl;
-			//		ClientCollect.signUp(currentUser, ClientCollect);
-		//	ClientCollect.PrintAll(currentUser);
-			ClientCollect.signUp(currentUser);
-		//	ClientCollect.PrintAll(totalClient[0]);
-			break;
-
-		case 2:
-			cout << "2. 회원 탈퇴." << endl;
-//			ClientCollect.PrintAll(totalClient[0]);
-//			if (1 == ClientCollect.deleteClient(currentUser)) { cout << "탈퇴 완료" << endl; }
-//			else { cout << "탈퇴안됨" << endl; }
-//			ClientCollect.PrintAll(totalClient[0]);
-			break;
-
-		case 0:
-			cout << "메인 메뉴로 돌아갑니다." << endl;
-			break;
-
-		default:
-			cout << "알맞지 않는 번호입니다";
-			break;
-		}
-	
-}
-
-
-void ClientCollection::signUp(Client currentUser) {
-
-	string str = "";
-	int newMember = 0;
-	for (; n[newMember] != 0; newMember++);
-
-	cout << "name 입력 : ";
-	cin >> str;	
-	totalClient[newMember].setName(str);
-	currentUser.setName(str);
-
-
-	cout << "address 입력 : ";
-	cin >> str;
-	totalClient[newMember].setAddress(str);
-	currentUser.setAddress(str);
-
-	cout << "email 입력 : ";
-	cin >> str;
-	totalClient[newMember].setEmail(str);
-	currentUser.setEmail(str);
-
-	cout << "id 입력 : ";
-	cin >> str;
-	totalClient[newMember].setId(str);
-	currentUser.setId(str);
-
-	cout << "password 입력 : ";
-	cin >> str;
-	totalClient[newMember].setPassword(str);
-	currentUser.setPassword(str);
-
-	n[newMember] = true;
-
-	totalClient[newMember].setPrivateNumber(newMember);
-	currentUser.setPrivateNumber(newMember);
-
-}
 
 
 

@@ -1,231 +1,75 @@
 #include "lib.h"
-#include <string>
-#include <vector>
+#include "total.h"
 using namespace std;
 
 
+//전체 판매를 관리하는 
 
 
-/**********************		T			Y			P			E	********************************/
+int Item::markItemID = 0;
+Client CurrentUser(1, "guest");
+FinishItemCollection FinishItemCollect;
+BidItemCollection BidItemCollect;
 
-//시간 명령어
-typedef struct Time{
-	int year;
-	int month;
-	int day;
-	int hour;
-}Day;
+//현재시간을 나타내는 전역변수
+Day CurrentTime;
 
 
+int main(void)
+{
+	//시간초기화 나중에 클래스로 예쁘게 구현해야 한다
+	//오퍼레이션 하셨다는게 어떤걸 의미하는지 내일 여쭤보자
+	CurrentTime.year = 2016;
+	CurrentTime.month = 6;
+	CurrentTime.day = 1;
+	CurrentTime.hour = 12;
 
-/**********************		I		T		E		M	********************************/
-
-class Item{
-
-protected:
-	int itemID;
-	int totalNum;
-	int startPrice;
-	string name;
-	Day	startTime;
-	Day endTime;
-
-	string ownerID;
-
-public:
-	static int markItemID;
-	string getOwnerID();
-	string getName();
-	Day getStartTime();
-	Day getEndTime();
-	int getTotalNum();
-	int getStartPrice();
-	int getItemID();
-
-	void setItemID(int i_itemID);
-	void setName(string i_name);
-	void setStartTime(Day i_startTime);
-	void setEndTime(Day i_endTime);
-	void setTotalNum(int i_totalNum);
-	void setStartPrice(int i_startPrice);
-	void setOwnerID(string i_OwnerID);
-
-
-	Item(){}
-	//~Item(){cout << "소멸자" << endl;}
-	~Item(){}
-};
-
-
-class SellItem : public Item {
-private:
-	Day remainTime;
-
-public:
-
-	Day getRemainTime();
-	void setRemainTime(Day remaintime);
-
-	//기본생성자
-	//SellItem(){ cout << "SellItem 생성자" << endl; }
-	SellItem(){}
-
-	//초기화 생성자 현황, 이름, 시작시간, 끝나는 시간, 남은 시간, 총 판매 수량, 시작 가격, 오너Id, 아이템 ID
-	//남은시간은 현재 시간과 비교해야 됌
-	SellItem(string i_name, Day i_startTime, Day i_endTime, Day i_remainTime, int i_totalNum, int i_startPrice, string i_ownerID, int i_itemID){
-		name = i_name;
-		startTime = i_startTime;
-		endTime = i_endTime;
-		totalNum = i_totalNum;
-		startPrice = i_startPrice;
-		ownerID = i_ownerID;
-		itemID = i_itemID;
-		
-	}
-	//~SellItem(){ cout << "SellItem 소멸자" << endl; }
-	~SellItem(){}
-};
-
-
-class FinishItem : public Item  {
-private:
-	int totalSoldNumber;
-	int bidderNumber;
-
-public:
-
-	int getTotalSoldNumber();
-	int getBidderNumber();
-
-	void setTotalSoldNumber(int i_totalSoldNumber);
-	void setBidderNumber(int i_bidderNumer);
-	
-	//얘는 set이 있어야 하나 절대로 수정되어선 안되는건데?
-	FinishItem(){};
-	~FinishItem(){}
-
-};
-
-
-class BidItem : public Item{
-protected:
-	Day remainTime;
-	int bidPrice;
-
-public:
-	BidItem();
-	~BidItem(){
-		cout << "소멸자" << endl;
-	}
-};
-
-
-
-
-/**********************	s	e	l	l	I	t	e	m	c	o	l	l	e	c	t	i	o	n	********************************/
-
-//구매 아이템에 대한 컬렉션
-class BidItemCollection{
-private:
-
-public:
-
-};
-
-//판매 아이템에 대한 컬렉션
-class SellItemCollection{
-private:
-	SellItem totalSellItem[100];
-public:
-
-	void addSellItem();
-
-	SellItem getSellItem(int i);
-
-	void setSellItem(int i, SellItem newItem);
-	//void deleteSellItem(SellItem *removeSell);
-	void getSellItemList();
 	
 
-	//생성자 소멸자
-	SellItemCollection(){}
-	~SellItemCollection(){cout << "소멸자가 생성되었습니다." << endl;}
 
-};
+	int command;
 
+	//지금 현재 유저가 누구인지 나타내주는 클래스이다
+	while (1){
+		cout << "1. Login/Logout" << endl;
+		cout << "2. Session 선택/변경" << endl;
+		cout << "3. 물품 등록 관리" << endl;
+		cout << "4. 경매 물품 조회, 입찰 관리" << endl;
+		cout << "5. 구매 완료/낙찰 실패 물품 정보 확인" << endl;
+		cout << "6. 경과시간 입력" << endl;
+		cout << "7. 회원가입/탈퇴" << endl;
+		cout << "0. 종료" << endl;
 
-class FinishItemCollection{
-private:
-	FinishItem finishItem[100];
+		cout << "* 입력 선택 : ";
+		cin >> command;
 
-public:
+		switch (command){
+		case 1:
+			break;
+		case 2:break;
+			changeSession();
+			break;
+			//판매물품등록관리로 넘어간다
+		case 3:
+			managementRegisterItem();
+			break;
+		case 4:break;
+		case 5:break;
+		case 6:
+			setCurrentTime();
+			break;
+		case 7:
 
-	FinishItem getFinishItem(int i);
-	void getFinishItemList();
-	void addFinishItem();
-	void setFinishItem(int sellectSellItem, int sellectFinishItem, SellItem newItem);
-
-	FinishItemCollection(){}
-	~FinishItemCollection(){}
-};
-
-
-
-
-
-/**********************		C		L		I		E		T		********************************/
-
-//client 구현
-class Client{
-private:
-
-	//0은 admin, 1 guest, 2 user
-	int session;
-	string name;
-	string privateNumber;
-	string address;
-	string email;
-	string id;
-	string password;
-	BidItemCollection bidderItem;
-	SellItemCollection sellerItem;
-	FinishItemCollection finishItem;
-	//비더 , 셀러
-
-public:
-
-	int getSession();
-	void setSession(int wantChangeSession);
-	string getName();
-	void setName(string c_name);
-	string getPrivateNumber();
-	void setPrivateNumber(string c_privateName);
-	string getAddress();
-	void setAddress(string c_address);
-	string getEmail();
-	void setEmail(string c_email);
-	string getId();
-	void setId(string c_id);
-	string getPassword();
-	void setPassword(string c_password);
-	BidItemCollection getBidderItem();
-	SellItemCollection getSellerItem();
-	FinishItemCollection getFinishItem();
+			break;
+		case 0:break;
+		default:
+			cout << "알맞지 않는 번호입니다";
+			break;
 
 
-
-	Client(int c_session, string c_name){ session = c_session; name = c_name; }
-	~Client(){}
-
-};
-
-
-
-
-/**********************		전		방		선		언	********************************/
-
-void managementRegisterItem();
-void setCurrentTime();
-void changeSession();
-
-
+		}
+	}
+	
+	
+	return 0;
+}

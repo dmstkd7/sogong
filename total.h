@@ -43,7 +43,7 @@ public:
 	int getItemID();
 
 	void setItemID(int i_itemID);
-	void setName(int i_name);
+	void setName(string i_name);
 	void setStartTime(Day i_startTime);
 	void setEndTime(Day i_endTime);
 	void setTotalNum(int i_totalNum);
@@ -71,6 +71,7 @@ public:
 	SellItem(){}
 
 	//초기화 생성자 현황, 이름, 시작시간, 끝나는 시간, 남은 시간, 총 판매 수량, 시작 가격, 오너Id, 아이템 ID
+	//남은시간은 현재 시간과 비교해야 됌
 	SellItem(string i_name, Day i_startTime, Day i_endTime, Day i_remainTime, int i_totalNum, int i_startPrice, string i_ownerID, int i_itemID){
 		name = i_name;
 		startTime = i_startTime;
@@ -96,9 +97,10 @@ public:
 	int getTotalSoldNumber();
 	int getBidderNumber();
 
+	void setTotalSoldNumber(int i_totalSoldNumber);
+	void setBidderNumber(int i_bidderNumer);
 	
 	//얘는 set이 있어야 하나 절대로 수정되어선 안되는건데?
-
 	FinishItem(){};
 	~FinishItem(){}
 
@@ -133,7 +135,7 @@ public:
 //판매 아이템에 대한 컬렉션
 class SellItemCollection{
 private:
-	SellItem sellItem[100];
+	SellItem totalSellItem[100];
 public:
 
 	void addSellItem();
@@ -161,7 +163,7 @@ public:
 	FinishItem getFinishItem(int i);
 	void getFinishItemList();
 	void addFinishItem();
-	void setFinishItem(int i, FinishItem newItem);
+	void setFinishItem(int sellectSellItem, int sellectFinishItem, SellItem newItem);
 
 	FinishItemCollection(){}
 	~FinishItemCollection(){}
@@ -191,6 +193,9 @@ private:
 	//비더 , 셀러
 
 public:
+
+	int getSession();
+	void setSession(int wantChangeSession);
 	string getName();
 	void setName(string c_name);
 	string getPrivateNumber();
@@ -210,39 +215,9 @@ public:
 
 
 	Client(int c_session, string c_name){ session = c_session; name = c_name; }
-	Client() {}
 	~Client(){}
 
 };
-
-
-
- /**************************CLient Collection Class****************/
-class ClientCollection {
-private:
-	Client* totalClient = new Client[10];
-	bool n[10];
-
-public:
-	ClientCollection() {
-		for (int i = 0; i < 10; i++)
-			n[i] = false;
-	};
-	~ClientCollection() { delete[] totalClient; }
-
-	void signUp_deleteClient(Client currentUser, ClientCollection ClientCollect);
-	void signUp(Client currentUser);
-	bool deleteClient(Client currentUser);
-
-	void Login_Logout(Client currentUser, ClientCollection ClientCollect);
-	bool Login(Client currentUser);
-	int Logout(int);
-
-	//void printClient();
-//	void PrintAll(Client currentUser);  //// 정보 입력 확인 용
-
-};
-
 
 
 
@@ -251,6 +226,6 @@ public:
 
 void managementRegisterItem();
 void setCurrentTime();
-
+void changeSession();
 
 

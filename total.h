@@ -26,6 +26,7 @@ protected:
 	int itemID;
 	int totalNum;
 	int startPrice;
+	int bidPersonNum;
 	string name;
 	Day	startTime;
 	Day endTime;
@@ -41,7 +42,9 @@ public:
 	int getTotalNum();
 	int getStartPrice();
 	int getItemID();
+	int getBidPersonNum();
 
+	void setBidPersonNum(int i_bidPersonNum);
 	void setItemID(int i_itemID);
 	void setName(string i_name);
 	void setStartTime(Day i_startTime);
@@ -55,6 +58,11 @@ public:
 	//~Item(){cout << "소멸자" << endl;}
 	~Item(){}
 };
+
+
+
+
+
 
 
 class SellItem : public Item {
@@ -80,6 +88,7 @@ public:
 		startPrice = i_startPrice;
 		ownerID = i_ownerID;
 		itemID = i_itemID;
+		bidPersonNum = 0;
 		
 	}
 	//~SellItem(){ cout << "SellItem 소멸자" << endl; }

@@ -217,7 +217,7 @@ void BidItemCollection::addBidItem(Client currentClient, SellItem bid) {
 		cin.ignore(256, '\n');
 		if (chk == 'N') {
 			cout << "입찰이 취소되었습니다. 메인메뉴로 돌아갑니다." << endl;
-			break;
+			return;
 		}
 		else if (chk == 'Y') {
 			while (totalBidItem[i].getName() != "") { cout << totalBidItem[i].getName() << endl; i++; }

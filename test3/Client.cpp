@@ -1,17 +1,24 @@
 #include "Client.h"
 
-//client Å¬·¡½º ±¸Çö
+//client í´ë˜ìŠ¤ êµ¬í˜„
 string Client::getName(){
 	return name;
 }
 void Client::setName(string c_name){
 	name = c_name;
 }
-int Client::getPrivateNumber(){
+string Client::getPrivateNumber(){
 	return privateNumber;
 }
-void Client::setPrivateNumber(int c_privateName){
+void Client::setPrivateNumber(string c_privateName){
 	privateNumber = c_privateName;
+}
+int Client::getEnrollNumber(){
+	return enrollNumber;
+	
+}
+void Client::setEnrollNumber(int c_enrollNumber){
+	enrollNumber = c_enrollNumber;
 }
 string Client::getAddress(){
 	return address;
@@ -47,7 +54,7 @@ int Client::getSession(){
 }
 
 
-////////// ¾ê³×´Â ¹¹ ÇÏ´Â ¾êµéÀÌÀÌÁö
+////////// ì–˜ë„¤ëŠ” ë­ í•˜ëŠ” ì–˜ë“¤ì´ì´ì§€
 void* Client::getBidderItem() {
 	return bidderItem;
 }
@@ -60,7 +67,7 @@ void* Client::getFinishItem() {
 
 
 /*
-////////// ¾ê³×´Â ¹¹ ÇÏ´Â ¾êµéÀÌÀÌÁö
+////////// ì–˜ë„¤ëŠ” ë­ í•˜ëŠ” ì–˜ë“¤ì´ì´ì§€
 BidItemCollection Client::getBidderItem() {
 	return *bidderItem;
 }

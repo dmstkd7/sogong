@@ -17,7 +17,6 @@ void ClientCollection::signUp_deleteClient() {
 		if (currentUser.getId()!="!!!"){ cout << "로그아웃 후 가입이 가능합니다." << endl; }
 		else { 
 			ClientCollect.signUp(); 
-			cout << "회원 가입이 완료되었습니다." << endl;
 		}
 		break;
 
@@ -50,8 +49,9 @@ void ClientCollection::signUp_deleteClient() {
 void ClientCollection::signUp() {
 	string str ;
 	Client newClient;
-
+	int checkNum = 0;
 	int newMember = 0;
+	
 	for (;totalClient[newMember].getId() != "!!!"; newMember++);
 	
 	try {
@@ -73,6 +73,19 @@ void ClientCollection::signUp() {
 	cout << "id 입력(15자 이하 가능)  : ";
 	cin >> str;
 	if (str.length() > 15) throw 4;
+
+	// 중복된 id를 확인합니다.
+	while (checkNum < 10) {
+		if (totalClient[checkNum].getId() == str)
+			break;
+		checkNum++;
+	}
+
+	if (checkNum != 10) {
+		cout << "중복된 id가 있습니다." << endl;
+		return;
+	}
+	// 중복된 id가 없는 경우 회원가입이 진행됩니다.
 	newClient.setId(str);
 
 	cout << "password 입력(20자 이하 가능)  : ";
@@ -85,6 +98,7 @@ void ClientCollection::signUp() {
 	//입력 받은 값들을 Collection의 client에 저장하는 함수입니다.
 	ClientCollect.setTotalClient(newMember, newClient);
 	
+	cout << "회원 가입이 완료되었습니다." << endl;
 	}
 	
 	catch (int type) {

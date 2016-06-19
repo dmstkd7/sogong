@@ -59,7 +59,19 @@ void ClientCollection::signUp_deleteClient() {
 
 }
 
-//회원 가입을 하는 창입니다.
+
+// Function : void singUp()
+ // Description: 회원가입을 하는 함수입니다.
+ // Parameters : 없음
+ // Return Value :  없음
+//str로 입력을 받습니다.
+//새로운 Client인 newClient를 생성합니다.
+// checkNum으로 Collection에 저장된 client의 정보를 확인한다.
+// 이름, 주소, 주민번호, 이메일, ID, PW를 입력 받아 저장한다.
+// 
+ // Created: 2015/6/15 16:35 pm
+ // Author: 전주라
+
 void ClientCollection::signUp() {
 	string str;
 	Client newClient;

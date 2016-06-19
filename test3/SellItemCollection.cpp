@@ -266,12 +266,16 @@ void SellItemCollection::getSellItemList(){
 }
 
 // Function : void SellItemCollection::findSellList(Client currentUser, string search, BidItemCollection BidItemCollect)
-// Description: 
+// Description: To make BidItem, Search SellItem
 // Parameters :   
+//	1. Client currentUser : Client who want to find item to make BidItem
+//	2. string search : the value which mean Item's name which is wanted by Client
+//	3. BidItemCollection BidItemCollect : the Collection of BidItems
 // Return Value :  
 //
-// Created: 2016/6/15/ 20:24 pm
+// Created: 2016/6/18/ 21:20 pm
 // Author: 최민수
+
 void SellItemCollection::findSellList(Client currentUser, string search, BidItemCollection BidItemCollect) {
 	int tCollection[100];
 	int chk = 0;
@@ -314,12 +318,17 @@ void SellItemCollection::findSellList(Client currentUser, string search, BidItem
 }
 
 // Function : void SellItemCollection::getSellItem(Client currentUser, int num, int* sellList, BidItemCollection BidItemCollect)
-// Description: 
+// Description:  show the detail information of selected SellItem
 // Parameters :   
+//	1. Client currentUser : who want know detail information of selected SellItem
+//	2. int num : number which mean selected number.
+//	3. int* sellList : which have itemIDs in SellItemList
+//	4. BidItemCollection BidItemCollect : Collection of BidItem
 // Return Value :  
 //
-// Created: 2016/6/15/ 20:24 pm
+// Created: 2016/6/19/ 01:16 pm
 // Author: 최민수
+
 void SellItemCollection::getSellItem(Client currentUser, int num, int* sellList, BidItemCollection BidItemCollect) {
 	int chk = sellList[num];
 	int i = 0;

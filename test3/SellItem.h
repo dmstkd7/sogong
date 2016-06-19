@@ -1,25 +1,42 @@
+// Class : SellItem.h
+ // Description: íŒë§¤ì¤‘ì¸ ì•„ì´í…œì„ êµ¬í˜„í•œ ì½”ë“œì…ë‹ˆë‹¤
+ //  â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦.
+ //  â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦
+ // Created: 2016/6/18 12:30 pm
+ // Author: ì¥ì€ìƒ
+ // mail: eeunsang7@naver.com
+ //
+ // Revsions : 
+ //   1. When & Who : 2016/6/18 21:30 pm pm by Eunsang-Jang
+ //      í•œê²ƒì€ : ê¸°ë³¸ ìƒì„±ì ìˆ˜ì • 
+ 
 #pragma once
 #include "Item.h"
 #include "Day.h"
 
-
-
-
 class SellItem : public Item {
 private:
 	Day remainTime;
-
 public:
 
+	// Function : Day getRemainTime();
+	 // Description: remainTimeì„ ë¦¬í„´í•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤â€¦
+	 // Parameters :  ì—†ìŒ
+	 // Return Value :  Dayíƒ€ì… return
+	 // Created: 2016/6/18 20:40 pm
+	 // Author: ì¥ì€ìƒ
 	Day getRemainTime();
+	// Function : void setRemainTime();
+	 // Description: remainTimeì„ ë¦¬í„´í•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤â€¦
+	 // Parameters :  ì—†ìŒ
+	 // Return Value :  ì—†ìŒ
+	 // Created: 2016/6/18 20:40 pm
+	 // Author: ì¥ì€ìƒ
 	void setRemainTime(Day remaintime);
 
-	//±âº»»ı¼ºÀÚ
-	//SellItem(){ cout << "SellItem »ı¼ºÀÚ" << endl; }
-	SellItem(){}
 
-	//ÃÊ±âÈ­ »ı¼ºÀÚ ÇöÈ², ÀÌ¸§, ½ÃÀÛ½Ã°£, ³¡³ª´Â ½Ã°£, ³²Àº ½Ã°£, ÃÑ ÆÇ¸Å ¼ö·®, ½ÃÀÛ °¡°İ, ¿À³ÊId, ¾ÆÀÌÅÛ ID
-	//³²Àº½Ã°£Àº ÇöÀç ½Ã°£°ú ºñ±³ÇØ¾ß ‰Î
+	SellItem(){}
+	//ì´ˆê¸°í™” ìƒì„±ì í˜„í™©, ì´ë¦„, ì‹œì‘ì‹œê°„, ëë‚˜ëŠ” ì‹œê°„, ë‚¨ì€ ì‹œê°„, ì´ íŒë§¤ ìˆ˜ëŸ‰, ì‹œì‘ ê°€ê²©, ì˜¤ë„ˆId, ì•„ì´í…œ ID
 	SellItem(string i_name, Day i_startTime, Day i_endTime, Day i_remainTime, int i_totalNum, int i_startPrice, string i_ownerID, int i_itemID){
 		name = i_name;
 		startTime = i_startTime;
@@ -31,6 +48,5 @@ public:
 		bidPersonNum = 0;
 
 	}
-	//~SellItem(){ cout << "SellItem ¼Ò¸êÀÚ" << endl; }
 	~SellItem(){}
 };

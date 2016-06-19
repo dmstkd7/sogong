@@ -36,7 +36,7 @@ int BidItemCollection::getNumberBid(int chk) {
 	cout << "번호 : " << chk << endl;
 	for (int i = 0; i < 100; i++) {
 		if (chk == totalBidItem[i].getItemID()) { num++; }
-	}
+	} // 반복문으로 collection을 fullscan 하여서 특정 아이템의 입찰 갯수를 구한다.
 
 	return num;
 }
@@ -67,7 +67,7 @@ void BidItemCollection::getBidList(Client currentClient) {
 			cout << totalBidItem[i].getRemainTime() << "	" << totalBidItem[i].getStartPrice() << endl;
 			chk++;
 			num++;
-		}
+		} // 현재 사용중인 클라이언트의 ID을 통해서 속하여 있는 아이템을 출력한다.
 	}
 
 	while (1){
@@ -109,7 +109,7 @@ void BidItemCollection::getBidList(Client currentClient) {
 
 void BidItemCollection::setBidItem(int i, BidItem bid) {
 	totalBidItem[i] = bid;
-	totalBidItem[i].setRemainTime();
+	totalBidItem[i].setRemainTime(); // 입찰한 시간의 값을 가지고 남은 시간을 계산한다.
 }
 
 // Function : void BidItemCollection::getBidItem(int num, int* bidList)
@@ -133,7 +133,7 @@ void BidItemCollection::getBidItem(int num, int* bidList) {
 	int input = 0;
 
 	cout << "- 4.2." << num << ". 선택된 물품의 상세조회" << endl;
-	while (chk != totalBidItem[i].getItemID()) { i++; }
+	while (chk != totalBidItem[i].getItemID()) { i++; } // itemID을 통해서 상세히 보고자 하는 아이템을 찾는다.
 
 	cout << "번호	" << "물품명	" << "수량	" << "시작가격	" << "입찰금액	" << "경매 시작시간	" << "경매 종료시간	" << "남은시간	" << endl;
 	cout << num << " ";
@@ -145,7 +145,7 @@ void BidItemCollection::getBidItem(int num, int* bidList) {
 	cout << totalBidItem[i].getEndTime() << "	";
 	cout << totalBidItem[i].getRemainTime() << endl;
 	
-	while(1){
+	while(1){ // 각 경우에 대한 입력과 결과에 대한 반복문
 		cout << "0. 메인메뉴로 돌아가기" << endl ;
 		cin >> input ;
 		cin.clear() ;
@@ -154,7 +154,7 @@ void BidItemCollection::getBidItem(int num, int* bidList) {
 			return;
 		}
 		else{
-			cout << "알맞지 않은 입력값입니다." << endl ;
+			cout << "알맞지 않은 입력값입니다." << endl ; // 0번 이외는 다 알맞지 않은 값이다.
 		}
 	}
 	return;
@@ -189,11 +189,11 @@ void BidItemCollection::addBidItem(Client currentClient, SellItem bid) {
 	int titemID = bid.getItemID();
 	Day tremainTime = bid.getRemainTime();
 	int tbidPrice;
-
+	// bid라는 입찰하고자 하는 SellItem의 정보를 가져온다.
 	char chk;
 	int i = 0;
 
-	while (1){
+	while (1){ // 입력부터 입찰완료까지 진행한다.
 		cout << "# 입찰 금액을 입력하십시오 : ";
 		cin >> tbidPrice;
 		cin.clear();

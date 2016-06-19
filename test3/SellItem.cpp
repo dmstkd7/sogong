@@ -3,10 +3,17 @@
 
 extern Day CurrentTime;
 
+// Function : Day getRemainTime();
+	 // Description: remainTimeì„ ë¦¬í„´í•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤â€¦
+	 // Parameters :  ì—†ìŒ
+	 // Return Value :  Dayíƒ€ì… return
+	 // Created: 2016/6/18 20:40 pm
+	 // Author: ì¥ì€ìƒ
+
 Day SellItem::getRemainTime(){
-	//SellItem¿¡ remainTimeÀÌ ÀÇ¹Ì°¡ ¾ø´Â°Í °°Àºµ¥?
-	//ÀÇ¹®Á¡À» ²À ÇØ°áÇÏ½Ã¿À
-	//´ë¹®ÀÚ ¼Ò¹®ÀÚ ÀÌ°Åµµ ²À¸ÂÃß½Ã¿À
+	//SellItemì— remainTimeì´ ì˜ë¯¸ê°€ ì—†ëŠ”ê²ƒ ê°™ì€ë°?
+	//ì˜ë¬¸ì ì„ ê¼­ í•´ê²°í•˜ì‹œì˜¤
+	//ëŒ€ë¬¸ì ì†Œë¬¸ì ì´ê±°ë„ ê¼­ë§ì¶”ì‹œì˜¤
 	remainTime.year = endTime.year - CurrentTime.year;
 	remainTime.month = endTime.month - CurrentTime.month;
 	remainTime.day = endTime.day - CurrentTime.day;

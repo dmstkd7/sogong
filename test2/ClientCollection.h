@@ -5,25 +5,24 @@ using namespace std;
 
 class ClientCollection {
 private:
-	Client* totalClient = new Client[10];
-	bool n[10];
-
+	Client totalClient[10];
+	
 public:
-	ClientCollection() {
-		for (int i = 0; i < 10; i++)
-			n[i] = false;
-	};
-	~ClientCollection() { delete[] totalClient; }
 
-	void signUp_deleteClient(Client currentUser, ClientCollection ClientCollect);
-	void signUp(Client currentUser);
-	bool deleteClient(Client currentUser);
+	ClientCollection() {}
+	~ClientCollection() {}
 
-	void Login_Logout(Client currentUser, ClientCollection ClientCollect);
-	bool Login(Client currentUser);
-	int Logout(int);
 
-	//void printClient();
-	//	void PrintAll(Client currentUser);  //// Á¤º¸ ÀÔ·Â È®ÀÎ ¿ë
+	void setTotalClient(int inputNum, Client newClient);
+
+	void signUp_deleteClient();
+	void signUp();
+	bool deleteClient(Client wantDeleteClient);
+
+	void Login_Logout();
+	bool Login();
+	bool Logout();
+
+//	void PrintAll(Client currentUser);  // Clientì˜ ì •ë³´ë¥¼ í™•ì¸í•  ìˆ˜ ìžˆëŠ” í•¨ìˆ˜ìž…ë‹ˆë‹¤.
 
 };

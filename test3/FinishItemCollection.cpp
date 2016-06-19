@@ -5,9 +5,26 @@
 extern SellItemCollection SellItemCollect;
 extern BidItemCollection BidItemCollect;
 
+// Function : FinishItem getFinishItem(int i)
+	 // Description: ê¸°ë³¸ get/setí•¨ìˆ˜ì´ë‹¤ ì½œë ‰ì…˜ ì•ˆì— finishItemì„ ë¦¬í„´í•œë‹¤
+	 // Parameters :   int i - 100ê°œ ì¤‘ì— ì–»ê³  ì‹¶ì€ finishItemì˜ ë²ˆí˜¸ì´ë‹¤
+	 // Return Value :  FinishItem
+	 // Created: 2016/6/15 20:15 pm
+	 // Author: ì¥ì€ìƒ
+
 FinishItem FinishItemCollection::getFinishItem(int i){
 	return finishItem[i];
 }
+
+// void setFinishItem(int sellectSellItem, int sellectFinishItem, SellItem newItem);
+	 // Description: íŒë§¤ì¤‘ì¸ ì•„ì´í…œì¤‘ ë‚¨ì€ì‹œê°„ì´ ì¢…ë£Œí•œ ê²ƒì„ íŒë§¤ê°€ ì¢…ë£Œëœ ì•„ì´í…œìœ¼ë¡œ ë°”ê¿€ ë•Œ ì½œë ‰ì…˜ì—
+	 //		 ì„¤ì •í•˜ëŠ” í•¨ìˆ˜ì´ë‹¤
+	 // Parameters :   int selectSellItem - ì‚­ì œí•´ì•¼í•˜ëŠ” SellItemcollectionì—ì„œì˜ ë²ˆí˜¸
+	 //		   int sellecFinishItem - SellFinishCollectionì—ì„œ ë“¤ì–´ê°ˆ ìˆ˜ ìˆëŠ” ë²ˆí˜¸
+	 //		   SellItem newItem - íŒë§¤ì¤‘ì—ì„œ íŒë§¤ì¢…ë£Œì•„ì´í…œìœ¼ë¡œ ë°”ê¾¸ë ¤ê³  í•˜ëŠ” ì•„ì´í…œ
+	 // Return Value :  ì—†ë‹¤
+	 // Created: 2016/6/15 20:32 pm
+	 // Author: ì¥ì€ìƒ
 
 void FinishItemCollection::setFinishItem(int sellectSellItem, int sellectFinishItem, SellItem newItem){
 
@@ -15,7 +32,7 @@ void FinishItemCollection::setFinishItem(int sellectSellItem, int sellectFinishI
 	//finishItem[0].getprint();
 
 	//finishItem[1].setTotalSoldNumber(0);
-	//totalNum°ú totalSoldNumber¸¦ ¾î¶»°Ô ³Ñ±æ°ÍÀÎ°¡ ²À ÇØ°áÇÏ½Ã¿À//////////////////////
+	//totalNumê³¼ totalSoldNumberë¥¼ ì–´ë–»ê²Œ ë„˜ê¸¸ê²ƒì¸ê°€ ê¼­ í•´ê²°í•˜ì‹œì˜¤//////////////////////
 	finishItem[sellectFinishItem].setTotalSoldNumber(0);
 
 	finishItem[sellectFinishItem].setItemID(newItem.getItemID());
@@ -32,38 +49,45 @@ void FinishItemCollection::setFinishItem(int sellectSellItem, int sellectFinishI
 
 }
 
+// Function : void getFinishItemList();
+	 // Description: FinishItem ì¤‘ì— ì˜ë¯¸ ìˆëŠ” ê°’ì„ ëª¨ë‘ ì¶œë ¥í•˜ëŠ” ê²ƒìœ¼ë¡œ íŒë§¤ì™„ë£Œ/ìœ ì¶œëœ ì•„ì´í…œì˜ ì¡°íšŒë¥¼ 
+	 //		 í•˜ëŠ”ê²ƒê³¼ ê°™ë‹¤
+	 // Parameters :   ì—†ë‹¤
+	 // Return Value :  ì—†ë‹¤
+	 // Created: 2016/6/15 20:16 pm
+	 // Author: ì¥ì€ìƒ
 
 void FinishItemCollection::getFinishItemList(){
 
 	int number = 1;
-	//Ãâ·ÂµÇ´Â ¹øÈ£¿Í ItemId¸¦ ¿¬°áÇÏ±â À§ÇÑ º¯¼ö
+	//ì¶œë ¥ë˜ëŠ” ë²ˆí˜¸ì™€ ItemIdë¥¼ ì—°ê²°í•˜ê¸° ìœ„í•œ ë³€ìˆ˜
 	vector< pair<int, FinishItem>> tmp;
 	int command = 0;
 
 
-	//ÀÌ°ÍÀ» ÇÏ´Â ÀÌÀ¯´Â Ãâ·ÂµÇ´Â ¹øÈ£¿Í ItemID¸¦ ÀÏÄ¡ ½ÃÅ°±â À§ÇØ ¾²·¹±â°ªÀ» ³Ö¾îµÎ´Â °ÍÀÌ´Ù
+	//ì´ê²ƒì„ í•˜ëŠ” ì´ìœ ëŠ” ì¶œë ¥ë˜ëŠ” ë²ˆí˜¸ì™€ ItemIDë¥¼ ì¼ì¹˜ ì‹œí‚¤ê¸° ìœ„í•´ ì“°ë ˆê¸°ê°’ì„ ë„£ì–´ë‘ëŠ” ê²ƒì´ë‹¤
 	FinishItem trash;
 	tmp.push_back(make_pair(0, trash));
 
 
 	try{
-		cout << "¹øÈ£" << "        " << "°æ¸Å ¸¶°¨ ½Ã°£" << "            " << "¹°Ç°¸í" << endl;
+		cout << "ë²ˆí˜¸" << "        " << "ê²½ë§¤ ë§ˆê° ì‹œê°„" << "            " << "ë¬¼í’ˆëª…" << endl;
 		FinishItem Item;
 		for (int i = 0; i < 100; i++){
 			Item = getFinishItem(i);
 			if (Item.getName() != ""){
 				tmp.push_back(make_pair(Item.getItemID(), Item));
-				cout << number++ << "        " << Item.getEndTime().year << "³â " << Item.getEndTime().month << "¿ù "
-					<< Item.getEndTime().day << "ÀÏ " << Item.getEndTime().hour << "½Ã°£        " << Item.getName() << endl;
+				cout << number++ << "        " << Item.getEndTime().year << "ë…„ " << Item.getEndTime().month << "ì›” "
+					<< Item.getEndTime().day << "ì¼ " << Item.getEndTime().hour << "ì‹œê°„        " << Item.getName() << endl;
 
 			}
 		}
-		cout << "0. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
+		cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
 
 
 
-		//»ó¼¼º¸±â¸¦ ÇÒ°ÇÁö ¾ÈÇÒ°ÇÁö °áÁ¤ÇÏ´Â °÷ÀÔ´Ï´Ù
-		cout << "ÀÔ·Â¼±ÅÃ : ";
+		//ìƒì„¸ë³´ê¸°ë¥¼ í• ê±´ì§€ ì•ˆí• ê±´ì§€ ê²°ì •í•˜ëŠ” ê³³ì…ë‹ˆë‹¤
+		cout << "ì…ë ¥ì„ íƒ : ";
 		cin >> command;
 		cin.clear();
 		cin.ignore(256, '\n');
@@ -72,16 +96,16 @@ void FinishItemCollection::getFinishItemList(){
 
 
 		if (command != 0){
-			//¾î¶² ¹øÈ£¸¦ ¸»ÇÏ´Â°ÇÁö Àß ¸ğ¸£°Ú´Ù ÀÏ´Ü ¾ÆÀÌÅÛ ¾ÆÀÌµğ·Î ³Ñ°Üº¸°Ú´Ù
-			cout << "¹øÈ£" << "       " << "°æ¸Å¸¶°¨½Ã°£" << "            " << "¹°Ç°¸í" << "     " << "ÃÑÆÇ¸Å¼ö·®" << "   " << "½ÃÀÛ°¡°İ" << "    " << "ÀÔÂûÀÚ¼ö" << endl;
+			//ì–´ë–¤ ë²ˆí˜¸ë¥¼ ë§í•˜ëŠ”ê±´ì§€ ì˜ ëª¨ë¥´ê² ë‹¤ ì¼ë‹¨ ì•„ì´í…œ ì•„ì´ë””ë¡œ ë„˜ê²¨ë³´ê² ë‹¤
+			cout << "ë²ˆí˜¸" << "       " << "ê²½ë§¤ë§ˆê°ì‹œê°„" << "            " << "ë¬¼í’ˆëª…" << "     " << "ì´íŒë§¤ìˆ˜ëŸ‰" << "   " << "ì‹œì‘ê°€ê²©" << "    " << "ì…ì°°ììˆ˜" << endl;
 			cout << tmp[command].first << "        "
-				<< tmp[command].second.getEndTime().year << "³â " << tmp[command].second.getEndTime().month << "¿ù "
-				<< tmp[command].second.getEndTime().day << "ÀÏ " << tmp[command].second.getEndTime().hour << "½Ã°£       "
+				<< tmp[command].second.getEndTime().year << "ë…„ " << tmp[command].second.getEndTime().month << "ì›” "
+				<< tmp[command].second.getEndTime().day << "ì¼ " << tmp[command].second.getEndTime().hour << "ì‹œê°„       "
 				<< tmp[command].second.getName() << "        " << tmp[command].second.getTotalSoldNumber() << "        "
 				<< tmp[command].second.getStartPrice() << "        " << tmp[command].second.getBidderNumber() << endl;
 
 		}
-		cout << "0. ¸ŞÀÎ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
+		cout << "0. ë©”ì¸ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
 		cin >> command;
 		cin.clear();
 		cin.ignore(256, '\n');
@@ -91,32 +115,38 @@ void FinishItemCollection::getFinishItemList(){
 	}
 	catch (int type){
 		if (type == 1){
-			cout << "¾ø´Â »ó¼¼º¸±â¸¦ ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù ³ª°¡°Ú½À´Ï´Ù\n" << endl;
+			cout << "ì—†ëŠ” ìƒì„¸ë³´ê¸°ë¥¼ ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤ ë‚˜ê°€ê² ìŠµë‹ˆë‹¤\n" << endl;
 			return;
 		}
 
 		else if (type == 2){
-			cout << "ÀÔ·ÂÀÌ 0 ¸»°í´Â ´õÀÌ»ó ÇÒ°Ô ¾ø½À´Ï´Ù ³ª°¡°Ú½À´Ï´Ù\n" << endl;
+			cout << "ì…ë ¥ì´ 0 ë§ê³ ëŠ” ë”ì´ìƒ í• ê²Œ ì—†ìŠµë‹ˆë‹¤ ë‚˜ê°€ê² ìŠµë‹ˆë‹¤\n" << endl;
 		}
 
 	}
 }
 
+// Function : void addFinishItem();
+	 // Description: FinishItemCollectionì— FinishItemë¥¼ ì¶”ê°€ ì‹œí‚¤ëŠ”ê²ƒì´ë‹¤ ë³´í†µ íŒë§¤ì¤‘ì¸ ê²ƒì´ ì‹œê°„ì´ ëë‚˜ë©´
+	 //		ìë™ì ìœ¼ë¡œ ì´ìª½ìœ¼ë¡œ ì˜¤ê²Œëœë‹¤ ê·¸ë•Œ ì‘ë™í•˜ëŠ” í•¨ìˆ˜ì´ë‹¤
+	 // Parameters :   ì—†ë‹¤
+	 // Return Value :  ì—†ë‹¤
+	 // Created: 2016/6/15 20:18 pm
+	 // Author: ì¥ì€ìƒ
 
-
-//ÆÇ¸ÅÁßÀÎ ¾ÆÀÌÅÛ¿¡¼­ °æ¸Å ¸¶°¨½Ã°£ÀÌ Áö³ª ¾ÆÀÌÅÛÀ» ÆÇ¸Å¿Ï·á/À¯Âû µÈ ¾ÆÀÌÅÛÀ¸·Î ÀÌµ¿ ½ÃÅ°´Â ÇÔ¼öÀÌ´Ù
+//íŒë§¤ì¤‘ì¸ ì•„ì´í…œì—ì„œ ê²½ë§¤ ë§ˆê°ì‹œê°„ì´ ì§€ë‚˜ ì•„ì´í…œì„ íŒë§¤ì™„ë£Œ/ìœ ì°° ëœ ì•„ì´í…œìœ¼ë¡œ ì´ë™ ì‹œí‚¤ëŠ” í•¨ìˆ˜ì´ë‹¤
 void FinishItemCollection::addFinishItem(){
-	//FinishItemÀº remainTimeÀ» °è»êÇÏ¿© remainTime <0 
-	//°ÍÀÌ ÀÖµû¸é FinishItem()¿¡ Ãß°¡¸¦ ½ÃÅ²´Ù 
+	//FinishItemì€ remainTimeì„ ê³„ì‚°í•˜ì—¬ remainTime <0 
+	//ê²ƒì´ ìˆë”°ë©´ FinishItem()ì— ì¶”ê°€ë¥¼ ì‹œí‚¨ë‹¤ 
 	
 	SellItem Item;
 	for (int i = 0; i < 100; i++){
 		Item = SellItemCollect.getSellItem(i);
-		//¸¸¾à °æ°ú½Ã°£ÀÌ 0ÀÌ¶ó°í ÇÑ´Ù¸é ºñ¾îÀÖ´Â °ªÀÌ¹Ç·Î ´ÙÀ½°ªÀ» È®ÀÎ ÇÏµµ·ÏÇÑ´Ù.
+		//ë§Œì•½ ê²½ê³¼ì‹œê°„ì´ 0ì´ë¼ê³  í•œë‹¤ë©´ ë¹„ì–´ìˆëŠ” ê°’ì´ë¯€ë¡œ ë‹¤ìŒê°’ì„ í™•ì¸ í•˜ë„ë¡í•œë‹¤.
 		if (Item.getEndTime().year == 0)
 			continue;
 
-		//°æ°ú½Ã°£, ÇöÀç½Ã°£À» ºñ±³ÇÏ´Â ÄÚµåÀÔ´Ï´Ù.
+		//ê²½ê³¼ì‹œê°„, í˜„ì¬ì‹œê°„ì„ ë¹„êµí•˜ëŠ” ì½”ë“œì…ë‹ˆë‹¤.
 		if (Item.getRemainTime().year >0)
 			continue;
 		if (Item.getRemainTime().year == 0 && Item.getRemainTime().month > 0)
@@ -125,8 +155,8 @@ void FinishItemCollection::addFinishItem(){
 			continue;
 		if (Item.getRemainTime().year == 0 && Item.getRemainTime().month == 0 && Item.getRemainTime().day == 0 && Item.getRemainTime().hour>0)
 			continue;
-		//¸¸¾à ÇöÀç½Ã°£ÀÌ °æ°ú½Ã°£º¸´Ù ´ÊÀº ½Ã°£ÀÌ¶ó¸é Finish ¾ÆÀÌÅÛÀ¸·Î ¿Å°Ü¾ß ÇÏ´Âµ¥
-		//¹ØÀº ÀÌ ¸ñÀûÀ» ´Ş¼ºÇØÁÖ´Â ÄÚµåÀÔ´Ï´Ù.
+		//ë§Œì•½ í˜„ì¬ì‹œê°„ì´ ê²½ê³¼ì‹œê°„ë³´ë‹¤ ëŠ¦ì€ ì‹œê°„ì´ë¼ë©´ Finish ì•„ì´í…œìœ¼ë¡œ ì˜®ê²¨ì•¼ í•˜ëŠ”ë°
+		//ë°‘ì€ ì´ ëª©ì ì„ ë‹¬ì„±í•´ì£¼ëŠ” ì½”ë“œì…ë‹ˆë‹¤.
 		FinishItem FItem;
 		for (int j = 0; j < 100; j++){
 			FItem = getFinishItem(j);

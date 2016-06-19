@@ -7,19 +7,19 @@ extern Day CurrentTime;
 // 현재시간에 관한 전역변수
 
 // Class : BidItem
- // Description: This is a BidItem class. 
- //  ……………………………………….
- //  ………………………………………
- // Created: 2016/06/15 20:00 pm
- // Author: 최민수
- // mail: minsproject@naver.comr
- //
- // Revisions : 
- //   1. When & Who : 2016/06/15 21:12 pm by 최민수
- //      What : added remainTime, 
- //            modified calCosts
- // 
- // 
+// Description: This is a BidItem class. 
+//  ……………………………………….
+//  ………………………………………
+// Created: 2016/06/15 20:00 pm
+// Author: 최민수
+// mail: minsproject@naver.comr
+//
+// Revisions : 
+//   1. When & Who : 2016/06/15 21:12 pm by 최민수
+//      What : added remainTime, 
+//            modified calCosts
+// 
+// 
 
 class BidItem : public Item {
 protected:

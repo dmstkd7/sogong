@@ -1,3 +1,12 @@
+// Class : utility.h
+ // Description: ë©”ì¸ì—ì„œ ì“¸ í•¨ìˆ˜ë¥¼ í•œ ë° ëª¨ì•„ë‘” ê²ƒì…ë‹ˆë‹¤
+ // Created: 2016/6/20 02:11 pm
+ // Author: ì¥ì€ìƒ
+ // mail: eeunsang7@naver.com
+ //
+ // Revsions : 
+ //   1. When & Who : 22016/6/20 02:11 pm 02:30 pm by EunsangJang
+ //      What : íŒ€ì›ê³¼ í•©ì¹˜ëŠ” ê³¼ì •ì—ì„œ queryBidItem, queryMyBidItem, managemnetRegisterItem()ë“±ì„ ì¶”ê°€í•˜ì˜€ìŠµë‹ˆë‹¤
 
 #include "utility.h"
 #include "collection.h"
@@ -6,89 +15,112 @@ extern Day CurrentTime;
 extern Client CurrentUser;
 
 
-
+// Function : void querySellItem();
+ // Description: íŒë§¤ì¤‘ì¸ ê²ƒì„ ì¡°íšŒí•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
+ // Parameters :  ì—†ìŒ
+ // Return Value : ì—†ìŒ
+ //
+ // Created: 2016/6/20 02:12 pm
+ // Author: ì¥ì€ìƒ
 void querySellItem(){
-	cout << "************** ÆÇ¸ÅÁßÀÎ ¹°Ç° Á¤º¸ Á¶È¸ ÇÏ·¯ ¿À¼Ì±º¿ä ¹İ°©½À´Ï´Ù **************" << endl;
+	cout << "************** íŒë§¤ì¤‘ì¸ ë¬¼í’ˆ ì •ë³´ ì¡°íšŒ í•˜ëŸ¬ ì˜¤ì…¨êµ°ìš” ë°˜ê°‘ìŠµë‹ˆë‹¤ **************" << endl;
 	SellItemCollect.getSellItemList();
 	return;
 }
 
-
+// Function : void queryFinishItem();
+ // Description: íŒë§¤ê°€ ì™„ë£Œëœ ê²ƒì„ ì¡°íšŒí•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
+ // Parameters :  ì—†ìŒ
+ // Return Value : ì—†ìŒ
+ //
+ // Created: 2016/6/20 02:18 pm
+ // Author: ì¥ì€ìƒ
 void queryFinishItem(){
-	cout << "************** ÆÇ¸Å/Á¾·á À¯Âû Á¶È¸ ÇÏ·¯ ¿À¼Ì±º¿ä ¹İ°©½À´Ï´Ù **************" << endl;
+	cout << "************** íŒë§¤/ì¢…ë£Œ ìœ ì°° ì¡°íšŒ í•˜ëŸ¬ ì˜¤ì…¨êµ°ìš” ë°˜ê°‘ìŠµë‹ˆë‹¤ **************" << endl;
 	FinishItemCollect.addFinishItem();
 	FinishItemCollect.getFinishItemList();
 	return;
 }
 
-
+// Function : void changeSession();
+ // Description: CurrentUserì˜ Sessionì„ ë°”ê¿”ì£¼ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
+ // Parameters :  ì—†ìŒ
+ // Return Value : ì—†ìŒ
+ //
+ // Created: 2016/6/20 02:29 pm
+ // Author: ì¥ì€ìƒ
 void changeSession(){
-	cout << "************** ¼¼¼ÇÀ» ¹Ù²Ù·¯ ¿À¼Ì±º¿ä ¹İ°©½À´Ï´Ù **************" << endl;
+	cout << "************** ì„¸ì…˜ì„ ë°”ê¾¸ëŸ¬ ì˜¤ì…¨êµ°ìš” ë°˜ê°‘ìŠµë‹ˆë‹¤ **************" << endl;
 	int command;
 
 	cout << "1.Admin" << endl;
 	cout << "2.Guest" << endl;
-	//ÀÌ°Ô À¯Àú¸¦ ÀÇ¹ÌÇÏ´Â°ÇÁö ¾Æ´ÑÁö ¸ğ¸£°Ú´Ù
+	//ì´ê²Œ ìœ ì €ë¥¼ ì˜ë¯¸í•˜ëŠ”ê±´ì§€ ì•„ë‹Œì§€ ëª¨ë¥´ê² ë‹¤
 	cout << "3.User" << endl;
-	cout << "0.¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
+	cout << "0.ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
 	cin >> command;
 
 	switch (command){
 	case 1:
 		CurrentUser.setSession(0);
-		//cout << "ÇöÀç Ä¿·±Æ® Á¤º¸ " << CurrentUser.getSession() << CurrentUser.getName() << endl;
+		//cout << "í˜„ì¬ ì»¤ëŸ°íŠ¸ ì •ë³´ " << CurrentUser.getSession() << CurrentUser.getName() << endl;
 		break;
 	case 2:
 		CurrentUser.setSession(1);
-		//cout << "ÇöÀç Ä¿·±Æ® Á¤º¸ " << CurrentUser.getSession() << CurrentUser.getName() << endl;
+		//cout << "í˜„ì¬ ì»¤ëŸ°íŠ¸ ì •ë³´ " << CurrentUser.getSession() << CurrentUser.getName() << endl;
 		break;
 	case 3:
 		CurrentUser.setSession(2);
-		//cout << "ÇöÀç Ä¿·±Æ® Á¤º¸ " << CurrentUser.getSession() << CurrentUser.getName() << endl;
+		//cout << "í˜„ì¬ ì»¤ëŸ°íŠ¸ ì •ë³´ " << CurrentUser.getSession() << CurrentUser.getName() << endl;
 		break;
 	case 0:
 		return;
 	default:
-		cout << "Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù ¼¼¼Ç ¹Ù²Ù±â¸¦ Á¾·áÇÕ´Ï´Ù" << endl;
+		cout << "ì˜ëª»ëœ ê°’ì„ ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤ ì„¸ì…˜ ë°”ê¾¸ê¸°ë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤" << endl;
 		break;
 	}
 
 }
 
 
-//¹°Ç° µî·Ï °ü¸®¸¦ ÇÏ´Â Ã¢ÀÔ´Ï´Ù
+// Function : void managementRegisterItem();
+ // Description: íŒë§¤ë¬¼í’ˆë“±ë¡ì„ í•˜ê¸° ìœ„í•œ ê³³ìœ¼ë¡œ ê°€ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
+ // Parameters :  ì—†ìŒ
+ // Return Value : ì—†ìŒ
+ // Created: 2016/6/20 02:51 pm
+ // Author: ì¥ì€ìƒ
 void managementRegisterItem(){
 
 	int command;
 	while (1){
-		cout << "1. ÆÇ¸Å ¹°Ç° Á¤º¸ µî·Ï" << endl;
-		cout << "2. ÆÇ¸Å ÁßÀÎ ¹°Ç° Á¤º¸ Á¶È¸" << endl;
-		cout << "3. ÆÇ¸Å Á¾·á/À¯Âû ¹°Ç° Á¶È¸" << endl;
-		cout << "0. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
-		cout << "ÀÔ·Â ¼±ÅÃ : ";
+		cout << "1. íŒë§¤ ë¬¼í’ˆ ì •ë³´ ë“±ë¡" << endl;
+		cout << "2. íŒë§¤ ì¤‘ì¸ ë¬¼í’ˆ ì •ë³´ ì¡°íšŒ" << endl;
+		cout << "3. íŒë§¤ ì¢…ë£Œ/ìœ ì°° ë¬¼í’ˆ ì¡°íšŒ" << endl;
+		cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
+		cout << "ì…ë ¥ ì„ íƒ : ";
 
 		cin >> command;
 		if (command == 0) return;
 
 		switch (command){
 		case 1:
-			cout << "1. ÆÇ¸Å ¹°Ç° Á¤º¸ µî·ÏÀ¸·Î µé¾î°©´Ï´Ù" << endl;
+			cout << "1. íŒë§¤ ë¬¼í’ˆ ì •ë³´ ë“±ë¡ìœ¼ë¡œ ë“¤ì–´ê°‘ë‹ˆë‹¤" << endl;
 			SellItemCollect.addSellItem();
 			break;
 		case 2:
-			cout << "2. ÆÇ¸Å ÁßÀÎ ¹°Ç° Á¤º¸ Á¶È¸·Î µé¾î°©´Ï´Ù." << endl;
+			cout << "2. íŒë§¤ ì¤‘ì¸ ë¬¼í’ˆ ì •ë³´ ì¡°íšŒë¡œ ë“¤ì–´ê°‘ë‹ˆë‹¤." << endl;
 			querySellItem();
 			break;
 		case 3:
-			cout << "3. ÆÇ¸Å Á¾·á/À¯Âû ¹°Ç° Á¶È¸" << endl;
+			cout << "3. íŒë§¤ ì¢…ë£Œ/ìœ ì°° ë¬¼í’ˆ ì¡°íšŒ" << endl;
 			queryFinishItem();
 			break;
 		case 0:
-			cout << "0. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡°Ú½À´Ï´Ù" << endl;
+			cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê² ìŠµë‹ˆë‹¤" << endl;
 			return;
 			break;
 		default:
-			cout << "¸í·É¾î ÀÔ·ÂÀÌ ¿Ã¹Ù¸£Áö ¾Ê½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä" << endl;
+			cout << "ëª…ë ¹ì–´ ì…ë ¥ì´ ì˜¬ë°”ë¥´ì§€ ì•ŠìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”" << endl;
 			continue;
 
 		}
@@ -97,15 +129,20 @@ void managementRegisterItem(){
 
 }
 
-//°æ°ú ½Ã°£À» ÀÔ·ÂÇÏ´Â °÷ÀÔ´Ï´Ù
+// Function : void setCurrentTime();
+ // Description: í˜„ì¬ ì‹œê°„ì„ ë°”ê¿”ì£¼ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
+ // Parameters :  ì—†ìŒ
+ // Return Value : ì—†ìŒ
+ // Created: 2016/6/20 03:11 pm
+ // Author: ì¥ì€ìƒ
 void setCurrentTime(){
-	//°æ°ú½Ã°£À» ¾î¶»°Ô ÀÔ·Â½ÃÅ°Áö
+	//ê²½ê³¼ì‹œê°„ì„ ì–´ë–»ê²Œ ì…ë ¥ì‹œí‚¤ì§€
 
-	cout << "************** °æ°ú½Ã°£À» ÀÔ·ÂÇÏ´Â °÷ÀÔ´Ï´Ù. **************" << endl;
-	cout << "ÇöÀç½Ã°£Àº" << CurrentTime.year << "³â " << CurrentTime.month << "¿ù " << CurrentTime.day << "ÀÏ " << CurrentTime.hour << "½Ã°£ " << endl;
+	cout << "************** ê²½ê³¼ì‹œê°„ì„ ì…ë ¥í•˜ëŠ” ê³³ì…ë‹ˆë‹¤. **************" << endl;
+	cout << "í˜„ì¬ì‹œê°„ì€" << CurrentTime.year << "ë…„ " << CurrentTime.month << "ì›” " << CurrentTime.day << "ì¼ " << CurrentTime.hour << "ì‹œê°„ " << endl;
 	//int tmp;
 	/*
-	cout << "°æ°ú ½Ã°£À» ÀÔ·ÂÇÏ½Ã¿À";
+	cout << "ê²½ê³¼ ì‹œê°„ì„ ì…ë ¥í•˜ì‹œì˜¤";
 	cin >> tmp;
 	CurrentTime.passTime(tmp);
 	*/
@@ -113,19 +150,19 @@ void setCurrentTime(){
 	int tmp;
 	while (1){
 		try{
-			cout << "¸î ³âÀ¸·Î ¼³Á¤ÇÏ½Ã°Ú½À´Ï±î : ";
+			cout << "ëª‡ ë…„ìœ¼ë¡œ ì„¤ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ : ";
 			cin >> tmp;
 			CurrentTime.year = tmp;
 			if (CurrentTime.year < 0) throw 1;
-			cout << "¸î ¿ùÀ¸·Î ¼³Á¤ÇÏ½Ã°Ú½À´Ï±î : ";
+			cout << "ëª‡ ì›”ìœ¼ë¡œ ì„¤ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ : ";
 			cin >> tmp;
 			CurrentTime.month = tmp;
 			if (CurrentTime.month < 0 || CurrentTime.month > 12) throw 1;
-			cout << "¸î ÀÏÀ¸·Î ¼³Á¤ÇÏ½Ã°Ú½À´Ï±î : ";
+			cout << "ëª‡ ì¼ìœ¼ë¡œ ì„¤ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ : ";
 			cin >> tmp;
 			CurrentTime.day = tmp;
 			if (CurrentTime.day < 0 || CurrentTime.day > 31) throw 1;
-			cout << "¸î ½Ã°£À¸·Î ¼³Á¤ÇÏ½Ã°Ú½À´Ï±î : ";
+			cout << "ëª‡ ì‹œê°„ìœ¼ë¡œ ì„¤ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ : ";
 			cin >> tmp;
 			CurrentTime.hour = tmp;
 			if (CurrentTime.hour < 0 || CurrentTime.hour > 24) throw 1;
@@ -133,52 +170,72 @@ void setCurrentTime(){
 		}
 		catch (int type){
 			if (type == 1){
-				cout << "¿Ã¹Ù¸¥ °æ°ú½Ã°£À» ÀÔ·ÂÇØÁÖ½Ã±â ¹Ù¶ø´Ï´Ù. ";
+				cout << "ì˜¬ë°”ë¥¸ ê²½ê³¼ì‹œê°„ì„ ì…ë ¥í•´ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤. ";
 			}
 		}
 	}
 	
 
-	cout << "¹Ù²ï ÇöÀç½Ã°£Àº " << CurrentTime.year << "³â " << CurrentTime.month << "¿ù " << CurrentTime.day << "ÀÏ " << CurrentTime.hour << "½Ã°£ " << endl;
+	cout << "ë°”ë€ í˜„ì¬ì‹œê°„ì€ " << CurrentTime.year << "ë…„ " << CurrentTime.month << "ì›” " << CurrentTime.day << "ì¼ " << CurrentTime.hour << "ì‹œê°„ " << endl;
 
 
 }
 
 
-
+// Function : void managementBIdItem(Client currentUser, BidItemCollection BidItemCollect, SellItemCollection SellItemCollect);
+ // Description: êµ¬ë§¤ë¬¼í’ˆë“±ë¡ì„ í•˜ê¸° ìœ„í•œ ê³³ìœ¼ë¡œ ê°€ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
+ // Parameters :  Client currentUser - í˜„ì¬ ìœ ì €ì˜ ì •ë³´ë¥¼ ë‹´ì€ í´ë˜ìŠ¤
+ //               BidItemCollection BidItemCollect - í˜„ì¬ ì¡´ì¬í•˜ëŠ” BidItemCollection
+ //               SellItemCollection SellItemCollect - í˜„ì¬ ì¡´ì¬í•˜ëŠ” SellitemCollection
+ // Return Value : ì—†ìŒ
+ // Created: 2016/6/19 02:11 pm
+ // Author: ìµœë¯¼ìˆ˜
 void managementBIdItem(Client currentUser, BidItemCollection BidItemCollect, SellItemCollection SellItemCollect) {
 	int command = 0;
 	while (1) {
-		cout << "- 4. °æ¸Å ¹°Ç° Á¶È¸, ÀÔÂû °ü¸®" << endl;
-		cout << "1. °æ¸Å ÁßÀÎ ¹°Ç° Á¶È¸" << endl;
-		cout << "2. Âü¿© ÁßÀÎ ÀÔÂû Á¶È¸" << endl;
-		cout << "0. ¸ŞÀÎ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
+		cout << "- 4. ê²½ë§¤ ë¬¼í’ˆ ì¡°íšŒ, ì…ì°° ê´€ë¦¬" << endl;
+		cout << "1. ê²½ë§¤ ì¤‘ì¸ ë¬¼í’ˆ ì¡°íšŒ" << endl;
+		cout << "2. ì°¸ì—¬ ì¤‘ì¸ ì…ì°° ì¡°íšŒ" << endl;
+		cout << "0. ë©”ì¸ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
 
-		cout << "* ÀÔ·Â¼±ÅÃ : ";
+		cout << "* ì…ë ¥ì„ íƒ : ";
 		cin >> command;
 		switch (command) {
 		case 0: return;
 		case 1: queryBidItem(currentUser, BidItemCollect, SellItemCollect); return;
 		case 2: queryMyBidItem(currentUser, BidItemCollect); return;
 		default:
-			cout << "¾Ë¸ÂÁö ¾ÊÀº ¹øÈ£ÀÔ´Ï´Ù." << endl;
+			cout << "ì•Œë§ì§€ ì•Šì€ ë²ˆí˜¸ì…ë‹ˆë‹¤." << endl;
 		}
 	}
 }
-
+// Function :void queryBidItem(Client currentUser, BidItemCollection BidItemCollect, SellItemCollection SellItemCollect);
+ // Description: êµ¬ë§¤ë¬¼í’ˆë“±ë¡ì„ í•˜ê¸° ìœ„í•œ ê³³ìœ¼ë¡œ ê°€ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
+ // Parameters :  Client currentUser - í˜„ì¬ ìœ ì €ì˜ ì •ë³´ë¥¼ ë‹´ì€ í´ë˜ìŠ¤
+ //               BidItemCollection BidItemCollect - í˜„ì¬ ì¡´ì¬í•˜ëŠ” BidItemCollection
+ //               SellItemCollection SellItemCollect - í˜„ì¬ ì¡´ì¬í•˜ëŠ” SellitemCollection
+ // Return Value : ì—†ìŒ
+ // Created: 2016/6/18 16:20 pm
+ // Author: ìµœë¯¼ìˆ˜
 void queryBidItem(Client currentUser, BidItemCollection BidItemCollect, SellItemCollection SellItemCollect) {
 	string search;
-	cout << "- 4.1. °æ¸Å ÁßÀÎ ¹°Ç° Á¶È¸" << endl;
-	cout << "# °æ¸Å ¹°Ç°ÀÇ Å°¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ";
+	cout << "- 4.1. ê²½ë§¤ ì¤‘ì¸ ë¬¼í’ˆ ì¡°íšŒ" << endl;
+	cout << "# ê²½ë§¤ ë¬¼í’ˆì˜ í‚¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš” : ";
 	cin >> search;
 	SellItemCollect.findSellList(currentUser, search, BidItemCollect);
 
 	return;
 }
-
+// Function :void queryMyBidItem(Client currentUser, BidItemCollection BidItemCollect);
+ // Description: êµ¬ë§¤ë¬¼í’ˆë“±ë¡ì„ í•˜ê¸° ìœ„í•œ ê³³ìœ¼ë¡œ ê°€ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
+ // Parameters :  Client currentUser - í˜„ì¬ ìœ ì €ì˜ ì •ë³´ë¥¼ ë‹´ì€ í´ë˜ìŠ¤
+ //               BidItemCollection BidItemCollect - í˜„ì¬ ì¡´ì¬í•˜ëŠ” BidItemCollection
+ // Return Value : ì—†ìŒ
+ // Created: 2016/6/18 23:20 pm
+ // Author: ìµœë¯¼ìˆ˜
 void queryMyBidItem(Client currentUser, BidItemCollection BidItemCollect) {
 	string search;
-	cout << "- 4.2. Âü¿© ÁßÀÎ ¹°Ç° Á¶È¸" << endl;
+	cout << "- 4.2. ì°¸ì—¬ ì¤‘ì¸ ë¬¼í’ˆ ì¡°íšŒ" << endl;
 	BidItemCollect.getBidList(currentUser);
 
 	return;

@@ -1,21 +1,55 @@
+// Class : SellItemCollection.cpp
+ // Description:SellItemCollection classë¥¼ êµ¬í˜„í•œ ì½”ë“œì…ë‹ˆë‹¤.
+ //  â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦.
+ //  â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦
+ // Created: 2016/6/14 23:00 pm
+ // Author: ì¥ì€ìƒ
+ // mail: eeunsang7@naver.com
+ //
+ // Revsions : 
+ //   1. When & Who : 2016/6/15 22:00 pm 23:30 pm by Jang-eunsang
+ //      What : added bFlag, 
+ //            modified calCosts
+ //              â€¦..
+
+
 #include "SellItemCollection.h"
 #include "BidItemCollection.h"
 #include "Client.h"
 #include <vector>
 
-
+//ì™¸ë¶€ ì „ì—­ë³€ìˆ˜ CurrentUser,CurrentTimeì„ ê°€ì ¸ì˜¨ë‹¤
 extern Client CurrentUser;
 extern Day CurrentTime;
 
+// Function : operator<<
+ // Description: Dayì— ëŒ€í•œ ì‹œê°„ì„ ì˜ˆì˜ê²Œ ì¶œë ¥í•´ì£¼ëŠ” í•¨ìˆ˜ì´ë‹¤
+ // Parameters :   ì—†ìŒ
+ // Return Value :  ostream
+ // Created: 
+ // Author: ìµœë¯¼ìˆ˜
 ostream& operator<< (ostream& os, Day tmpTime);
 
 
-//SellectionCollection¿¡¼­ privateÀÇ totalSellItemÀ» °¡Á®¿À´Â get ÇÔ¼öÀÔ´Ï´Ù.
+// Function : SellItem SellItemCollection::getSellItem(int i)
+ // Description: SellItemCollectionì˜ SellItemì„ ë¦¬í„´ ë°›ëŠ” í•¨ìˆ˜ì´ë‹¤
+ //		 iì— ëŒ€í•œ ê°’ì„ ë„˜ê¸°ë©´ ê·¸ ë²ˆí˜¸ì— í•´ë‹¹í•˜ëŠ” SellItemì„ ë¦¬í„´í•œë‹¤.
+ // Parameters :   int i - SellItem[100]ì¤‘ ë¹„ì–´ìˆëŠ” ê°’ì„ ë‚˜íƒ€ëƒ„
+ // Return Value :  ì›í•˜ëŠ” ë²ˆí˜¸ì— í•´ë‹¹í•˜ëŠ” SellItem ë¦¬í„´
+ //
+ // Created: 2016
+ // Author: Gildong Hong
+ // 
+ // Revsions : 
+ //   1. When & Who : 2007/05/16 13:12 pm by Ji-sung Park
+ //      What : added other factors when calculating costsâ€¦
+ //              â€¦..
+ //   2. â€¦â€¦â€¦.      
 SellItem SellItemCollection::getSellItem(int i){
 	return totalSellItem[i];
 }
 
-//totalSellItem¿¡¼­ wantChange¹øÈ£¸¦ newItemÀ» Ãß°¡ ½ÃÅ°´Â ÇÔ¼öÀÔ´Ï´Ù.
+//totalSellItemì—ì„œ wantChangeë²ˆí˜¸ë¥¼ newItemì„ ì¶”ê°€ ì‹œí‚¤ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
 void SellItemCollection::setSellItem(int wantChangeNum, SellItem newItem){
 	totalSellItem[wantChangeNum] = newItem;
 }
@@ -23,7 +57,7 @@ void SellItemCollection::setSellItem(int wantChangeNum, SellItem newItem){
 
 void SellItemCollection::addSellItem(){
 
-	cout << "************** ¹°Ç° µî·ÏÀ» ÇÏ·¯ ¿À¼Ì±º¿ä ¹İ°©½À´Ï´Ù **************" << endl;
+	cout << "************** ë¬¼í’ˆ ë“±ë¡ì„ í•˜ëŸ¬ ì˜¤ì…¨êµ°ìš” ë°˜ê°‘ìŠµë‹ˆë‹¤ **************" << endl;
 
 
 	string name, ownerID;
@@ -33,39 +67,39 @@ void SellItemCollection::addSellItem(){
 	Day startTime, endTime, remainTime;
 	while (1){
 		try{
-			cout << "¹°Ç°¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä : ";
+			cout << "ë¬¼í’ˆëª…ì„ ì…ë ¥í•˜ì„¸ìš” : ";
 			cin >> name;
 			cin.clear();
 			cin.ignore(256, '\n');
 			if (name.length() < 2) throw 1;
-			cout << "ÃÑÆÇ¸Å¼ö·®À» ÀÔ·ÂÇÏ¼¼¿ä : ";
+			cout << "ì´íŒë§¤ìˆ˜ëŸ‰ì„ ì…ë ¥í•˜ì„¸ìš” : ";
 			cin >> totalNum;
 			cin.clear();
 			cin.ignore(256, '\n');
 			if (totalNum< 0) throw 2;
-			cout << "½ÃÀÛ °¡°İÀ» ÀÔ·ÂÇÏ¼¼¿ä : ";
+			cout << "ì‹œì‘ ê°€ê²©ì„ ì…ë ¥í•˜ì„¸ìš” : ";
 			cin >> startPrice;
 			cin.clear();
 			cin.ignore(256, '\n');
 			if (startPrice< 0) throw 3;
-			cout << "°æ¸Å ½ÃÀÛ½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä ³â : ";
+			cout << "ê²½ë§¤ ì‹œì‘ì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš” ë…„ : ";
 			cin >> startTime.year;
 			cin.clear();
 			cin.ignore(256, '\n');
 			if (startTime.year < CurrentTime.year) throw 4;
-			cout << "°æ¸Å ½ÃÀÛ½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä ¿ù : ";
+			cout << "ê²½ë§¤ ì‹œì‘ì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš” ì›” : ";
 			cin >> startTime.month;
 			cin.clear();
 			cin.ignore(256, '\n');
 			if ((startTime.year == CurrentTime.year) && startTime.month < CurrentTime.month) throw 4;
 			if (startTime.month > 12 || startTime.month < 1) throw 6;
-			cout << "°æ¸Å ½ÃÀÛ½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä ÀÏ : ";
+			cout << "ê²½ë§¤ ì‹œì‘ì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš” ì¼ : ";
 			cin >> startTime.day;
 			cin.clear();
 			cin.ignore(256, '\n');
 			if ((startTime.year == CurrentTime.year) && (startTime.month == CurrentTime.month) && startTime.day < CurrentTime.day) throw 4;
 			if (startTime.day > 31 || startTime.day < 1) throw 6;
-			cout << "°æ¸Å ½ÃÀÛ½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä ½Ã°£ : ";
+			cout << "ê²½ë§¤ ì‹œì‘ì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš” ì‹œê°„ : ";
 			cin >> startTime.hour;
 			cin.clear();
 			cin.ignore(256, '\n');
@@ -74,27 +108,27 @@ void SellItemCollection::addSellItem(){
 
 			
 
-			cout << "°æ¸Å Á¾·á½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä ³â :";
+			cout << "ê²½ë§¤ ì¢…ë£Œì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš” ë…„ :";
 			cin >> endTime.year;
 			cin.clear();
 			cin.ignore(256, '\n');
 			//if (endTime.year < CurrentTime.year) throw 4;
 			if (endTime.year < startTime.year) throw 5;
-			cout << "°æ¸Å Á¾·á½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä ¿ù : ";
+			cout << "ê²½ë§¤ ì¢…ë£Œì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš” ì›” : ";
 			cin >> endTime.month;
 			cin.clear();
 			cin.ignore(256, '\n');
 			//if ((endTime.year == CurrentTime.year) && endTime.month < CurrentTime.month) throw 4;
 			if ((endTime.year == startTime.year) && endTime.month < startTime.month) throw 5;
 			if (endTime.month > 12 || endTime.month < 1) throw 6;
-			cout << "°æ¸Å Á¾·á½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä ÀÏ : ";
+			cout << "ê²½ë§¤ ì¢…ë£Œì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš” ì¼ : ";
 			cin >> endTime.day;
 			cin.clear();
 			cin.ignore(256, '\n');
 			//if ((endTime.year == CurrentTime.year) && (endTime.month == CurrentTime.month) && endTime.day < CurrentTime.day) throw 4;
 			if ((endTime.year == startTime.year) && (endTime.month == startTime.month) && endTime.day < startTime.day) throw 5;
 			if (endTime.day > 31 || endTime.day < 1) throw 6;
-			cout << "°æ¸Å Á¾·á½Ã°£À» ÀÔ·ÂÇÏ¼¼¿ä ½Ã°£ : ";
+			cout << "ê²½ë§¤ ì¢…ë£Œì‹œê°„ì„ ì…ë ¥í•˜ì„¸ìš” ì‹œê°„ : ";
 			cin >> endTime.hour;
 			cin.clear();
 			cin.ignore(256, '\n');
@@ -111,24 +145,24 @@ void SellItemCollection::addSellItem(){
 		catch (int type){
 			switch (type){
 			case 1:
-				cout << "¹°Ç°¸íÀ» Àû¾îµµ 2±ÛÀÚ ÀÌ»ó Àû¾îÁÖ¼¼¿ä" << endl;
+				cout << "ë¬¼í’ˆëª…ì„ ì ì–´ë„ 2ê¸€ì ì´ìƒ ì ì–´ì£¼ì„¸ìš”" << endl;
 				break;
 			case 2:
-				cout << "ÃÑ ÆÇ¸Å¼ö·®À» 0¿ø ÀÌ»óÀ¸·Î Àû¾îÁÖ¼¼¿ä" << endl;
+				cout << "ì´ íŒë§¤ìˆ˜ëŸ‰ì„ 0ì› ì´ìƒìœ¼ë¡œ ì ì–´ì£¼ì„¸ìš”" << endl;
 				break;
 			case 3:
-				cout << "½ÃÀÛ°¡°İÀ» 0¿ø ÀÌ»óÀ¸·Î Àû¾îÁÖ¼¼¿ä" << endl;
+				cout << "ì‹œì‘ê°€ê²©ì„ 0ì› ì´ìƒìœ¼ë¡œ ì ì–´ì£¼ì„¸ìš”" << endl;
 				break;
 			case 4:
-				cout << "ÇöÀç½Ã°£º¸´Ù ´õ Àû°Ô ¼³Á¤ÇÒ ¼ö´Â ¾ø½À´Ï´Ù." << endl;
+				cout << "í˜„ì¬ì‹œê°„ë³´ë‹¤ ë” ì ê²Œ ì„¤ì •í•  ìˆ˜ëŠ” ì—†ìŠµë‹ˆë‹¤." << endl;
 				break;
 			case 5:
-				cout << "¸¶°¨½Ã°£ÀÌ ½ÃÀÛ½Ã°£º¸´Ù ÀüÀÏ ¼ö´Â ¾ø½À´Ï´Ù" << endl;
+				cout << "ë§ˆê°ì‹œê°„ì´ ì‹œì‘ì‹œê°„ë³´ë‹¤ ì „ì¼ ìˆ˜ëŠ” ì—†ìŠµë‹ˆë‹¤" << endl;
 				break;
 			case 6:
-				cout << "¹üÀ§¿¡ ¸ÂÁö ¾Ê´Â ¼ö ÀÔ´Ï´Ù." << endl;
+				cout << "ë²”ìœ„ì— ë§ì§€ ì•ŠëŠ” ìˆ˜ ì…ë‹ˆë‹¤." << endl;
 			}
-			cout << "´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä " << endl;
+			cout << "ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš” " << endl;
 			continue;
 		}
 	}
@@ -144,7 +178,7 @@ void SellItemCollection::addSellItem(){
 		}
 
 	}
-	cout << "\n" << "¸Ş´º µî·ÏÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù" << endl;
+	cout << "\n" << "ë©”ë‰´ ë“±ë¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤" << endl;
 
 	return;
 }
@@ -152,17 +186,17 @@ void SellItemCollection::addSellItem(){
 void SellItemCollection::getSellItemList(){
 
 	int number = 1;
-	//Ãâ·ÂµÇ´Â ¹øÈ£¿Í ItemId¸¦ ¿¬°áÇÏ±â À§ÇÑ º¯¼ö
+	//ì¶œë ¥ë˜ëŠ” ë²ˆí˜¸ì™€ ItemIdë¥¼ ì—°ê²°í•˜ê¸° ìœ„í•œ ë³€ìˆ˜
 	vector< pair<int, SellItem>> tmp;
 	int command = 0;
 
 
-	//ÀÌ°ÍÀ» ÇÏ´Â ÀÌÀ¯´Â Ãâ·ÂµÇ´Â ¹øÈ£¿Í ItemID¸¦ ÀÏÄ¡ ½ÃÅ°±â À§ÇØ ¾²·¹±â°ªÀ» ³Ö¾îµÎ´Â °ÍÀÌ´Ù
+	//ì´ê²ƒì„ í•˜ëŠ” ì´ìœ ëŠ” ì¶œë ¥ë˜ëŠ” ë²ˆí˜¸ì™€ ItemIDë¥¼ ì¼ì¹˜ ì‹œí‚¤ê¸° ìœ„í•´ ì“°ë ˆê¸°ê°’ì„ ë„£ì–´ë‘ëŠ” ê²ƒì´ë‹¤
 	SellItem trash;
 	tmp.push_back(make_pair(0, trash));
 
 	try{
-		cout << "¹øÈ£" << "   " << "¹° Ç° ¸í" << "   " << "ÃÑ ÆÇ¸Å¼ö·®" << "     " << "½ÃÀÛ °¡°İ" << endl;
+		cout << "ë²ˆí˜¸" << "   " << "ë¬¼ í’ˆ ëª…" << "   " << "ì´ íŒë§¤ìˆ˜ëŸ‰" << "     " << "ì‹œì‘ ê°€ê²©" << endl;
 		SellItem Item;
 		for (int i = 0; i < 100; i++){
 			Item = getSellItem(i);
@@ -171,12 +205,12 @@ void SellItemCollection::getSellItemList(){
 				cout << number++ << "        " << Item.getName() << "        " << Item.getTotalNum() << "             " << Item.getStartPrice() << endl;
 			}
 		}
-		cout << "0. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
+		cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
 
 
 
-		//»ó¼¼º¸±â¸¦ ÇÒ°ÇÁö ¾ÈÇÒ°ÇÁö °áÁ¤ÇÏ´Â °÷ÀÔ´Ï´Ù
-		cout << "ÀÔ·Â¼±ÅÃ : ";
+		//ìƒì„¸ë³´ê¸°ë¥¼ í• ê±´ì§€ ì•ˆí• ê±´ì§€ ê²°ì •í•˜ëŠ” ê³³ì…ë‹ˆë‹¤
+		cout << "ì…ë ¥ì„ íƒ : ";
 		cin >> command;
 		cin.clear();
 		cin.ignore(256, '\n');
@@ -185,16 +219,16 @@ void SellItemCollection::getSellItemList(){
 
 
 		if (command != 0){
-			//¾î¶² ¹øÈ£¸¦ ¸»ÇÏ´Â°ÇÁö Àß ¸ğ¸£°Ú´Ù ÀÏ´Ü ¾ÆÀÌÅÛ ¾ÆÀÌµğ·Î ³Ñ°Üº¸°Ú´Ù
-			cout << "¹øÈ£" << "  " << "¹° Ç° ¸í" << "   " << "ÃÑ ÆÇ¸Å¼ö·®" << "   " << "½ÃÀÛ °¡°İ" << "   " << "ÀÔÂûÀÚ ¼ö" << "        " << "°æ¸Å¸¶°¨½Ã°£" << endl;
+			//ì–´ë–¤ ë²ˆí˜¸ë¥¼ ë§í•˜ëŠ”ê±´ì§€ ì˜ ëª¨ë¥´ê² ë‹¤ ì¼ë‹¨ ì•„ì´í…œ ì•„ì´ë””ë¡œ ë„˜ê²¨ë³´ê² ë‹¤
+			cout << "ë²ˆí˜¸" << "  " << "ë¬¼ í’ˆ ëª…" << "   " << "ì´ íŒë§¤ìˆ˜ëŸ‰" << "   " << "ì‹œì‘ ê°€ê²©" << "   " << "ì…ì°°ì ìˆ˜" << "        " << "ê²½ë§¤ë§ˆê°ì‹œê°„" << endl;
 			cout << tmp[command].first << "      " << tmp[command].second.getName() << "         " << tmp[command].second.getTotalNum()
 				<< "           " << tmp[command].second.getStartPrice() << "        " << tmp[command].second.getBidPersonNum() << "        "
-				<< tmp[command].second.getEndTime().year << "³â " << tmp[command].second.getEndTime().month << "¿ù "
-				<< tmp[command].second.getEndTime().day << "ÀÏ " << tmp[command].second.getEndTime().hour << "½Ã°£ "
+				<< tmp[command].second.getEndTime().year << "ë…„ " << tmp[command].second.getEndTime().month << "ì›” "
+				<< tmp[command].second.getEndTime().day << "ì¼ " << tmp[command].second.getEndTime().hour << "ì‹œê°„ "
 				<< endl;
 		}
-		cout << "0. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
-		cout << "ÀÔ·Â¼±ÅÃ : ";
+		cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
+		cout << "ì…ë ¥ì„ íƒ : ";
 		cin >> command;
 		cin.clear();
 		cin.ignore(256, '\n');
@@ -204,12 +238,12 @@ void SellItemCollection::getSellItemList(){
 	}
 	catch (int type){
 		if (type == 1){
-			cout << "¾ø´Â »ó¼¼º¸±â¸¦ ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù ³ª°¡°Ú½À´Ï´Ù\n" << endl;
+			cout << "ì—†ëŠ” ìƒì„¸ë³´ê¸°ë¥¼ ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤ ë‚˜ê°€ê² ìŠµë‹ˆë‹¤\n" << endl;
 			return;
 		}
 
 		else if (type == 2){
-			cout << "ÀÔ·ÂÀÌ 0 ¸»°í´Â ´õÀÌ»ó ÇÒ°Ô ¾ø½À´Ï´Ù ³ª°¡°Ú½À´Ï´Ù\n" << endl;
+			cout << "ì…ë ¥ì´ 0 ë§ê³ ëŠ” ë”ì´ìƒ í• ê²Œ ì—†ìŠµë‹ˆë‹¤ ë‚˜ê°€ê² ìŠµë‹ˆë‹¤\n" << endl;
 		}
 
 	}
@@ -226,7 +260,7 @@ void SellItemCollection::findSellList(Client currentUser, string search, BidItem
 	for (int i = 0; i < 100; i++) {
 		if (search == totalSellItem[i].getName()) {
 			tCollection[chk] = totalSellItem[i].getItemID();
-			cout << "¹øÈ£	" << "ÀÌ¸§	" << "³²Àº½Ã°£	" << "°¡°İ	" << endl;
+			cout << "ë²ˆí˜¸	" << "ì´ë¦„	" << "ë‚¨ì€ì‹œê°„	" << "ê°€ê²©	" << endl;
 			cout << num << "	" << totalSellItem[i].getName() << "	";
 			cout << totalSellItem[i].getRemainTime() << "	" << totalSellItem[i].getStartPrice() << endl;
 			num++;
@@ -234,10 +268,10 @@ void SellItemCollection::findSellList(Client currentUser, string search, BidItem
 		}
 	}
 
-	if (chk == 0) { cout << "Ã£´Â ¹°Ç°ÀÌ ¾ø½À´Ï´Ù. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°©´Ï´Ù." << endl; return; }
+	if (chk == 0) { cout << "ì°¾ëŠ” ë¬¼í’ˆì´ ì—†ìŠµë‹ˆë‹¤. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤." << endl; return; }
 	while (1){
-		cout << "0. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
-		cout << "* ÀÔ·Â¼±ÅÃ : ";
+		cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
+		cout << "* ì…ë ¥ì„ íƒ : ";
 		cin >> input;
 		cin.clear();
 		cin.ignore(256, '\n');
@@ -245,7 +279,7 @@ void SellItemCollection::findSellList(Client currentUser, string search, BidItem
 			break;
 		}
 		else if (input > chk || input < 0) {
-			cout << "¾Ë¸ÂÁö ¾ÊÀº °ªÀÔ´Ï´Ù" << endl;
+			cout << "ì•Œë§ì§€ ì•Šì€ ê°’ì…ë‹ˆë‹¤" << endl;
 		}
 		else {
 			input--;
@@ -264,7 +298,7 @@ void SellItemCollection::getSellItem(Client currentUser, int num, int* sellList,
 	int i = 0;
 	int input;
 
-	cout << "-4.1.1." << num << " ¼±ÅÃµÈ ¹°Ç°ÀÇ »ó¼¼ Á¶È¸" << endl;
+	cout << "-4.1.1." << num << " ì„ íƒëœ ë¬¼í’ˆì˜ ìƒì„¸ ì¡°íšŒ" << endl;
 
 	while (chk != totalSellItem[i].getItemID()) { i++; }
 	cout << totalSellItem[i].getName() << " ";
@@ -277,9 +311,9 @@ void SellItemCollection::getSellItem(Client currentUser, int num, int* sellList,
 	cout << totalSellItem[i].getRemainTime() << endl;
 
 	while (1) {
-		cout << "1. ÀÔÂûÂü¿©" << endl;
-		cout << "0. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
-		cout << "* ÀÔ·Â¼±ÅÃ : ";
+		cout << "1. ì…ì°°ì°¸ì—¬" << endl;
+		cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
+		cout << "* ì…ë ¥ì„ íƒ : ";
 		cin >> input;
 		cin.clear();
 		cin.ignore(256, '\n');
@@ -289,7 +323,7 @@ void SellItemCollection::getSellItem(Client currentUser, int num, int* sellList,
 		}
 		else if (input == 0) { break; }
 		else {
-			cout << "¾Ë¸ÂÁö ¾ÊÀº °ªÀÔ´Ï´Ù." << endl;
+			cout << "ì•Œë§ì§€ ì•Šì€ ê°’ì…ë‹ˆë‹¤." << endl;
 			continue;
 		}
 	}

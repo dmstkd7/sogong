@@ -1,6 +1,21 @@
 #include "Client.h"
 
 //client 클래스 구현
+
+
+// Function : get 함수
+ // Description: 정보를 가져오는 함수이다.
+ // Parameters : 없음
+ // Return Value :  해당 정보
+ // Created: 2015/6/15 13:00 pm
+ // Author: 전주라
+
+// Function : set 함수
+ // Description: 정보를 바꾸는 함수이다.
+ // Parameters : 바꾸고 싶은 정보
+ // Return Value : 없음
+ // Created: 2015/6/15 13:00 pm
+ // Author: 전주라
 string Client::getName(){
 	return name;
 }

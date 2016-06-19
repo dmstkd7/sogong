@@ -1,14 +1,34 @@
 #include "BidItem.h"
 
+// Function : Day getRemainTime()
+// Description: This is a function that calculates RemainTime.
+// Parameters :  
+// Return Value :  RemainTime value
+//
+// Created: 2016/06/15 22:01 pm
+// Author: ìµœë¯¼ìˆ˜
+// 
+// Revisions : 
+//
+
 Day BidItem::getRemainTime() {
 	
-	//ÀÌ°Å´Â ³ªÁß¿¡ ´Ù½Ã ÇÑ¹ø »ı°¢ÇØº¸´Â ±âÈ¸¸¦ °®ÀÚ
+	//ì´ê±°ëŠ” ë‚˜ì¤‘ì— ë‹¤ì‹œ í•œë²ˆ ìƒê°í•´ë³´ëŠ” ê¸°íšŒë¥¼ ê°–ì
 	remainTime.year = endTime.year - CurrentTime.year;
 	remainTime.month = endTime.month - CurrentTime.month;
 	remainTime.day = endTime.day - CurrentTime.day;
 	remainTime.hour = endTime.hour - CurrentTime.hour;
 	return remainTime;
 }
+// Function : int getBidPrice()
+// Description: This is a function that get BidPrice.
+// Parameters :  
+// Return Value :  BidPrice
+//
+// Created: 2016/06/15 22:35 pm
+// Author: ìµœë¯¼ìˆ˜
+// 
+// Revisions : 
 
 void BidItem::setRemainTime(){
 	remainTime.year = endTime.year - CurrentTime.year;
@@ -17,6 +37,15 @@ void BidItem::setRemainTime(){
 	remainTime.hour = endTime.hour - CurrentTime.hour;
 }
 
+// Function : void setRemainTime()
+// Description: This is a function that set RemainTime.
+// Parameters :  
+// Return Value : 
+//
+// Created: 2016/06/15 23:12 pm
+// Author: ìµœë¯¼ìˆ˜
+// 
+// Revisions : 
 
 int BidItem::getBidPrice() {
 	return bidPrice;

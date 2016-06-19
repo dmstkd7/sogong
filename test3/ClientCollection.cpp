@@ -133,7 +133,16 @@ void ClientCollection::signUp() {
 
 		newClient.setEnrollNumber(newMember);
 
-		//입력 받은 값들을 Collection의 client에 저장하는 함수입니다.
+	
+// Function : void setTotalClient(int inputNum, Client newClient)
+ // Description: 입력받은 값을 clientCollection에 저장하는 함수입니다.
+ // Parameters : int inputNumber , Client newClient
+ // Return Value :  없음
+//newClient에 가입정보를 가져와
+//Client Collection에 있는 totalClient[inputNum]에 저장합니다.
+ // Created: 2016/6/16 20:15 pm
+ // Author: 전주라
+
 		ClientCollect.setTotalClient(newMember, newClient);
 
 		cout << "회원 가입이 완료되었습니다." << endl;

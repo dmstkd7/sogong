@@ -103,6 +103,9 @@ void ClientCollection::signUp_deleteClient() {
 // : 6/19 13:30 pm 전주라
 // 입력값의 길이를 제한하였다.
 
+//REvesion
+// 6/20 1:20 am 전주라
+//privateNumber 정보를 추가하였다.
 void ClientCollection::signUp() {
 	string str;
 	Client newClient;

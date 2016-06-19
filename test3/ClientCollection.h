@@ -9,7 +9,7 @@ extern Client CurrentUser;
 // Class : ClientCollection
  // Description: Client의 정보를 모아놓는 ClientCollection class이다. 
  //  Client 10명의 정보를 저장할 수 있다. 
- //  로그인, 로그아웃, 회원가입, 회원탈퇴의 operation을 선언한다.
+//회원가입 operation을 선언한다.
  // Created: 2015/6/15 14:20 pm
  // Author: 전주라
  // mail: j161021@hanmail.net
@@ -43,7 +43,7 @@ public:
 // checkNum으로 Collection에 저장된 client의 정보를 확인한다.
 // 이름, 주소, 주민번호, 이메일, ID, PW를 입력 받아 저장한다.
 // 
- // Created: 2015/6/15 17:75 pm
+ // Created: 2015/6/15 17:55 pm
  // Author: 전주라
 
 	void signUp();

@@ -98,6 +98,11 @@ void ClientCollection::signUp_deleteClient() {
 // : 6/16 1:30 am 전주라
 //  totalCLient에 저장이 안된 것을setTotalClient(newMember, newClient)을추가하여 수정
 
+
+//Reversion 
+// : 6/19 13:30 pm 전주라
+// 입력값의 길이를 제한하였다.
+
 void ClientCollection::signUp() {
 	string str;
 	Client newClient;

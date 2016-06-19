@@ -29,11 +29,12 @@ private:
 	//0Àº admin, 1 guest, 2 user
 	int session;
 	string name;
-	int privateNumber;
+	string privateNumber;
 	string address;
 	string email;
 	string id;
 	string password;
+	int enrollNumber;//가입번호
 	BidItemCollection *bidderItem;
 	SellItemCollection *sellerItem;
 	FinishItemCollection *finishItem;
@@ -55,6 +56,8 @@ public:
 	void setId(string c_id);
 	string getPassword();
 	void setPassword(string c_password);
+	int getEnrollNumber();
+	void setEnrollNumber(int c_enrollNumber);
 	void* getBidderItem();
 	void* getSellerItem();
 	void* getFinishItem();

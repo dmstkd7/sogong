@@ -12,11 +12,21 @@ class FinishItemCollection;
 
 
 
+// Class : Client
+ // Description: Client의 정보를 갖는class이다. 
+ //  각 client는 세션, 이름, 주민번호, 주소, 이메일, ID, PW
+// 가입번호를 갖는다. 
+ // get 함수는 client의 정보를 반환해주고,
+ // set 함수는 client의 정보를 셋팅한다.
+ // client가 생성될 때는 session, enrollNumber, id가 설정된다.
+ // Created: 2015/6/15 13:00 pm
+ // Author: 전주라
+ // mail: j161021@hanmail.net
 
 class Client{
 private:
 
-	//0�� admin, 1 guest, 2 user
+	//0Àº admin, 1 guest, 2 user
 	int session;
 	string name;
 	int privateNumber;
@@ -27,7 +37,7 @@ private:
 	BidItemCollection *bidderItem;
 	SellItemCollection *sellerItem;
 	FinishItemCollection *finishItem;
-	//��� , ����
+	//ºñ´õ , ¼¿·¯
 
 public:
 

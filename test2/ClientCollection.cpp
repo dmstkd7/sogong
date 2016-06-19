@@ -16,7 +16,9 @@ void ClientCollection::signUp_deleteClient() {
 		cout << "************** 회원가입 하러 오셨군요 반갑습니다 **************" << endl;
 		if (currentUser.getId()!="!!!"){ cout << "로그아웃 후 가입이 가능합니다." << endl; }
 		else { 
-			ClientCollect.signUp(); }
+			ClientCollect.signUp(); 
+			cout << "회원 가입이 완료되었습니다." << endl;
+		}
 		break;
 
 	case 2:

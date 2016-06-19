@@ -16,10 +16,10 @@ class FinishItemCollection;
 class Client{
 private:
 
-	//0Àº admin, 1 guest, 2 user
+	//0Ã€Âº admin, 1 guest, 2 user
 	int session;
 	string name;
-	string privateNumber;
+	int privateNumber;
 	string address;
 	string email;
 	string id;
@@ -27,7 +27,7 @@ private:
 	BidItemCollection *bidderItem;
 	SellItemCollection *sellerItem;
 	FinishItemCollection *finishItem;
-	//ºñ´õ , ¼¿·¯
+	//ÂºÃ±Â´Ãµ , Â¼Â¿Â·Â¯
 
 public:
 
@@ -35,8 +35,8 @@ public:
 	void setSession(int wantChangeSession);
 	string getName();
 	void setName(string c_name);
-	string getPrivateNumber();
-	void setPrivateNumber(string c_privateName);
+	int getPrivateNumber();
+	void setPrivateNumber(int c_privateName);
 	string getAddress();
 	void setAddress(string c_address);
 	string getEmail();
@@ -50,8 +50,8 @@ public:
 	void* getFinishItem();
 
 
-	Client(){}
-	Client(int c_session, string c_name){ session = c_session; name = c_name; }
-	~Client(){}
+	Client() { session = 1; privateNumber = -1; id = "!!!"; }
+	Client(int c_session, string c_name) { session = c_session; name = c_name; id = "!!!"; }
+	~Client() {}
 
 };

@@ -22,8 +22,8 @@ extern Day CurrentTime;
 
 class BidItem : public Item {
 protected:
-	Day remainTime;
-	int bidPrice;
+	Day remainTime; // BidItem의 남은시간
+	int bidPrice; // BidItem의 입찰가격
 
 public:
 	BidItem() {}

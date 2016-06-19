@@ -65,32 +65,31 @@ void setCurrentTime();
 
 
 // Function : void managementBIdItem(Client currentUser, BidItemCollection BidItemCollect, SellItemCollection SellItemCollect);
- // Description: 구매물품등록을 하기 위한 곳으로 가는 함수입니다
- // Parameters :  Client currentUser - 현재 유저의 정보를 담은 클래스
- //               BidItemCollection BidItemCollect - 현재 존재하는 BidItemCollection
- //               SellItemCollection SellItemCollect - 현재 존재하는 SellitemCollection
+ // Description: To show interface for searching SellItem for Bidding and managing BidItem
+ // Parameters :  Client currentUser - Client who want to search SellItem or manage BidItems
+ //               BidItemCollection BidItemCollect - Collection of BidItems
+ //               SellItemCollection SellItemCollect - Collection of SellItems
  // Return Value : 없음
- // Created: 2016/6/19 02:11 pm
+ // Created: 2016/6/16 02:11 am
  // Author: 최민수
 void managementBIdItem(Client currentUser, BidItemCollection BidItemCollect, SellItemCollection SellItemCollect);
 
 
 // Function :void queryBidItem(Client currentUser, BidItemCollection BidItemCollect, SellItemCollection SellItemCollect);
- // Description: 구매물품등록을 하기 위한 곳으로 가는 함수입니다
- // Parameters :  Client currentUser - 현재 유저의 정보를 담은 클래스
- //               BidItemCollection BidItemCollect - 현재 존재하는 BidItemCollection
- //               SellItemCollection SellItemCollect - 현재 존재하는 SellitemCollection
- // Return Value : 없음
- // Created: 2016/6/18 16:20 pm
- // Author: 최민수
+// Description: To show interface for searching SellItem for Bidding
+// Parameters :  Client currentUser - Client who want to search SellItem or manage BidItems
+//               BidItemCollection BidItemCollect - Collection of BidItems
+//               SellItemCollection SellItemCollect - Collection of SellItems // Return Value : 없음
+// Created: 2016/6/16 09:20 am
+// Author: 최민수
 void queryBidItem(Client currentUser, BidItemCollection BidItemCollect, SellItemCollection SellItemCollect);
 
 
 // Function :void queryMyBidItem(Client currentUser, BidItemCollection BidItemCollect);
- // Description: 구매물품등록을 하기 위한 곳으로 가는 함수입니다
- // Parameters :  Client currentUser - 현재 유저의 정보를 담은 클래스
- //               BidItemCollection BidItemCollect - 현재 존재하는 BidItemCollection
- // Return Value : 없음
- // Created: 2016/6/18 23:20 pm
- // Author: 최민수
+// Description: To show interface for managing BidItem
+// Parameters :  Client currentUser - Client who want to search SellItem or manage BidItems
+//               BidItemCollection BidItemCollect - Collection of BidItems
+// Return Value : 없음
+// Created: 2016/6/16 09:45 pm
+// Author: 최민수
 void queryMyBidItem(Client currentUser, BidItemCollection BidItemCollect);

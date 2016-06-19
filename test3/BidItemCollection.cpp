@@ -1,21 +1,57 @@
 #include "BidItemCollection.h"
 
+// Function : ostream& operator<<(ostream& os, Day tmpTime)
+// Description: This is a function that prnt Day.
+// Parameters :  
+// Return Value : 
+//
+// Created: 2016/06/19 14:01 pm
+// Author: ìµœë¯¼ìˆ˜
+// 
+// Revisions : 
+//
+
 ostream& operator<< (ostream& os, Day tmpTime) {
 	os << tmpTime.year << "/" << tmpTime.month << "/" << tmpTime.day << " " << tmpTime.hour << ":00";
 	return os;
 }
 
 extern BidItemCollection BidItemCollect;
+// BidItemCollectionì˜ ì „ì—­ë³€ìˆ˜
+
+// Function : int BidItemCollection::getNumberBid(int chk)
+// Description: This is a function that get the number of BidItem which itemID is chk.
+// Parameters :  
+//	int chk : item's itemID for checking value
+// Return Value : the number of BidItem which itemID is chk. 
+//	
+// Created: 2016/06/16 10:01 am
+// Author: ìµœë¯¼ìˆ˜
+// 
+// Revisions : 
+//
 
 int BidItemCollection::getNumberBid(int chk) {
 	int num = 0;
-	cout << "¹øÈ£ : " << chk << endl;
+	cout << "ë²ˆí˜¸ : " << chk << endl;
 	for (int i = 0; i < 100; i++) {
 		if (chk == totalBidItem[i].getItemID()) { num++; }
 	}
 
 	return num;
 }
+
+// Function : void BidItemCollection::getBidList(Client currentClient)
+// Description: This is a function that print the list of user's BidItem.
+// Parameters :  
+//	Client currentClient : Client who want to print the list of his/her BidItem.
+// Return Value :  
+//	
+// Created: 2016/06/16 10:01 am
+// Author: ìµœë¯¼ìˆ˜
+// 
+// Revisions : 
+//
 
 void BidItemCollection::getBidList(Client currentClient) {
 	int tCollection[100];
@@ -26,7 +62,7 @@ void BidItemCollection::getBidList(Client currentClient) {
 	for (int i = 0; i < 100; i++) {
 		if (currentClient.getId() == totalBidItem[i].getOwnerID()) {
 			tCollection[chk] = totalBidItem[i].getItemID();
-			cout << "¹øÈ£	" << "ÀÌ¸§	" << "³²Àº½Ã°£	" << "½ÃÀÛ°¡°Ý	" << endl;
+			cout << "ë²ˆí˜¸	" << "ì´ë¦„	" << "ë‚¨ì€ì‹œê°„	" << "ì‹œìž‘ê°€ê²©	" << endl;
 			cout << num << "	" << totalBidItem[i].getName() << "	";
 			cout << totalBidItem[i].getRemainTime() << "	" << totalBidItem[i].getStartPrice() << endl;
 			chk++;
@@ -35,8 +71,8 @@ void BidItemCollection::getBidList(Client currentClient) {
 	}
 
 	while (1){
-		cout << "0. ¸ÞÀÎ ¸Þ´º·Î µ¹¾Æ°¡±â" << endl;
-		cout << "*ÀÔ·Â¼±ÅÃ : ";
+		cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
+		cout << "*ìž…ë ¥ì„ íƒ : ";
 		cin >> input;
 		cin.clear();
 		cin.ignore(256, '\n');
@@ -44,7 +80,7 @@ void BidItemCollection::getBidList(Client currentClient) {
 			break;
 		}
 		else if (input > chk || input < 0) {
-			cout << "¾Ë¸ÂÀÌ ¾ÊÀº ÀÔ·Â°ªÀÔ´Ï´Ù." << endl;
+			cout << "ì•Œë§žì´ ì•Šì€ ìž…ë ¥ê°’ìž…ë‹ˆë‹¤." << endl;
 			continue;
 		}
 		else {
@@ -56,20 +92,50 @@ void BidItemCollection::getBidList(Client currentClient) {
 	return;
 }
 
+// Function : void BidItemCollection::setBidItem(int i, BidItem bid)
+// Description: This is a function that set user's BidItem.
+// Parameters :  
+//	int i : number which means place where BidItem will to be in
+//	BidItem bid : BidItem which will be in BidItemCollection
+// Return Value :  
+//	
+// Created: 2016/06/16 16:26 pm
+// Author: ìµœë¯¼ìˆ˜
+// 
+// Revisions : 
+//	1. When & Who : 2016/06/17 13:12 pm by ìµœë¯¼ìˆ˜
+//      What : added setRemainTime() ;
+//
+
 void BidItemCollection::setBidItem(int i, BidItem bid) {
 	totalBidItem[i] = bid;
 	totalBidItem[i].setRemainTime();
 }
+
+// Function : void BidItemCollection::getBidItem(int num, int* bidList)
+// Description: This is a function that get choosen user's BidItem.
+// Parameters :  
+//	int num : selected number in getBidList operation
+//	int* bidList : itemID list from getBidList operation's List
+// Return Value :  
+//	
+// Created: 2016/06/16 18:34 pm
+// Author: ìµœë¯¼ìˆ˜
+// 
+// Revisions : 
+//	1. When & Who : 2016/06/18 11:18 am by ìµœë¯¼ìˆ˜
+//      What : add while() to make loop ;
+//
 
 void BidItemCollection::getBidItem(int num, int* bidList) {
 	int chk = bidList[num];
 	int i = 0;
 	int input = 0;
 
-	cout << "- 4.2." << num << ". ¼±ÅÃµÈ ¹°Ç°ÀÇ »ó¼¼Á¶È¸" << endl;
+	cout << "- 4.2." << num << ". ì„ íƒëœ ë¬¼í’ˆì˜ ìƒì„¸ì¡°íšŒ" << endl;
 	while (chk != totalBidItem[i].getItemID()) { i++; }
 
-	cout << "¹øÈ£	" << "¹°Ç°¸í	" << "¼ö·®	" << "½ÃÀÛ°¡°Ý	" << "ÀÔÂû±Ý¾×	" << "°æ¸Å ½ÃÀÛ½Ã°£	" << "°æ¸Å Á¾·á½Ã°£	" << "³²Àº½Ã°£	" << endl;
+	cout << "ë²ˆí˜¸	" << "ë¬¼í’ˆëª…	" << "ìˆ˜ëŸ‰	" << "ì‹œìž‘ê°€ê²©	" << "ìž…ì°°ê¸ˆì•¡	" << "ê²½ë§¤ ì‹œìž‘ì‹œê°„	" << "ê²½ë§¤ ì¢…ë£Œì‹œê°„	" << "ë‚¨ì€ì‹œê°„	" << endl;
 	cout << num << " ";
 	cout << totalBidItem[i].getName() << "	";
 	cout << totalBidItem[i].getTotalNum() << "	";
@@ -78,12 +144,40 @@ void BidItemCollection::getBidItem(int num, int* bidList) {
 	cout << totalBidItem[i].getStartTime() << "	";
 	cout << totalBidItem[i].getEndTime() << "	";
 	cout << totalBidItem[i].getRemainTime() << endl;
-	if (input == 0) {
-		return;
+	
+	while(1){
+		cout << "0. ë©”ì¸ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl ;
+		cin >> input ;
+		cin.clear() ;
+		cin.ignore(256, '\n') ;
+		if (input == 0) {
+			return;
+		}
+		else{
+			cout << "ì•Œë§žì§€ ì•Šì€ ìž…ë ¥ê°’ìž…ë‹ˆë‹¤." << endl ;
+		}
 	}
-
 	return;
 }
+
+// Function : void BidItemCollection::addBidItem(Client currentClient, SellItem bid)
+// Description: This is a function that add BidItem.
+// Parameters :  
+//	Client currentClient : Client who want to add BidItem
+//	SellItem bid : SellItem which is to be BidItem
+// Return Value :  
+//	
+// Created: 2016/06/16 19:54 pm
+// Author: ìµœë¯¼ìˆ˜
+// 
+// Revisions : 
+//	1. When & Who : 2016/06/18 11:18 am by ìµœë¯¼ìˆ˜
+//      What : add while() to make loop ;
+//	2. When & Who : 2016/06/18 11:32 am by ìµœë¯¼ìˆ˜
+//      What : modify if / else if / if in while loop;
+//	3. When & Who : 2016/06/19 12:11 am by ìµœë¯¼ìˆ˜
+//      What : add cin.clear(), cin.ignore(256,'\n') ;
+//
 
 void BidItemCollection::addBidItem(Client currentClient, SellItem bid) {
 	string tname = bid.getName();
@@ -100,40 +194,40 @@ void BidItemCollection::addBidItem(Client currentClient, SellItem bid) {
 	int i = 0;
 
 	while (1){
-		cout << "# ÀÔÂû ±Ý¾×À» ÀÔ·ÂÇÏ½Ê½Ã¿À : ";
+		cout << "# ìž…ì°° ê¸ˆì•¡ì„ ìž…ë ¥í•˜ì‹­ì‹œì˜¤ : ";
 		cin >> tbidPrice;
 		cin.clear();
 		cin.ignore(256, '\n');
 		if (tbidPrice<0) {
-			cout << "ÀÔÂû ±Ý¾×ÀÌ 0º¸´Ù Àû½À´Ï´Ù." << endl;
+			cout << "ìž…ì°° ê¸ˆì•¡ì´ 0ë³´ë‹¤ ì ìŠµë‹ˆë‹¤." << endl;
 			continue;
 		}
 		else if (tbidPrice < bid.getStartPrice()){
-			cout << "ÀÔÂû ±Ý¾×ÀÌ ÀÔÂû ½ÃÀÛ ±Ý¾×º¸´Ù Àû½À´Ï´Ù." << endl;
+			cout << "ìž…ì°° ê¸ˆì•¡ì´ ìž…ì°° ì‹œìž‘ ê¸ˆì•¡ë³´ë‹¤ ì ìŠµë‹ˆë‹¤." << endl;
 			continue;
 		}
 		else if (tbidPrice >= bid.getStartPrice()){ }
 		else{
-			cout << "¾Ë¸ÂÁö ¾ÊÀº ÀÔ·Â°ªÀÔ´Ï´Ù. ¸ÞÀÎ¸Þ´º·Î µ¹¾Æ°©´Ï´Ù." << endl;
+			cout << "ì•Œë§žì§€ ì•Šì€ ìž…ë ¥ê°’ìž…ë‹ˆë‹¤. ë©”ì¸ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤." << endl;
 			return;
 		}
-		cout << "Á¤¸» ÀÔÂûÇÏ½Ã°Ú½À´Ï±î? (Y/N) : ";
+		cout << "ì •ë§ ìž…ì°°í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (Y/N) : ";
 		cin >> chk;
 		cin.clear();
 		cin.ignore(256, '\n');
 		if (chk == 'N') {
-			cout << "ÀÔÂûÀÌ Ãë¼ÒµÇ¾ú½À´Ï´Ù. ¸ÞÀÎ¸Þ´º·Î µ¹¾Æ°©´Ï´Ù." << endl;
+			cout << "ìž…ì°°ì´ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤. ë©”ì¸ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤." << endl;
 			break;
 		}
 		else if (chk == 'Y') {
 			while (totalBidItem[i].getName() != "") { cout << totalBidItem[i].getName() << endl; i++; }
 			BidItem tmpBid(tname, tstartTime, tendTime, ttotalNum, tstartPrice, townerID, titemID, tbidPrice);
 			BidItemCollect.setBidItem(i, tmpBid);
-			cout << "ÀÔÂûÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù." << endl;
+			cout << "ìž…ì°°ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 			return;
 		}
 		else {
-			cout << "¾Ë¸ÂÁö ¾ÊÀº ÀÔ·Â°ªÀÔ´Ï´Ù. ¸ÞÀÎ¸Þ´º·Î µ¹¾Æ°©´Ï´Ù." << endl;
+			cout << "ì•Œë§žì§€ ì•Šì€ ìž…ë ¥ê°’ìž…ë‹ˆë‹¤. ë©”ì¸ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤." << endl;
 			return;
 		}
 	}

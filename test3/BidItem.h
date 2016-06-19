@@ -16,8 +16,7 @@ extern Day CurrentTime;
 //
 // Revisions : 
 //   1. When & Who : 2016/06/15 21:12 pm by 최민수
-//      What : added remainTime, 
-//            modified calCosts
+//      What : added remainTime
 // 
 // 
 

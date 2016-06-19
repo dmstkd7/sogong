@@ -52,24 +52,30 @@ void ClientCollection::signUp() {
 	int newMember = 0;
 	for (;totalClient[newMember].getId() != "!!!"; newMember++);
 	
-	cout << "name 입력 : ";
+	try {
+	cout << "name 입력(15자 이하 가능) : ";
 	cin >> str;
+	if (str.length() > 15) throw 1;	
 	newClient.setName(str);//몇 번째 값에 Name을 설정할 것인지 정하는 함수입니다
 	
-	cout << "address 입력 : ";
+	cout << "address 입력(30자 이하 가능) : ";
 	cin >> str;
+	if (str.length() > 30) throw 2;
 	newClient.setAddress(str);
 
-	cout << "email 입력 : ";
+	cout << "email 입력(30자 이하 가능)  : ";
 	cin >> str;
+	if (str.length() > 30) throw 3;
 	newClient.setEmail(str);
 
-	cout << "id 입력 : ";
+	cout << "id 입력(15자 이하 가능)  : ";
 	cin >> str;
+	if (str.length() > 15) throw 4;
 	newClient.setId(str);
 
-	cout << "password 입력 : ";
+	cout << "password 입력(20자 이하 가능)  : ";
 	cin >> str;
+	if (str.length() > 20) throw 5;
 	newClient.setPassword(str);
 	
 	newClient.setPrivateNumber(newMember);
@@ -77,6 +83,32 @@ void ClientCollection::signUp() {
 	//입력 받은 값들을 Collection의 client에 저장하는 함수입니다.
 	ClientCollect.setTotalClient(newMember, newClient);
 	
+	}
+	
+	catch (int type) {
+		switch (type)
+		{
+		case 1:
+			cout << "name은 15자를 넘어갈 수 없습니다." << endl;
+			break;
+		case 2:
+			cout << "address는 30자를 넘어갈 수 없습니다." << endl;
+			break;
+		case 3:
+			cout << "email은 30자를 넘어갈 수 없습니다." << endl;
+			break;
+		case 4:
+			cout << "id는 15자를 넘어갈 수 없습니다." << endl;
+			break;
+		case 5:
+			cout << "password는 20자를 넘어갈 수 없습니다." << endl;
+			break;
+		default:
+			break;
+		}
+		
+	}
+	return;
 }
 
 

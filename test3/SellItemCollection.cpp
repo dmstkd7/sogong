@@ -7,10 +7,6 @@
  // mail: eeunsang7@naver.com
  //
  // Revsions : 
- //   1. When & Who : 2016/6/15 22:00 pm 23:30 pm by Jang-eunsang
- //      What : added bFlag, 
- //            modified calCosts
- //              …..
 
 
 #include "SellItemCollection.h"
@@ -22,12 +18,18 @@
 extern Client CurrentUser;
 extern Day CurrentTime;
 
-// Function : operator<<
- // Description: Day에 대한 시간을 예쁘게 출력해주는 함수이다
- // Parameters :   없음
- // Return Value :  ostream
- // Created: 
- // Author: 최민수
+
+// Function : ostream& operator<<(ostream& os, Day tmpTime)
+// Description: This is a function that print Day.
+// Parameters :  
+// Return Value : 
+//
+// Created: 2016/06/19 14:01 pm
+// Author: 최민수
+// 
+// Revisions : 
+//
+
 ostream& operator<< (ostream& os, Day tmpTime);
 
 

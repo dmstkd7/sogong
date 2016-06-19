@@ -72,6 +72,10 @@ void ClientCollection::signUp_deleteClient() {
  // Created: 2015/6/15 17:55 pm
  // Author: 전주라
 
+//Reversion 
+// : 6/16 1:30 am 전주라
+//  totalCLient에 저장이 안된 것을setTotalClient(newMember, newClient)을추가하여 수정
+
 void ClientCollection::signUp() {
 	string str;
 	Client newClient;
@@ -140,7 +144,7 @@ void ClientCollection::signUp() {
  // Return Value :  없음
 //newClient에 가입정보를 가져와
 //Client Collection에 있는 totalClient[inputNum]에 저장합니다.
- // Created: 2016/6/16 20:15 pm
+ // Created: 2016/6/16 1:30 am
  // Author: 전주라
 
 		ClientCollect.setTotalClient(newMember, newClient);
@@ -174,6 +178,15 @@ void ClientCollection::signUp() {
 	return;
 }
 
+
+// Function : bool deleteClient(Client wantDeleteClient)
+ // Description: 회원 탈퇴를 원하는 Client의 정보를 clientCollection에서 삭제하는 함수입니다.
+ // Parameters : Client wantDeleteClient
+ // Return Value : bool
+//wantDeleteClient에 정보를 가져와 ID, PW를 체크한 후 
+//Client Collection에 있던 totalClient[inputNum]의 정보를 초기화합니다.
+ // Created: 2016/6/17 13:25 am
+ // Author: 전주라
 
 //회원 탈퇴를 하는 창입니다.
 // CurrentUser만이 탈퇴가 가능하다
@@ -327,11 +340,20 @@ void ClientCollection::Login_Logout() {
 
 }
 
-
+// Login() 
+// paramater : currentUser
+// return : bool
 //CurrentUser의 상태를 받아서 로그인이 되었다면
 //CurrentUser의 id, session 등등을 로그인된 정보로 바꾼다
-
-bool ClientCollection::Login(){//Client loginUser) {
+// Created: 2016/6/16 11:40 am
+ // Author: 전주라
+ 
+ // Revesion :
+ // 2016/6/16 14:40 pm 전주라
+ // patamater를 받지 않고 아이디 체크를 할 수 있게 하였다.
+ // 해당 아이디가 없는 경우를 추가하였다.
+ 
+bool ClientCollection::Login(){
 	int checkNum = 0;
 	string inputId;
 	string inputPassword;
@@ -363,12 +385,13 @@ bool ClientCollection::Login(){//Client loginUser) {
 		//ID와 Password가 일치한다면 CurrentUser의 정보를 set한다.
 		CurrentUser.setSession(2);	//	session은 사용자로 설정한다.
 		CurrentUser.setName(totalClient[checkNum].getName());
+		CurrentUser.setPrivateNumber(totalClient[checkNum].getPrivateNumber());
 		CurrentUser.setEnrollNumber(totalClient[checkNum].getEnrollNumber());
 		CurrentUser.setAddress(totalClient[checkNum].getAddress());
 		CurrentUser.setEmail(totalClient[checkNum].getEmail());
 		CurrentUser.setId(totalClient[checkNum].getId());
 		CurrentUser.setPassword(totalClient[checkNum].getPassword());
-
+	
 		return true;
 	}
 
@@ -376,6 +399,14 @@ bool ClientCollection::Login(){//Client loginUser) {
 }
 
 
+// Logout() 
+// paramater : 없음
+// return : bool
+//CurrentUser가 로그아웃 시도 시 current의 정보를 초기화 한다.
+// 아이디 체크를 하여 해당 Pw를 가져오게 하였다.
+ // Created: 2016/6/16 20:30 am
+ // Author: 전주라
+ 
 bool ClientCollection::Logout() {
 
 	bool logoutcheck;
@@ -389,6 +420,7 @@ bool ClientCollection::Logout() {
 		CurrentUser.setSession(1);
 		CurrentUser.setName("guest");
 		CurrentUser.setEnrollNumber(-1);
+		CurrentUser.setPrivateNumber("");
 		CurrentUser.setAddress("");
 		CurrentUser.setEmail("");
 		CurrentUser.setId("!!!");

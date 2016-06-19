@@ -8,58 +8,58 @@ void ClientCollection::setTotalClient(int inputNum, Client newItem) {
 }
 
 
-// È¸¿ø °¡ÀÔ°ú È¸¿ø Å»Åğ Áß ¼±ÅÃÇÏ´Â Ã¢ÀÔ´Ï´Ù.
+// íšŒì› ê°€ì…ê³¼ íšŒì› íƒˆí‡´ ì¤‘ ì„ íƒí•˜ëŠ” ì°½ì…ë‹ˆë‹¤.
 void ClientCollection::signUp_deleteClient() {
 	int command = 0;
 
-	cout << "1. È¸¿ø °¡ÀÔ" << endl;
-	cout << "2. È¸¿ø Å»Åğ" << endl;
-	cout << "0. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
+	cout << "1. íšŒì› ê°€ì…" << endl;
+	cout << "2. íšŒì› íƒˆí‡´" << endl;
+	cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
 
-	cout << "* ÀÔ·Â ¼±ÅÃ : ";
+	cout << "* ì…ë ¥ ì„ íƒ : ";
 	cin >> command;
 	cin.clear();
 	cin.ignore(256, '\n');
 
 	switch (command) {
 	case 1:
-		cout << "************** È¸¿ø°¡ÀÔ ÇÏ·¯ ¿À¼Ì±º¿ä ¹İ°©½À´Ï´Ù **************" << endl;
-		if (CurrentUser.getId() != "!!!"){ cout << "·Î±×¾Æ¿ô ÈÄ °¡ÀÔÀÌ °¡´ÉÇÕ´Ï´Ù." << endl; }
+		cout << "************** íšŒì›ê°€ì… í•˜ëŸ¬ ì˜¤ì…¨êµ°ìš” ë°˜ê°‘ìŠµë‹ˆë‹¤ **************" << endl;
+		if (CurrentUser.getId() != "!!!"){ cout << "ë¡œê·¸ì•„ì›ƒ í›„ ê°€ì…ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤." << endl; }
 		else {
 			ClientCollect.signUp();
-			cout << "È¸¿ø °¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù." << endl;
+			cout << "íšŒì› ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 
 
 		}
 		break;
 
 	case 2:
-		cout << "************** È¸¿øÅ»Åğ ÇÏ·¯ ¿À¼Ì±º¿ä ¹İ°©½À´Ï´Ù **************" << endl;
-		// CurrentUser¸¸ÀÌ Å»Åğ°¡ °¡´ÉÇÏ´Ù
+		cout << "************** íšŒì›íƒˆí‡´ í•˜ëŸ¬ ì˜¤ì…¨êµ°ìš” ë°˜ê°‘ìŠµë‹ˆë‹¤ **************" << endl;
+		// CurrentUserë§Œì´ íƒˆí‡´ê°€ ê°€ëŠ¥í•˜ë‹¤
 		if (CurrentUser.getId() == "!!!") {
-			cout << "·Î±×ÀÎ ÈÄ Å»Åğ°¡ °¡´ÉÇÕ´Ï´Ù." << endl;
+			cout << "ë¡œê·¸ì¸ í›„ íƒˆí‡´ê°€ ê°€ëŠ¥í•©ë‹ˆë‹¤." << endl;
 		}
 		else{
-			if (ClientCollect.deleteClient(CurrentUser) == true) { cout << "Å»Åğ°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù." << endl; }
+			if (ClientCollect.deleteClient(CurrentUser) == true) { cout << "íƒˆí‡´ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤." << endl; }
 
-			else { cout << "Å»Åğ°¡ Ãë¼ÒµÇ¾ú½À´Ï´Ù." << endl; }
+			else { cout << "íƒˆí‡´ê°€ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤." << endl; }
 		}
 
 		break;
 
 	case 0:
-		cout << "¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°©´Ï´Ù." << endl;
+		cout << "ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤." << endl;
 		return;
 		break;
 
 	default:
-		cout << "Àß¸øµÈ °ªÀ» ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä";
+		cout << "ì˜ëª»ëœ ê°’ì„ ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”";
 		break;
 	}
 
 }
 
-//È¸¿ø °¡ÀÔÀ» ÇÏ´Â Ã¢ÀÔ´Ï´Ù.
+//íšŒì› ê°€ì…ì„ í•˜ëŠ” ì°½ì…ë‹ˆë‹¤.
 void ClientCollection::signUp() {
 	string str;
 	Client newClient;
@@ -68,32 +68,32 @@ void ClientCollection::signUp() {
 	int newMember = 0;
 	for (; totalClient[newMember].getId() != "!!!"; newMember++);
 
-	cout << "name ÀÔ·Â : ";
+	cout << "name ì…ë ¥ : ";
 	for (; totalClient[newMember].getId() != "!!!"; newMember++);
 
 	try {
-		cout << "name ÀÔ·Â(15ÀÚ ÀÌÇÏ °¡´É) : ";
+		cout << "name ì…ë ¥(15ì ì´í•˜ ê°€ëŠ¥) : ";
 		cin >> str;
 		cin.clear();
 		cin.ignore(256, '\n');
 		if (str.length() > 15) throw 1;
-		newClient.setName(str);//¸î ¹øÂ° °ª¿¡ NameÀ» ¼³Á¤ÇÒ °ÍÀÎÁö Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
+		newClient.setName(str);//ëª‡ ë²ˆì§¸ ê°’ì— Nameì„ ì„¤ì •í•  ê²ƒì¸ì§€ ì •í•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤
 
-		cout << "address ÀÔ·Â(30ÀÚ ÀÌÇÏ °¡´É) : ";
+		cout << "address ì…ë ¥(30ì ì´í•˜ ê°€ëŠ¥) : ";
 		cin >> str;
 		cin.clear();
 		cin.ignore(256, '\n');
 		if (str.length() > 30) throw 2;
 		newClient.setAddress(str);
 
-		cout << "email ÀÔ·Â(30ÀÚ ÀÌÇÏ °¡´É)  : ";
+		cout << "email ì…ë ¥(30ì ì´í•˜ ê°€ëŠ¥)  : ";
 		cin >> str;
 		cin.clear();
 		cin.ignore(256, '\n');
 		if (str.length() > 30) throw 3;
 		newClient.setEmail(str);
 
-		cout << "id ÀÔ·Â(15ÀÚ ÀÌÇÏ °¡´É)  : ";
+		cout << "id ì…ë ¥(15ì ì´í•˜ ê°€ëŠ¥)  : ";
 		cin >> str;
 		cin.clear();
 		cin.ignore(256, '\n');
@@ -107,11 +107,11 @@ void ClientCollection::signUp() {
 		}
 		
 			if (checkNum != 10) {
-			cout << "Áßº¹µÈ id°¡ ÀÖ½À´Ï´Ù." << endl;
+			cout << "ì¤‘ë³µëœ idê°€ ìˆìŠµë‹ˆë‹¤." << endl;
 			return;
 			
 		}
-			// Áßº¹µÈ id°¡ ¾ø´Â °æ¿ì È¸¿ø°¡ÀÔÀÌ ÁøÇàµË´Ï´Ù.
+			// ì¤‘ë³µëœ idê°€ ì—†ëŠ” ê²½ìš° íšŒì›ê°€ì…ì´ ì§„í–‰ë©ë‹ˆë‹¤.
 
 
 
@@ -122,38 +122,38 @@ void ClientCollection::signUp() {
 
 
 
-		cout << "password ÀÔ·Â(20ÀÚ ÀÌÇÏ °¡´É)  : ";
+		cout << "password ì…ë ¥(20ì ì´í•˜ ê°€ëŠ¥)  : ";
 		cin >> str;
 		cin.clear();
 		cin.ignore(256, '\n');
 		if (str.length() > 20) throw 5;
 		newClient.setPassword(str);
 
-		newClient.setPrivateNumber(newMember);
+		newClient.setEnrollNumber(newMember);
 
-		//ÀÔ·Â ¹ŞÀº °ªµéÀ» CollectionÀÇ client¿¡ ÀúÀåÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
+		//ì…ë ¥ ë°›ì€ ê°’ë“¤ì„ Collectionì˜ clientì— ì €ì¥í•˜ëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤.
 		ClientCollect.setTotalClient(newMember, newClient);
 
-		cout << "È¸¿ø °¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù." << endl;
+		cout << "íšŒì› ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
 	}
 
 	catch (int type) {
 		switch (type)
 		{
 		case 1:
-			cout << "nameÀº 15ÀÚ¸¦ ³Ñ¾î°¥ ¼ö ¾ø½À´Ï´Ù." << endl;
+			cout << "nameì€ 15ìë¥¼ ë„˜ì–´ê°ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
 			break;
 		case 2:
-			cout << "address´Â 30ÀÚ¸¦ ³Ñ¾î°¥ ¼ö ¾ø½À´Ï´Ù." << endl;
+			cout << "addressëŠ” 30ìë¥¼ ë„˜ì–´ê°ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
 			break;
 		case 3:
-			cout << "emailÀº 30ÀÚ¸¦ ³Ñ¾î°¥ ¼ö ¾ø½À´Ï´Ù." << endl;
+			cout << "emailì€ 30ìë¥¼ ë„˜ì–´ê°ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
 			break;
 		case 4:
-			cout << "id´Â 15ÀÚ¸¦ ³Ñ¾î°¥ ¼ö ¾ø½À´Ï´Ù." << endl;
+			cout << "idëŠ” 15ìë¥¼ ë„˜ì–´ê°ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
 			break;
 		case 5:
-			cout << "password´Â 20ÀÚ¸¦ ³Ñ¾î°¥ ¼ö ¾ø½À´Ï´Ù." << endl;
+			cout << "passwordëŠ” 20ìë¥¼ ë„˜ì–´ê°ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
 			break;
 		default:
 			break;
@@ -164,52 +164,52 @@ void ClientCollection::signUp() {
 }
 
 
-//È¸¿ø Å»Åğ¸¦ ÇÏ´Â Ã¢ÀÔ´Ï´Ù.
-// CurrentUser¸¸ÀÌ Å»Åğ°¡ °¡´ÉÇÏ´Ù
+//íšŒì› íƒˆí‡´ë¥¼ í•˜ëŠ” ì°½ì…ë‹ˆë‹¤.
+// CurrentUserë§Œì´ íƒˆí‡´ê°€ ê°€ëŠ¥í•˜ë‹¤
 bool ClientCollection::deleteClient(Client wantDeleteClient) {
 	int checkNum = 0;
 	string inputId;
 	string inputPassword;
 
-	cout << "id¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ";
+	cout << "idë¥¼ ì…ë ¥í•˜ì„¸ìš” : ";
 	cin >> inputId;
 	cin.clear();
 	cin.ignore(256, '\n');
 
 	if (wantDeleteClient.getId() != inputId) {
-		cout << "id°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù." << endl;
+		cout << "idê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤." << endl;
 		return false;
 	}
 
-	// ÀÏÄ¡ÇÏ´Â ID¸¦ È®ÀÎÈÄ Password¸¦ ÀÔ·Â¹Ş´Â´Ù.
+	// ì¼ì¹˜í•˜ëŠ” IDë¥¼ í™•ì¸í›„ Passwordë¥¼ ì…ë ¥ë°›ëŠ”ë‹¤.
 	else {
-		cout << "PW¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ";
+		cout << "PWë¥¼ ì…ë ¥í•˜ì„¸ìš” : ";
 		cin >> inputPassword;
 		cin.clear();
 		cin.ignore(256, '\n');
 
-		// ÀÏÄ¡ÇÏ´Â ID¿Í ¸Â´Â Password¸¦ È®ÀÎÇÑ´Ù.
-		// ID¿Í PW°¡ ¿Ã¹Ù¸¥ °æ¿ì Å»Åğ ¿©ºÎ¸¦ È®ÀÎÇÑ´Ù.
+		// ì¼ì¹˜í•˜ëŠ” IDì™€ ë§ëŠ” Passwordë¥¼ í™•ì¸í•œë‹¤.
+		// IDì™€ PWê°€ ì˜¬ë°”ë¥¸ ê²½ìš° íƒˆí‡´ ì—¬ë¶€ë¥¼ í™•ì¸í•œë‹¤.
 		if (wantDeleteClient.getPassword() != inputPassword) {
-			cout << "PW°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù. " << endl;
+			cout << "PWê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. " << endl;
 			return false;
 		}
 		else {
 			int deleteCheck;
-			cout << "Å»ÅğÇÏ½Ã°Ú½À´Ï±î? Y (1) /N (0)  : ";
+			cout << "íƒˆí‡´í•˜ì‹œê² ìŠµë‹ˆê¹Œ? Y (1) /N (0)  : ";
 			cin >> deleteCheck;
 			cin.clear();
 			cin.ignore(256, '\n');
 
-			//Y ¸¦ ¼±ÅÃÇÏ´Â °æ¿ì CliectCollection¿¡¼­ È¸¿øÀÇ Á¤º¸¸¦ »èÁ¦ ½ÃÅ²´Ù.
-			// ÇöÀç »ç¿ëÀÚÀÇ Á¤º¸µµ ¸ğµÎ ¸®¼ÂÇÑ´Ù.
+			//Y ë¥¼ ì„ íƒí•˜ëŠ” ê²½ìš° CliectCollectionì—ì„œ íšŒì›ì˜ ì •ë³´ë¥¼ ì‚­ì œ ì‹œí‚¨ë‹¤.
+			// í˜„ì¬ ì‚¬ìš©ìì˜ ì •ë³´ë„ ëª¨ë‘ ë¦¬ì…‹í•œë‹¤.
 			if (deleteCheck == 1) {
 				int a;
-				a = wantDeleteClient.getPrivateNumber();
+				a = wantDeleteClient.getEnrollNumber();
 
 				totalClient[a].setSession(1);
 				totalClient[a].setName("guest");
-				totalClient[a].setPrivateNumber(-1);
+				totalClient[a].setEnrollNumber(-1);
 				totalClient[a].setAddress("");
 				totalClient[a].setEmail("");
 				totalClient[a].setId("!!!");
@@ -217,7 +217,7 @@ bool ClientCollection::deleteClient(Client wantDeleteClient) {
 
 				CurrentUser.setSession(1);
 				CurrentUser.setName("guest");
-				CurrentUser.setPrivateNumber(-1);
+				CurrentUser.setEnrollNumber(-1);
 				CurrentUser.setAddress("");
 				CurrentUser.setEmail("");
 				CurrentUser.setId("!!!");
@@ -234,30 +234,30 @@ bool ClientCollection::deleteClient(Client wantDeleteClient) {
 
 
 
-/*======================== ·Î ±× ÀÎ   ·Î ±× ¾Æ ¿ô======================*/
+/*======================== ë¡œ ê·¸ ì¸   ë¡œ ê·¸ ì•„ ì›ƒ======================*/
 
 
 
-// ·Î±×ÀÎ°ú ·Î±×¾Æ¿ô Áß ¼±ÅÃÇÏ´Â Ã¢ÀÔ´Ï´Ù.
+// ë¡œê·¸ì¸ê³¼ ë¡œê·¸ì•„ì›ƒ ì¤‘ ì„ íƒí•˜ëŠ” ì°½ì…ë‹ˆë‹¤.
 void ClientCollection::Login_Logout() {
 	int command = 0;
 
 	//Client *CurrentUser = new Client(1, "guest");
 
 
-	cout << "1. ·Î±×ÀÎ" << endl;
-	cout << "2. ·Î±×¾Æ¿ô" << endl;
-	cout << "0. ¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°¡±â" << endl;
+	cout << "1. ë¡œê·¸ì¸" << endl;
+	cout << "2. ë¡œê·¸ì•„ì›ƒ" << endl;
+	cout << "0. ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°€ê¸°" << endl;
 
-	cout << "* ÀÔ·Â ¼±ÅÃ : ";
+	cout << "* ì…ë ¥ ì„ íƒ : ";
 	cin >> command;
 	cin.clear();
 	cin.ignore(256, '\n');
 
-	//·Î±×ÀÎÀÌ µÇ¾î ÀÖ´ÂÁö ¾ø´ÂÁö È®ÀÎÇØÁÖ´Â º¯¼öÀÔ´Ï´Ù.
-	// ·Î±×ÀÎ µÇÀÖÀ¸¸é ID°¡ !!ÀÌ ¾Æ´Ï¾ß 
-	//		-> ·Î±×ÀÎ ºÒ°¡´É
-	//  !!!ÀÌ¸é ·Î±×ÀÎ °¡´É
+	//ë¡œê·¸ì¸ì´ ë˜ì–´ ìˆëŠ”ì§€ ì—†ëŠ”ì§€ í™•ì¸í•´ì£¼ëŠ” ë³€ìˆ˜ì…ë‹ˆë‹¤.
+	// ë¡œê·¸ì¸ ë˜ìˆìœ¼ë©´ IDê°€ !!ì´ ì•„ë‹ˆì•¼ 
+	//		-> ë¡œê·¸ì¸ ë¶ˆê°€ëŠ¥
+	//  !!!ì´ë©´ ë¡œê·¸ì¸ ê°€ëŠ¥
 	bool loginCheck = false;
 
 	loginCheck = (CurrentUser.getId() == "!!!");
@@ -265,73 +265,73 @@ void ClientCollection::Login_Logout() {
 
 	switch (command) {
 	case 1:
-		//if (loginCheck && ClientCollect.Login(CurrentUser)) { cout << "·Î±×ÀÎ ¼º°ø" << endl; }
-		cout << "************** ·Î±×ÀÎ ÇÏ·¯ ¿À¼Ì±º¿ä ¹İ°©½À´Ï´Ù **************" << endl;
+		//if (loginCheck && ClientCollect.Login(CurrentUser)) { cout << "ë¡œê·¸ì¸ ì„±ê³µ" << endl; }
+		cout << "************** ë¡œê·¸ì¸ í•˜ëŸ¬ ì˜¤ì…¨êµ°ìš” ë°˜ê°‘ìŠµë‹ˆë‹¤ **************" << endl;
 
-		//else { cout << "·Î±×ÀÎ µÇ¾îÀÖ´Ù." << endl; }
+		//else { cout << "ë¡œê·¸ì¸ ë˜ì–´ìˆë‹¤." << endl; }
 
 		if (loginCheck == true){
 
 			if (ClientCollect.Login() == true) {
-				cout << "·Î±×ÀÎ ¼º°ø" << endl;
+				cout << "ë¡œê·¸ì¸ ì„±ê³µ" << endl;
 			}
 			else {
-				cout << "·Î±×ÀÎ ½ÇÆĞ" << endl;
+				cout << "ë¡œê·¸ì¸ ì‹¤íŒ¨" << endl;
 			}
 		}
-		else { cout << "ÀÌ¹Ì ·Î±×ÀÎ »óÅÂ ÀÔ´Ï´Ù!!" << endl; }
+		else { cout << "ì´ë¯¸ ë¡œê·¸ì¸ ìƒíƒœ ì…ë‹ˆë‹¤!!" << endl; }
 		break;
 
 	case 2:
-		cout << "************** ·Î±×¾Æ¿ô ÇÏ·¯ ¿À¼Ì±º¿ä **************" << endl;
+		cout << "************** ë¡œê·¸ì•„ì›ƒ í•˜ëŸ¬ ì˜¤ì…¨êµ°ìš” **************" << endl;
 
 		if (loginCheck == false) {
 			if (ClientCollect.Logout() == true) {
-				cout << "·Î±×¾Æ¿ô ¿Ï·á" << endl;
+				cout << "ë¡œê·¸ì•„ì›ƒ ì™„ë£Œ" << endl;
 			}
 			else
-				cout << "·Î±×¾Æ¿ô Ãë¼Ò" << endl;
+				cout << "ë¡œê·¸ì•„ì›ƒ ì·¨ì†Œ" << endl;
 		}
 		else
-			cout << "·Î±×¾Æ¿ôÀÌ ºÒ°¡´É ÇÕ´Ï´Ù.  ·Î±×ÀÎÀ» ¸ÕÀú ÇØÁÖ¼¼¿ä!!!" << endl;
+			cout << "ë¡œê·¸ì•„ì›ƒì´ ë¶ˆê°€ëŠ¥ í•©ë‹ˆë‹¤.  ë¡œê·¸ì¸ì„ ë¨¼ì € í•´ì£¼ì„¸ìš”!!!" << endl;
 
 
-		//if (isLogin && ClientCollect.Login(CurrentUser) ) { cout << "·Î±×¾Æ¿ôÀÌ ºÒ°¡´É ÇÕ´Ï´Ù." << endl; }
-		//if else  (isLogin && ClientCollect.Logout(CurrentUser)) { cout << "·Î±×¾Æ¿ô ¼º°ø" << endl; }
+		//if (isLogin && ClientCollect.Login(CurrentUser) ) { cout << "ë¡œê·¸ì•„ì›ƒì´ ë¶ˆê°€ëŠ¥ í•©ë‹ˆë‹¤." << endl; }
+		//if else  (isLogin && ClientCollect.Logout(CurrentUser)) { cout << "ë¡œê·¸ì•„ì›ƒ ì„±ê³µ" << endl; }
 
-		//else { cout << "·Î±×¾Æ¿ô Ãë¼Ò" << endl; }
+		//else { cout << "ë¡œê·¸ì•„ì›ƒ ì·¨ì†Œ" << endl; }
 
 
 		break;
 
 	case 0:
-		cout << "¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°©´Ï´Ù." << endl;
+		cout << "ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤." << endl;
 		return;
 		break;
 
 	default:
-		cout << "¾Ë¸ÂÁö ¾Ê´Â ¹øÈ£ÀÔ´Ï´Ù";
+		cout << "ì•Œë§ì§€ ì•ŠëŠ” ë²ˆí˜¸ì…ë‹ˆë‹¤";
 		break;
 	}
 
 }
 
 
-//CurrentUserÀÇ »óÅÂ¸¦ ¹Ş¾Æ¼­ ·Î±×ÀÎÀÌ µÇ¾ú´Ù¸é
-//CurrentUserÀÇ id, session µîµîÀ» ·Î±×ÀÎµÈ Á¤º¸·Î ¹Ù²Û´Ù
+//CurrentUserì˜ ìƒíƒœë¥¼ ë°›ì•„ì„œ ë¡œê·¸ì¸ì´ ë˜ì—ˆë‹¤ë©´
+//CurrentUserì˜ id, session ë“±ë“±ì„ ë¡œê·¸ì¸ëœ ì •ë³´ë¡œ ë°”ê¾¼ë‹¤
 
 bool ClientCollection::Login(){//Client loginUser) {
 	int checkNum = 0;
 	string inputId;
 	string inputPassword;
 
-	cout << "id¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ";
+	cout << "idë¥¼ ì…ë ¥í•˜ì„¸ìš” : ";
 	cin >> inputId;
 	cin.clear();
 	cin.ignore(256, '\n');
 
 
-	//ÀÏÄ¡ÇÏ´Â°Ô ÀÖÀ»¶§±îÁö while¹®À» °è¼Ó µ¹¸°´Ù ¸¸¾à ÀÏÄ¡ÇÏ´Â°Ô ÀÖÀ¸¸é checkNumÀ» À¯ÁöÇÑ Ã¼ ºüÁ®³ª¿Â´Ù
+	//ì¼ì¹˜í•˜ëŠ”ê²Œ ìˆì„ë•Œê¹Œì§€ whileë¬¸ì„ ê³„ì† ëŒë¦°ë‹¤ ë§Œì•½ ì¼ì¹˜í•˜ëŠ”ê²Œ ìˆìœ¼ë©´ checkNumì„ ìœ ì§€í•œ ì²´ ë¹ ì ¸ë‚˜ì˜¨ë‹¤
 	while (checkNum < 10) {
 		if (totalClient[checkNum].getId() == inputId)
 			break;
@@ -339,20 +339,20 @@ bool ClientCollection::Login(){//Client loginUser) {
 	}
 
 	if (checkNum == 10) {
-		cout << "ÀÏÄ¡ÇÏ´Â ¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù." << endl;
+		cout << "ì¼ì¹˜í•˜ëŠ” ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤." << endl;
 		return false;
 	}
 
-	cout << "PW¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ";
+	cout << "PWë¥¼ ì…ë ¥í•˜ì„¸ìš” : ";
 	cin >> inputPassword;
 	cin.clear();
 	cin.ignore(256, '\n');
 
 	if (totalClient[checkNum].getPassword() == inputPassword) {
-		//ID¿Í Password°¡ ÀÏÄ¡ÇÑ´Ù¸é CurrentUserÀÇ Á¤º¸¸¦ setÇÑ´Ù.
-		CurrentUser.setSession(2);	//	sessionÀº »ç¿ëÀÚ·Î ¼³Á¤ÇÑ´Ù.
+		//IDì™€ Passwordê°€ ì¼ì¹˜í•œë‹¤ë©´ CurrentUserì˜ ì •ë³´ë¥¼ setí•œë‹¤.
+		CurrentUser.setSession(2);	//	sessionì€ ì‚¬ìš©ìë¡œ ì„¤ì •í•œë‹¤.
 		CurrentUser.setName(totalClient[checkNum].getName());
-		CurrentUser.setPrivateNumber(totalClient[checkNum].getPrivateNumber());
+		CurrentUser.setEnrollNumber(totalClient[checkNum].getEnrollNumber());
 		CurrentUser.setAddress(totalClient[checkNum].getAddress());
 		CurrentUser.setEmail(totalClient[checkNum].getEmail());
 		CurrentUser.setId(totalClient[checkNum].getId());
@@ -369,7 +369,7 @@ bool ClientCollection::Logout() {
 
 	bool logoutcheck;
 
-	cout << "Á¤¸» ·Î±×¾Æ¿ô ÇÏ½Ã°Ú½À´Ï±î? Y(1) / N(0) : ";
+	cout << "ì •ë§ ë¡œê·¸ì•„ì›ƒ í•˜ì‹œê² ìŠµë‹ˆê¹Œ? Y(1) / N(0) : ";
 	cin >> logoutcheck;
 	cin.clear();
 	cin.ignore(256, '\n');
@@ -377,7 +377,7 @@ bool ClientCollection::Logout() {
 	if (logoutcheck == 1) {
 		CurrentUser.setSession(1);
 		CurrentUser.setName("guest");
-		CurrentUser.setPrivateNumber(-1);
+		CurrentUser.setEnrollNumber(-1);
 		CurrentUser.setAddress("");
 		CurrentUser.setEmail("");
 		CurrentUser.setId("!!!");

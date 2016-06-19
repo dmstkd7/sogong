@@ -69,7 +69,7 @@ void ClientCollection::signUp_deleteClient() {
 // checkNum으로 Collection에 저장된 client의 정보를 확인한다.
 // 이름, 주소, 주민번호, 이메일, ID, PW를 입력 받아 저장한다.
 // 
- // Created: 2015/6/15 16:35 pm
+ // Created: 2015/6/15 17:55 pm
  // Author: 전주라
 
 void ClientCollection::signUp() {
@@ -78,9 +78,7 @@ void ClientCollection::signUp() {
 
 	int checkNum = 0;
 	int newMember = 0;
-	for (; totalClient[newMember].getId() != "!!!"; newMember++);
 
-	cout << "name 입력 : ";
 	for (; totalClient[newMember].getId() != "!!!"; newMember++);
 
 	try {
@@ -124,15 +122,7 @@ void ClientCollection::signUp() {
 			
 		}
 			// 중복된 id가 없는 경우 회원가입이 진행됩니다.
-
-
-
-
-
 		newClient.setId(str);
-
-
-
 
 		cout << "password 입력(20자 이하 가능)  : ";
 		cin >> str;

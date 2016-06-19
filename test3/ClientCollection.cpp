@@ -100,6 +100,14 @@ void ClientCollection::signUp() {
 		if (str.length() > 30) throw 2;
 		newClient.setAddress(str);
 
+		cout << "privateNumber주민번호 입력(13자) : ";
+		cin >> str;
+		cin.clear();
+		cin.ignore(256, '\n');
+		if (str.length() != 13) throw 6;
+		newClient.setAddress(str);
+
+
 		cout << "email 입력(30자 이하 가능)  : ";
 		cin >> str;
 		cin.clear();
@@ -170,6 +178,9 @@ void ClientCollection::signUp() {
 		case 5:
 			cout << "password는 20자를 넘어갈 수 없습니다." << endl;
 			break;
+		case 6:
+			cout << "privateNumber는 13자입니다." << endl;
+			break;
 		default:
 			break;
 		}
@@ -234,12 +245,14 @@ bool ClientCollection::deleteClient(Client wantDeleteClient) {
 				totalClient[a].setSession(1);
 				totalClient[a].setName("guest");
 				totalClient[a].setEnrollNumber(-1);
+				totalClient[a].setPrivateNumber("");
 				totalClient[a].setAddress("");
 				totalClient[a].setEmail("");
 				totalClient[a].setId("!!!");
 				totalClient[a].setPassword("");
 
 				CurrentUser.setSession(1);
+				CurrentUser.setPrivateNumber("");
 				CurrentUser.setName("guest");
 				CurrentUser.setEnrollNumber(-1);
 				CurrentUser.setAddress("");

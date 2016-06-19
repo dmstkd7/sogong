@@ -37,24 +37,30 @@ ostream& operator<< (ostream& os, Day tmpTime);
  // Parameters :   int i - SellItem[100]중 비어있는 값을 나타냄
  // Return Value :  원하는 번호에 해당하는 SellItem 리턴
  //
- // Created: 2016
- // Author: Gildong Hong
- // 
- // Revsions : 
- //   1. When & Who : 2007/05/16 13:12 pm by Ji-sung Park
- //      What : added other factors when calculating costs…
- //              …..
- //   2. ……….      
+ // Created: 2016/6/15/ 18:20 pm
+ // Author: 장은상
 SellItem SellItemCollection::getSellItem(int i){
 	return totalSellItem[i];
 }
 
-//totalSellItem에서 wantChange번호를 newItem을 추가 시키는 함수입니다.
+// Function : void SellItemCollection::setSellItem(int wantChangeNum, SellItem newItem)
+// Description: 바꾸고 싶은 번호와 셋팅하고 싶은 SellItem을 연결짓는 역할을 하는 함수이다
+// Parameters :   int wantChangeNum, SellItem newItem
+// Return Value :  없다
+//
+// Created: 2016/6/15/ 18:30 pm
+// Author: 장은상
 void SellItemCollection::setSellItem(int wantChangeNum, SellItem newItem){
 	totalSellItem[wantChangeNum] = newItem;
 }
 
-
+// Function : void SellItemCollection::addSellItem()
+// Description: 물품등록을 하는 함수이다. 물품등록의 기본정보를 묻고 SellItemcollection에 그 값을 입력시킨다
+// Parameters :   없다
+// Return Value :  없다
+//
+// Created: 2016/6/15/ 19:23 pm
+// Author: 장은상
 void SellItemCollection::addSellItem(){
 
 	cout << "************** 물품 등록을 하러 오셨군요 반갑습니다 **************" << endl;
@@ -183,6 +189,15 @@ void SellItemCollection::addSellItem(){
 	return;
 }
 
+
+// Function : void SellItemCollection::getSellItemList()
+// Description: SellItemCollection에 있는 SellItem에서 값이 들어있는 값을 출력하는 함수이다
+//              판매중인 아이템 리스트 조회이다.
+// Parameters :   없다
+// Return Value :  없다
+//
+// Created: 2016/6/15/ 20:24 pm
+// Author: 장은상
 void SellItemCollection::getSellItemList(){
 
 	int number = 1;
@@ -250,7 +265,13 @@ void SellItemCollection::getSellItemList(){
 	return;
 }
 
-
+// Function : void SellItemCollection::findSellList(Client currentUser, string search, BidItemCollection BidItemCollect)
+// Description: 
+// Parameters :   
+// Return Value :  
+//
+// Created: 2016/6/15/ 20:24 pm
+// Author: 최민수
 void SellItemCollection::findSellList(Client currentUser, string search, BidItemCollection BidItemCollect) {
 	int tCollection[100];
 	int chk = 0;
@@ -292,7 +313,13 @@ void SellItemCollection::findSellList(Client currentUser, string search, BidItem
 
 }
 
-
+// Function : void SellItemCollection::getSellItem(Client currentUser, int num, int* sellList, BidItemCollection BidItemCollect)
+// Description: 
+// Parameters :   
+// Return Value :  
+//
+// Created: 2016/6/15/ 20:24 pm
+// Author: 최민수
 void SellItemCollection::getSellItem(Client currentUser, int num, int* sellList, BidItemCollection BidItemCollect) {
 	int chk = sellList[num];
 	int i = 0;

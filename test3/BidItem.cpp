@@ -14,10 +14,10 @@
 Day BidItem::getRemainTime() {
 	
 	//이거는 나중에 다시 한번 생각해보는 기회를 갖자
-	remainTime.year = endTime.year - CurrentTime.year;
-	remainTime.month = endTime.month - CurrentTime.month;
-	remainTime.day = endTime.day - CurrentTime.day;
-	remainTime.hour = endTime.hour - CurrentTime.hour;
+	remainTime.year = endTime.year - CurrentTime.year; // 연도를 계산
+	remainTime.month = endTime.month - CurrentTime.month; // 월을 계산
+	remainTime.day = endTime.day - CurrentTime.day; // 일을 계산
+	remainTime.hour = endTime.hour - CurrentTime.hour; // 시간을 계산
 	return remainTime;
 }
 // Function : int getBidPrice()

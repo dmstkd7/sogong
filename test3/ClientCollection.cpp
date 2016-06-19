@@ -3,12 +3,36 @@
 
 extern ClientCollection ClientCollect;
 
+	
+// Function : void setTotalClient(int inputNum, Client newClient)
+ // Description: 입력받은 값을 clientCollection에 저장하는 함수입니다.
+ // Parameters : int inputNumber , Client newClient
+ // Return Value :  없음
+//newClient에 가입정보를 가져와
+//Client Collection에 있는 totalClient[inputNum]에 저장합니다.
+ // Created: 2016/6/16 1:30 am
+ // Author: 전주라
 void ClientCollection::setTotalClient(int inputNum, Client newItem) {
 	totalClient[inputNum] = newItem;
 }
 
-
+//void signUp_deleteClient() 
+// paramater 없음
+// return 없음
 // 회원 가입과 회원 탈퇴 중 선택하는 창입니다.
+// input값을 이용하여 해당 함수로 넘어갑니다.
+// 2016/17/16:00
+// 전주라
+
+//Revesion 
+//2016/6/17/ 21:40 전주라
+// 로그인 상태에서 회원가입을 하는 경우를 막았다.
+
+//Revesion 
+//2016/6/18/ 19:05 전주라
+// 로그아웃 상태에서 회원가입을 하는 경우를 막았다.
+// 로그인 하지 않은 상태에서 회원탈퇴하는 경우를 막았다.
+
 void ClientCollection::signUp_deleteClient() {
 	int command = 0;
 
@@ -28,8 +52,6 @@ void ClientCollection::signUp_deleteClient() {
 		else {
 			ClientCollect.signUp();
 			cout << "회원 가입이 완료되었습니다." << endl;
-
-
 		}
 		break;
 
@@ -144,16 +166,6 @@ void ClientCollection::signUp() {
 		newClient.setPassword(str);
 
 		newClient.setEnrollNumber(newMember);
-
-	
-// Function : void setTotalClient(int inputNum, Client newClient)
- // Description: 입력받은 값을 clientCollection에 저장하는 함수입니다.
- // Parameters : int inputNumber , Client newClient
- // Return Value :  없음
-//newClient에 가입정보를 가져와
-//Client Collection에 있는 totalClient[inputNum]에 저장합니다.
- // Created: 2016/6/16 1:30 am
- // Author: 전주라
 
 		ClientCollect.setTotalClient(newMember, newClient);
 
@@ -274,8 +286,24 @@ bool ClientCollection::deleteClient(Client wantDeleteClient) {
 /*======================== 로 그 인   로 그 아 웃======================*/
 
 
-
+//void Login_Logout() 
+// paramater 없음
+// return 없음
 // 로그인과 로그아웃 중 선택하는 창입니다.
+// input값을 이용하여 해당 함수로 넘어갑니다.
+// 2016/17/17:10 
+//전주라
+
+//Revesion 
+//2016/6/18/ 1:15 전주라
+// 로그인 상태에서 다시 로그인을 하는 경우를 막았다.
+// bool logincheck를 사용하여 로그인 되어있는지를 확인한다.
+
+//Revesion 
+//2016/6/18/ 11:25 전주라
+// 로그아웃 상태에서 다시 로그인을 하는 경우를 확인했다.
+// 로그인 하지 않은 상태에서 로그아웃하는 경우를 막았다.
+
 void ClientCollection::Login_Logout() {
 	int command = 0;
 
@@ -291,10 +319,6 @@ void ClientCollection::Login_Logout() {
 	cin.clear();
 	cin.ignore(256, '\n');
 
-	//로그인이 되어 있는지 없는지 확인해주는 변수입니다.
-	// 로그인 되있으면 ID가 !!이 아니야 
-	//		-> 로그인 불가능
-	//  !!!이면 로그인 가능
 	bool loginCheck = false;
 
 	loginCheck = (CurrentUser.getId() == "!!!");
@@ -302,11 +326,7 @@ void ClientCollection::Login_Logout() {
 
 	switch (command) {
 	case 1:
-		//if (loginCheck && ClientCollect.Login(CurrentUser)) { cout << "로그인 성공" << endl; }
 		cout << "************** 로그인 하러 오셨군요 반갑습니다 **************" << endl;
-
-		//else { cout << "로그인 되어있다." << endl; }
-
 		if (loginCheck == true){
 
 			if (ClientCollect.Login() == true) {
@@ -331,14 +351,6 @@ void ClientCollection::Login_Logout() {
 		}
 		else
 			cout << "로그아웃이 불가능 합니다.  로그인을 먼저 해주세요!!!" << endl;
-
-
-		//if (isLogin && ClientCollect.Login(CurrentUser) ) { cout << "로그아웃이 불가능 합니다." << endl; }
-		//if else  (isLogin && ClientCollect.Logout(CurrentUser)) { cout << "로그아웃 성공" << endl; }
-
-		//else { cout << "로그아웃 취소" << endl; }
-
-
 		break;
 
 	case 0:
@@ -366,6 +378,7 @@ void ClientCollection::Login_Logout() {
  // patamater를 받지 않고 아이디 체크를 할 수 있게 하였다.
  // 해당 아이디가 없는 경우를 추가하였다.
  
+
 bool ClientCollection::Login(){
 	int checkNum = 0;
 	string inputId;

@@ -10,7 +10,7 @@ extern ClientCollection ClientCollect;
  // Return Value :  없음
 //newClient에 가입정보를 가져와
 //Client Collection에 있는 totalClient[inputNum]에 저장합니다.
- // Created: 2016/6/16 1:30 am
+ // Created: 2016/6/16 2:00 am
  // Author: 전주라
 void ClientCollection::setTotalClient(int inputNum, Client newItem) {
 	totalClient[inputNum] = newItem;
@@ -21,11 +21,11 @@ void ClientCollection::setTotalClient(int inputNum, Client newItem) {
 // return 없음
 // 회원 가입과 회원 탈퇴 중 선택하는 창입니다.
 // input값을 이용하여 해당 함수로 넘어갑니다.
-// 2016/17/16:00
+// 2016/17/17:00
 // 전주라
 
 //Revesion 
-//2016/6/17/ 21:40 전주라
+//2016/6/17/ 22:40 전주라
 // 로그인 상태에서 회원가입을 하는 경우를 막았다.
 
 //Revesion 
@@ -213,7 +213,7 @@ void ClientCollection::signUp() {
  // Return Value : bool
 //wantDeleteClient에 정보를 가져와 ID, PW를 체크한 후 
 //Client Collection에 있던 totalClient[inputNum]의 정보를 초기화합니다.
- // Created: 2016/6/17 13:25 am
+ // Created: 2016/6/17 16:25 am
  // Author: 전주라
 
 //회원 탈퇴를 하는 창입니다.
@@ -305,7 +305,7 @@ bool ClientCollection::deleteClient(Client wantDeleteClient) {
 // bool logincheck를 사용하여 로그인 되어있는지를 확인한다.
 
 //Revesion 
-//2016/6/18/ 11:25 전주라
+//2016/6/19/ 11:25 전주라
 // 로그아웃 상태에서 다시 로그인을 하는 경우를 확인했다.
 // 로그인 하지 않은 상태에서 로그아웃하는 경우를 막았다.
 

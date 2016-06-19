@@ -127,14 +127,6 @@ void ClientCollection::signUp() {
 		if (str.length() > 30) throw 2;
 		newClient.setAddress(str);
 
-		cout << "privateNumber주민번호 입력(13자) : ";
-		cin >> str;
-		cin.clear();
-		cin.ignore(256, '\n');
-		if (str.length() != 13) throw 6;
-		newClient.setAddress(str);
-
-
 		cout << "email 입력(30자 이하 가능)  : ";
 		cin >> str;
 		cin.clear();
@@ -169,6 +161,14 @@ void ClientCollection::signUp() {
 		cin.ignore(256, '\n');
 		if (str.length() > 20) throw 5;
 		newClient.setPassword(str);
+
+
+		cout << "privateNumber주민번호 입력(13자) : ";
+		cin >> str;
+		cin.clear();
+		cin.ignore(256, '\n');
+		if (str.length() != 13) throw 6;
+		newClient.setAddress(str);
 
 		newClient.setEnrollNumber(newMember);
 

@@ -1,3 +1,9 @@
+// Class : Day.h
+ // Description: ê¸°ë³¸ ë‚ ì§œë¥¼ êµ¬í˜„í•˜ëŠ” ì½”ë“œì…ë‹ˆë‹¤
+ // Created: 2016/6/20 23:10 pm
+ // Author: ì¥ì€ìƒ
+ // mail: eeunsang7@naver.com
+
 #pragma once
 #include <cstdio>
 
@@ -6,31 +12,6 @@ typedef struct Day{
 	int month;
 	int day;
 	int hour;
-
-	/*
-	
-	void passTime(int time){
-		int t_hour = (hour + time) % 24;
-		int countPassMonth = (day + (hour + time) / 24) / 31;
-		int tmp_day = (day + (hour + time) / 24) % 32;
-		if (tmp_day == 0)
-			tmp_day++;
-		// '´Ş'À» °è»êÇÏ°í ³â¼ö°¡ Áö³­¸¸Å­ °è»êÇØÁØ´Ù
-		int countPassYear = (month + countPassMonth) / 12;
-		int tmp_month = (month + countPassMonth) % 13;
-		if (tmp_month == 0)
-			tmp_month++;
-		// '³â'À» °è»êÇÏ°í ´õÇØÁØ´Ù
-		int tmp_year = year + countPassYear;
-
-		//ÀÓ½Ã·Î °è»êµÈ°ÍÀ» ÀÔ·ÂÇÏ´Â °÷
-		hour = t_hour;
-		day = tmp_day;
-		month = tmp_month;
-		year = tmp_year;
-		
-	}
-		*/
 
 }Time;
 

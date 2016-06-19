@@ -22,6 +22,14 @@ public:
 	ClientCollection() {}
 	~ClientCollection() {}
 
+// Function : void setTotalClient(int inputNum, Client newClient)
+ // Description: 입력받은 값을 clientCollection에 저장하는 함수입니다.
+ // Parameters : int inputNumber , Client newClient
+ // Return Value :  없음
+//newClient에 가입정보를 가져와
+//Client Collection에 있는 totalClient[inputNum]에 저장합니다.
+ // Created: 2016/6/16 20:15 pm
+ // Author: 전주라
 	void setTotalClient(int inputNum, Client newClient);
 
 	void signUp_deleteClient();

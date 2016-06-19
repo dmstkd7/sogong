@@ -46,8 +46,8 @@ public:
 	void setSession(int wantChangeSession);
 	string getName();
 	void setName(string c_name);
-	int getPrivateNumber();
-	void setPrivateNumber(int c_privateNumber);
+	string getPrivateNumber();
+	void setPrivateNumber(string c_privateNumber);
 	string getAddress();
 	void setAddress(string c_address);
 	string getEmail();
@@ -62,9 +62,9 @@ public:
 	void* getSellerItem();
 	void* getFinishItem();
 
-	Client() { session = 1; privateNumber = -1; id = "!!!"; }
+	Client() { session = 1; enrollNumber = -1; id = "!!!"; }
 	//Client(){}
-	Client(int c_session, string c_name){ session = c_session; name = c_name; session = 1; privateNumber = -1; id = "!!!";}
+	Client(int c_session, string c_name){ session = c_session; name = c_name; session = 1; enrollNumber = -1; id = "!!!";}
 	~Client(){}
 
 };

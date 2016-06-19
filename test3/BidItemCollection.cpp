@@ -1,7 +1,7 @@
 #include "BidItemCollection.h"
 
 // Function : ostream& operator<<(ostream& os, Day tmpTime)
-// Description: This is a function that prnt Day.
+// Description: This is a function that print Day.
 // Parameters :  
 // Return Value : 
 //
